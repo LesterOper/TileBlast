@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a8ea446a195b2e749acff43dcd82c79b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Geist
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 85b88e9f29b35a14782282eae39fe14c, type: 3}
+  - {fileID: 12800000, guid: 08fc7cda6ce87c648a3db64e27627722, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

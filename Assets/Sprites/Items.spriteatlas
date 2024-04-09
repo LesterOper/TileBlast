@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Items
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 2aa13ce73574e7f438e7357da52077ad, type: 3}
+    - {fileID: 102900000, guid: d2dcc17f356faf243b8145adc20a2f0b, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
+  - {fileID: 21300000, guid: a4cee47309112bf46ab62a689e72b27f, type: 3}
+  - {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
+  - {fileID: 21300000, guid: 5009b496cdf20d2448d4037c05d96b10, type: 3}
+  - {fileID: 21300000, guid: 61df0bd6ba0f88b45bc7019f06c26865, type: 3}
+  - {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
+  - {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
+  - {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
+  - {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
+  - {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
+  - {fileID: 21300000, guid: 10075e8a0660c5a4e958a4ad8544d8c6, type: 3}
+  - {fileID: 21300000, guid: 33079cecf37f38b44af13f5eb3655b69, type: 3}
+  - {fileID: 21300000, guid: 995624fd23db4904f8ee251b80cd5e1d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Apple_green
+  - Cell
+  - "\u0412all"
+  - CellYellow
+  - Background_Core
+  - "\u0421rab 1"
+  - CellGreen
+  - Mango
+  - Shell yellow
+  - Shell blue
+  - CellBlue
+  - Candy yellow
+  - CellPink
+  m_RenderDataMap: {}
+  m_Tag: Items
+  m_IsVariant: 0
