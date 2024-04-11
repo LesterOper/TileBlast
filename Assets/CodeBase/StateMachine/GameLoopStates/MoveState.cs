@@ -6,14 +6,17 @@ namespace CodeBase.StateMachine.GameLoopStates
     public class MoveState : State
     {
         private MoveTickable _moveTickable;
+        private Matcher _matcher;
         private IField _field;
 
         public MoveState(
             SignalBus signalBus,
             MoveTickable moveTickable,
-            IField field) : base(signalBus)
+            IField field, 
+            Matcher matcher) : base(signalBus)
         {
             _moveTickable = moveTickable;
+            _matcher = matcher;
             _field = field;
         }
 

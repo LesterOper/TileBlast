@@ -1,4 +1,5 @@
-﻿using CodeBase.CoreBase.Configs;
+﻿using System;
+using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.Item;
 using CodeBase.CoreBase.ItemBase;
 
@@ -6,17 +7,25 @@ namespace CodeBase.CoreBase.CellBase
 {
     public interface IAnimate
     {
-        public void ShakeAnimation();
+        //public void ShakeAnimation();
     }
     public interface ICell
     {
-        public ItemType ItemType { get; }
-        public IItem ItemProperty { get; }
+        public void Initialize(CellView cellView, ItemData item);
+
         public bool IsCellEmpty { get; }
         
-        public bool IsTargetForMoving { get; set; }
+        public CellView CellViewProperty { get; }
+        
         public FieldPosition FieldPositionProperty { get; }
-        public void ClearItem();
-        public void SetItem(IItem item);
+        public void ClearCell();
+
+        public void PlayEffect(Action callback);
+        
+        public ItemType itemTypeToDestroyForDiscoBooster { get; set; }
+
+        public bool IsBooster();
+        
+        public ItemData ItemDataProperty { get; }
     }
 }

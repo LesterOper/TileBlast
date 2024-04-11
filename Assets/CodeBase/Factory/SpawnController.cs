@@ -16,6 +16,7 @@ namespace CodeBase.Factory
         private CellFactory _cellFactory;
         private ItemsConfig _itemsConfig;
         private ItemPool _itemPool;
+        private FieldBoard _fieldBoard;
 
         public SpawnController(
             CellFactory cellFactory, 
@@ -26,37 +27,59 @@ namespace CodeBase.Factory
             _cellFactory = cellFactory;
             _itemsConfig = itemsConfig;
             _itemPool = itemPool;
+            _fieldBoard = fieldBoard;
         }
 
         public CellView SpawnCell(Transform parent, Vector3 position, float scale, FieldPosition fieldPosition)
         {
-            CellView cellView = _cellFactory.CreateInstance(parent);
+            CellView cellView = _itemPool.Spawn(fieldPosition);
             cellView.transform.position = position;
             cellView.CellTransform.localScale = Vector3.one * scale;
             return cellView;
         }
 
-        public IItem SpawnItem(FieldPosition fieldPosition, ItemType itemType, Vector2 position, float scale)
+        public ItemData GetItemDataByType(ItemType itemType)
         {
-            ItemView itemView = _itemPool.Spawn(fieldPosition);
-            itemView.transform.position = position;
-            itemView.transform.localScale *= scale;
-            ItemData itemData = _itemsConfig.GetItem(itemType);
-            return new Item(itemView, itemData);
+            return _itemsConfig.GetItem(itemType);
         }
         
-        public IItem SpawnRandomItem(FieldPosition fieldPosition, Vector2 position, float scale)
+        public (CellView, ItemData) SpawnRandomCell(FieldPosition fieldPosition, Vector2 position, float scale)
         {
-            ItemView itemView = _itemPool.Spawn(fieldPosition);
-            itemView.transform.localPosition = position;
-            itemView.transform.localScale =Vector3.one * 0.2f * scale;
+            CellView cellView = _itemPool.Spawn(fieldPosition);
+            cellView.transform.localPosition = position;
+            cellView.transform.localScale =Vector3.one *  scale;
             ItemData itemData = GetNewItemData();
-            return new Item(itemView, itemData);
+            cellView.Initialize(itemData.cellColor, itemData.item);
+            return (cellView, itemData);
         }
 
-        public ItemData GetNewItemData()
+        public (CellView boosterView, ItemData boosterData) SpawnBoosterCellView(FieldPosition fieldPosition, int matchedCount)
         {
-            return _itemsConfig.GetItem((ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length));
+            ItemData itemData = GetBoosterItemData(matchedCount);
+            CellView cellView = null;
+            if (itemData != null)
+            {
+                cellView = _itemPool.Spawn(fieldPosition);
+                cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
+                cellView.transform.localScale = Vector3.one * _fieldBoard.TileSize;
+                cellView.Initialize(itemData.cellColor, itemData.item);
+            }
+
+            return (cellView, itemData);
         }
+
+        private ItemData GetBoosterItemData(int matchedCount)
+        {
+            ItemData boosterData = _itemsConfig.GetBoosterItemData(matchedCount);
+
+            return boosterData;
+        }
+
+        private ItemData GetNewItemData()
+        {
+            return _itemsConfig.GetItem((ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 4));
+        }
+
+        public void Despawn(CellView cellView) => _itemPool.Despawn(cellView);
     }
 }

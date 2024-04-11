@@ -9,15 +9,15 @@ namespace CodeBase.CoreBase.Item
     public class ItemView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer itemIcon;
-        private ItemData _itemData;
         private Tween _moveTween;
 
-        public void Initialize(ItemData itemData)
+        public void Initialize(Sprite itemSprite)
         {
-            _itemData = itemData;
-            itemIcon.sprite = _itemData.item;
+            itemIcon.sprite = itemSprite;
         }
 
+        public void FadeOut(float endValue, float duration) => itemIcon.DOFade(endValue, duration);
+        
         public void ShakeAnimation() => transform.Bouncing(1.1f, 0.1f);
 
         public void MoveToTargetCell(Vector2 position, Action callback)

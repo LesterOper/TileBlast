@@ -31,5 +31,6 @@ namespace CodeBase.StateMachine.GameLoopStates
             _gameModel.Level = level;
             _signalBus.Fire(new NextStateSignal(typeof(CreateFieldState)));
         }
+        
     }
 }

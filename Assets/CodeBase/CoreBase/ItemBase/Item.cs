@@ -14,7 +14,7 @@ namespace CodeBase.CoreBase.ItemBase
         {
             _itemView = itemView;
             _itemData = itemData;
-            _itemView.Initialize(itemData);
+            //_itemView.Initialize(itemData);
         }
 
         public ItemType ItemTypeProperty => _itemData.itemType;

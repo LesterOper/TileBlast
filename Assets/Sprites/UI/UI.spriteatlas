@@ -69,19 +69,19 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - Pause
   - indicator
-  - "\u041B\u0438\u0441\u0442\u043E\u043A"
+  - leave
   - top_bar_bg
-  - "\u043B\u0438\u0441\u04423-1"
-  - "\u043B\u0438\u0441\u04423-2"
-  - "\u043B\u0438\u0441\u04424-1"
-  - "\u043B\u0438\u0441\u04423"
-  - "\u043B\u0438\u0441\u04422.2.2"
+  - leave3
+  - leave4
+  - leave6
+  - leave5
+  - leave1
   - goal_bg
   - Level_badge
-  - "\u043B\u0438\u0441\u04422"
-  - "\u043B\u0438\u0441\u04424-2"
+  - leave2
+  - leave7
   - settings_bg
-  - "\u043B\u0438\u0441\u04424"
+  - leave8
   m_RenderDataMap: {}
   m_Tag: UI
   m_IsVariant: 0

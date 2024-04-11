@@ -21,20 +21,23 @@ namespace CodeBase.CoreBase.FieldBase
     {
         public class MovableItem
         {
-            private IItem _item;
+            private CellView _cellView;
             private Vector2 _targetPosition;
             private ICell _cell;
             private ICell _currentCell;
 
-            public MovableItem(IItem item, Vector2 targetPosition)
+            public MovableItem(CellView cellView, Vector2 targetPosition)
             {
-                _item = item;
+                _cellView = cellView;
                 _targetPosition = targetPosition;
             }
             
             public void MoveToTarget()
             {
-                _item.MoveToZeroPositionOfParent(_targetPosition, _cell, _currentCell);
+                _cellView.MoveToTargetCell(_targetPosition, ()=>
+                {
+                    
+                });
             }
         }
 

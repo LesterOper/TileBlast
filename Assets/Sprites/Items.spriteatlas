@@ -51,6 +51,7 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
   - {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
   - {fileID: 21300000, guid: a4cee47309112bf46ab62a689e72b27f, type: 3}
   - {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
@@ -60,11 +61,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
   - {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
   - {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
+  - {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
   - {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
   - {fileID: 21300000, guid: 10075e8a0660c5a4e958a4ad8544d8c6, type: 3}
   - {fileID: 21300000, guid: 33079cecf37f38b44af13f5eb3655b69, type: 3}
+  - {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
   - {fileID: 21300000, guid: 995624fd23db4904f8ee251b80cd5e1d, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Bucket_3
   - Apple_green
   - Cell
   - "\u0412all"
@@ -74,9 +78,11 @@ SpriteAtlas:
   - CellGreen
   - Mango
   - Shell yellow
+  - Carambola 1
   - Shell blue
   - CellBlue
   - Candy yellow
+  - Sand tower 1
   - CellPink
   m_RenderDataMap: {}
   m_Tag: Items

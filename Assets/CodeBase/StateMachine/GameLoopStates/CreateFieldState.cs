@@ -23,5 +23,7 @@ namespace CodeBase.StateMachine.GameLoopStates
             _field.CreateField();
             _signalBus.Fire(new NextStateSignal(typeof(UserClickState)));
         }
+        
+        private void InitializeFieldCellMatrix() {}
     }
 }

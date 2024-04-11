@@ -42,6 +42,7 @@ namespace CodeBase.CoreBase.FieldBase
 
         public void Initialize()
         {
+            InitializeFieldCellMatrix();
             CalculateFieldSize();
             _spriteRendererFieldBg.size = new Vector2(_gameModel.FieldModel.FieldSize._column * _fieldBoard.TileSize + _fieldBoard._borderDelta, _gameModel.FieldModel.FieldSize._row * _fieldBoard.TileSize + _fieldBoard._borderDelta);
             _spriteRendererFieldBg.transform.GetChild(0).localScale = new Vector2(
@@ -53,7 +54,20 @@ namespace CodeBase.CoreBase.FieldBase
         {
             _fieldBoard.Calculate(_gameModel.FieldModel.FieldSize);
         }
-        
+
+        private void InitializeFieldCellMatrix()
+        {
+            FieldSize fieldSize = _gameModel.FieldModel.FieldSize;
+            for (int i = 0; i < fieldSize._row; i++)
+            {
+                for (int j = 0; j < fieldSize._column; j++)
+                {
+                    FieldPosition fieldPosition = new FieldPosition(i, j);
+                    _gameModel.FieldModel.Cells[i, j] = new Cell(fieldPosition);
+                }
+            }
+        }
+
         public void CreateField()
         {
             ICell[,] cells = _gameModel.FieldModel.Cells;
@@ -66,8 +80,8 @@ namespace CodeBase.CoreBase.FieldBase
                     var cellView =
                         _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize, fieldPosition);
                     var item = CreateItem(fieldPosition, _fieldBoard.TileSize);
-                    var cell = new Cell(cellView, item, fieldPosition);
-                    cells[i, j] = cell;
+                    
+                    cells[i, j].Initialize(cellView, item);
                 }
             }
             
@@ -76,12 +90,12 @@ namespace CodeBase.CoreBase.FieldBase
                 Mathf.Lerp(_fieldBoard.WorldPosition(0, 0).y, _fieldBoard.WorldPosition(_gameModel.FieldModel.FieldSize._row - 1, 0).y, 0.5f), 0);
         }
 
-        private IItem CreateItem(FieldPosition fieldPosition, float scale)
+        private ItemData CreateItem(FieldPosition fieldPosition, float scale)
         {
             ItemType itemType = _gameModel.Level.levelItemsDatas
                 .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.itemType;
-            Vector2 position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-            return _spawnController.SpawnItem(fieldPosition, itemType, position,scale);
+
+            return _spawnController.GetItemDataByType(itemType);
         }
 
         public List<MovableItemsContainer.MovableItem> GetMovableItems()
@@ -89,14 +103,16 @@ namespace CodeBase.CoreBase.FieldBase
             List<MovableItemsContainer.MovableItem> movableItems = new List<MovableItemsContainer.MovableItem>(10);
 
             List<ICell> empty = _gameModel.FieldModel.GetEmptyCells();
-            List<IItem> itemsFromPool = new List<IItem>(empty.Count);
+            List<CellView> itemsFromPool = new List<CellView>(empty.Count);
+            List<ItemData> itemsDataFromPool = new List<ItemData>(empty.Count);
 
             for (int i = 0; i < empty.Count; i++)
             {
                 FieldPosition fieldPosition = empty[i].FieldPositionProperty;
                 Vector2 position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-                IItem item = _spawnController.SpawnRandomItem(empty[i].FieldPositionProperty, position, _fieldBoard.TileSize);
-                itemsFromPool.Add(item);
+                var cell = _spawnController.SpawnRandomCell(empty[i].FieldPositionProperty, new Vector2(position.x, 0), _fieldBoard.TileSize);
+                itemsFromPool.Add(cell.Item1);
+                itemsDataFromPool.Add(cell.Item2);
             }
 
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
@@ -115,13 +131,14 @@ namespace CodeBase.CoreBase.FieldBase
 
                     if (emptyCells.Count > 0)
                     {
-                        IItem item = currentColumn[j].ItemProperty;
-                        emptyCells[0].SetItem(item);
-                        currentColumn[j].SetItem(null);
+                        ICell cell = currentColumn[j];
+                        emptyCells[0].Initialize(cell.CellViewProperty, cell.ItemDataProperty);
+                        emptyCells[0].itemTypeToDestroyForDiscoBooster = cell.itemTypeToDestroyForDiscoBooster;
+                        cell.ClearCell();
                         Vector2 position = _fieldBoard.WorldPosition(emptyCells[0].FieldPositionProperty.Row,
                             emptyCells[0].FieldPositionProperty.Column);
                         MovableItemsContainer.MovableItem movableItem =
-                            new MovableItemsContainer.MovableItem(item, position);
+                            new MovableItemsContainer.MovableItem(emptyCells[0].CellViewProperty, position);
                         movableItems.Add(movableItem);
                         emptyCells.RemoveAt(0);
                         emptyCells.Add(currentColumn[j]);
@@ -130,14 +147,14 @@ namespace CodeBase.CoreBase.FieldBase
 
                 for (int k = emptyCells.Count-1; k >= 0; k--)
                 {
-                    IItem item = itemsFromPool[0];
-                    emptyCells[k].SetItem(item);
+                    emptyCells[k].Initialize(itemsFromPool[0], itemsDataFromPool[0]);
+                    emptyCells[k].itemTypeToDestroyForDiscoBooster = ItemType.NONE;
                     itemsFromPool.RemoveAt(0);
+                    itemsDataFromPool.RemoveAt(0);
                     Vector2 position = _fieldBoard.WorldPosition(emptyCells[k].FieldPositionProperty.Row,
                         emptyCells[k].FieldPositionProperty.Column);
-                    Debug.Log($"{emptyCells[k].FieldPositionProperty} - {position.ToString()}");
                     MovableItemsContainer.MovableItem movableItem =
-                        new MovableItemsContainer.MovableItem(item, position);
+                        new MovableItemsContainer.MovableItem(emptyCells[k].CellViewProperty, position);
                     movableItems.Add(movableItem);
                 }
             }

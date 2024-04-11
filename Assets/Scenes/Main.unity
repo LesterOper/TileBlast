@@ -711,7 +711,7 @@ MonoBehaviour:
   field: {fileID: 124851919}
   fieldBg: {fileID: 1989299059}
   parent: {fileID: 942612655}
-  ItemView: {fileID: 4817513838035417282, guid: 87fd8ff0501a8934c83b4a5e7d274296, type: 3}
+  CellView: {fileID: 7034524563603676005, guid: bc7b1cf880f73ab4e85f785a2ce5aa5c, type: 3}
 --- !u!114 &892099749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,7 +960,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942612654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.64, z: 0}
+  m_LocalPosition: {x: 0, y: 3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

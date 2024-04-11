@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.CoreBase.CellBase;
+using CodeBase.CoreBase.Configs;
 
 namespace CodeBase.CoreBase.FieldBase
 {
@@ -48,6 +49,17 @@ namespace CodeBase.CoreBase.FieldBase
             return fieldPosition.Row >= FieldSize._row || fieldPosition.Row < 0 ||
                    fieldPosition.Column >= FieldSize._column || fieldPosition.Column < 0;
         }
+
+        public bool IsClickedItemBooster(FieldPosition fieldPosition)
+        {
+            return (int) Cells[fieldPosition.Row, fieldPosition.Column].ItemDataProperty.itemType >=
+                   (int) ItemType.BOMB;
+        }
+
+        public ItemType GetItemTypeByFieldPosition(FieldPosition fieldPosition) =>
+            Cells[fieldPosition.Row, fieldPosition.Column].ItemDataProperty.itemType;
+
+        public ICell this[FieldPosition fieldPosition] => Cells[fieldPosition.Row, fieldPosition.Column];
         
     }
 }

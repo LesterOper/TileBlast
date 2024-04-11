@@ -1,4 +1,6 @@
-﻿using CodeBase.CoreBase.Configs;
+﻿using System;
+using CodeBase.CoreBase.CellBase;
+using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.DialogsSystem;
 
@@ -28,5 +30,9 @@ namespace CodeBase.CoreBase.GameStateModel
         public FieldModel FieldModel => _fieldModel;
 
         public bool IsClickedFieldPositionOutOfIndex() => _fieldModel.IsFieldPositionOutOfSize(ClickFieldPosition);
+
+        public bool IsClickedItemBooster() => _fieldModel.IsClickedItemBooster(ClickFieldPosition);
+
+        public ItemType ClickedItemType() => _fieldModel.GetItemTypeByFieldPosition(ClickFieldPosition);
     }
 }

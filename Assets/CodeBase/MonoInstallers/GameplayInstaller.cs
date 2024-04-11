@@ -1,6 +1,8 @@
 ﻿using CodeBase.ApplicationBase.SavingBase;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.AimTopBar;
+using CodeBase.CoreBase.BoostersOnField;
+using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.CoreBase.Input;
@@ -19,7 +21,7 @@ namespace CodeBase.MonoInstallers
         public Transform field;
         public SpriteRenderer fieldBg;
         public Transform parent;
-        public ItemView ItemView;
+        public CellView CellView;
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
@@ -40,9 +42,10 @@ namespace CodeBase.MonoInstallers
             Container.Bind<AimTopBarController>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<MoveTickable>().FromNew().AsSingle();
             Container.Bind<SpawnController>().FromNew().AsSingle();
-            Container.BindMemoryPool<ItemView, ItemPool>().WithInitialSize(200)
-                .FromComponentInNewPrefab(ItemView)
+            Container.BindMemoryPool<CellView, ItemPool>().WithInitialSize(200)
+                .FromComponentInNewPrefab(CellView)
                 .UnderTransform(parent);
+            Container.Bind<BoostersOnFieldActivator>().FromNew().AsSingle();
 
 
             Container.Bind<InitializeLevelState>().FromNew().AsSingle();
