@@ -1,12 +1,16 @@
-﻿namespace CodeBase.CoreBase.GameStateModel
+﻿using CodeBase.CoreBase.Input;
+
+namespace CodeBase.CoreBase.GameStateModel
 {
     public class GameEndingChecker
     {
         private GameModel _gameModel;
+        private IInputSystem _inputSystem;
 
-        public GameEndingChecker(GameModel gameModel)
+        public GameEndingChecker(GameModel gameModel, IInputSystem inputSystem)
         {
             _gameModel = gameModel;
+            _inputSystem = inputSystem;
         }
 
         public void CheckGameEnding()
@@ -14,7 +18,8 @@
             if (_gameModel.GameplayCountersModelProperty.MovesModelProperty.Value <= 0)
             {
                 if (PassedLevel()) return;
-                _gameModel.DialogsController.ShowLooseDialog();
+                _gameModel.DialogsController.ShowReviveMovesDialog();
+                _inputSystem.SetEnable(false);
             }
             else
             {
@@ -27,6 +32,7 @@
             if (_gameModel.GameplayCountersModelProperty.AimModelSetterProperty.IsLevelPassed())
             {
                 _gameModel.DialogsController.ShowWinDialog();
+                _inputSystem.SetEnable(false);
                 return true;
             }
 

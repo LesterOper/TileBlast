@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   levels:
-  - moves: 90
+  - moves: 5
     row: 11
     column: 8
     LevelAims:

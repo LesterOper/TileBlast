@@ -38,6 +38,15 @@ namespace CodeBase.MetaBase.Views
             (long duration, bool needRecover) = _timerChecker.TryToRecoverHealth();
             if(needRecover)
                 StartRecovery(duration);
+            else
+            {
+                if (_timer != null)
+                {
+                    _timer.Cancel();
+                    _timer = null;
+                    timerField.text = "Full";
+                }
+            }
         }
 
         private void StartRecovery(long duration)
@@ -64,6 +73,22 @@ namespace CodeBase.MetaBase.Views
             timerField.text = $"{hours}h {minutes}m {seconds}s";
         }
 
+        public void StopTimer()
+        {
+            if (_timer != null)
+            {
+                _timer.Cancel();
+            }
+
+            timerField.text = $"0h 0m 0s";
+            TryToRecoverHealth();
+        }
+
+        public void Reinitialize()
+        {
+            TryToRecoverHealth();
+        }
+        
         private void OnDestroy()
         {
             //_globalGameStateModel.HealthSetter.OnTimerEvent -= TryToRecoverHealth;

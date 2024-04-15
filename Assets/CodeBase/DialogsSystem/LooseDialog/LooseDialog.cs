@@ -1,5 +1,6 @@
 ﻿using CodeBase.ApplicationBase;
 using CodeBase.CoreBase;
+using CodeBase.CoreBase.GameStateModel;
 using CodeBase.MetaBase.Views;
 using TMPro;
 using UnityEngine;
@@ -13,12 +14,14 @@ namespace CodeBase.DialogsSystem.LooseDialog
         [SerializeField] private TextMeshProUGUI levelField;
         [SerializeField] private HealthRecoveryTimerView timer;
         private GlobalGameStateModel _globalGameStateModel;
+        private GameModel _gameModel;
         private TimeModel _timeModel;
 
         [Inject]
-        private void Construct(GlobalGameStateModel globalGameStateModel, TimeModel timeModel)
+        private void Construct(GlobalGameStateModel globalGameStateModel, TimeModel timeModel, GameModel gameModel)
         {
             _globalGameStateModel = globalGameStateModel;
+            _gameModel = gameModel;
             _timeModel = timeModel;
         }
         
@@ -27,15 +30,28 @@ namespace CodeBase.DialogsSystem.LooseDialog
             levelField.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";
             _globalGameStateModel.HealthSetter.Value = -1;
             _globalGameStateModel.UpdateRecoveryData(_timeModel.GetUnixTimeSeconds());
-            if (!_globalGameStateModel.HealthSetter.HasHealth)
-                confirm.interactable = false;
             base.Initialize();
         }
 
         protected override void Confirm()
         {
             base.Confirm();
-            SceneManager.LoadScene(2);
+            if (!_globalGameStateModel.HealthSetter.HasHealth)
+            {
+                Hide();
+                _gameModel.DialogsController.ShowReviveHealthDialog();
+            }
+            else
+            {
+                CloseDialog();
+                SceneManager.LoadScene(2);
+            }
+        }
+
+        public override void Show()
+        {
+            timer.Reinitialize();
+            base.Show();
         }
 
         protected override void Decline()

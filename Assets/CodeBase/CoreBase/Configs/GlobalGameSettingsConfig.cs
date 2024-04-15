@@ -9,5 +9,11 @@ namespace CodeBase.CoreBase.Configs
         public int DefaultSoftMoneyAmount;
         public int MaxHealthAmount;
         public float ResetDurationOfOneHealthInSeconds;
+
+        public int MovesReviveCost;
+        public int MovesReviveAmount;
+
+        public int HealthReviveCost;
+        public int HealthReviveAmount;
     }
 }

@@ -16,43 +16,51 @@ MonoBehaviour:
   - itemType: 0
     item: {fileID: 0}
     cellColor: {fileID: 0}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 2
     item: {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
     cellColor: {fileID: 21300000, guid: 5009b496cdf20d2448d4037c05d96b10, type: 3}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 1
     item: {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
     cellColor: {fileID: 21300000, guid: a4cee47309112bf46ab62a689e72b27f, type: 3}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 3
     item: {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
     cellColor: {fileID: 21300000, guid: 10075e8a0660c5a4e958a4ad8544d8c6, type: 3}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 4
     item: {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
     cellColor: {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 5
     item: {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
     cellColor: {fileID: 21300000, guid: 995624fd23db4904f8ee251b80cd5e1d, type: 3}
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   boosterDatas:
-  - BoosterItemData:
-      itemType: 8
-      item: {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
-      cellColor: {fileID: 0}
+  - itemType: 7
+    item: {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
+    cellColor: {fileID: 0}
     minCountNeedItems: 5
     maxCountNeedItems: 6
-  - BoosterItemData:
-      itemType: 7
-      item: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
-      cellColor: {fileID: 0}
+  - itemType: 8
+    item: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
+    cellColor: {fileID: 0}
     minCountNeedItems: 5
     maxCountNeedItems: 6
-  - BoosterItemData:
-      itemType: 6
-      item: {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
-      cellColor: {fileID: 0}
+  - itemType: 6
+    item: {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
+    cellColor: {fileID: 0}
     minCountNeedItems: 7
     maxCountNeedItems: 8
-  - BoosterItemData:
-      itemType: 9
-      item: {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
-      cellColor: {fileID: 0}
+  - itemType: 9
+    item: {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
+    cellColor: {fileID: 0}
     minCountNeedItems: 9
     maxCountNeedItems: 0

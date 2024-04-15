@@ -1,6 +1,8 @@
 ﻿using System;
+using CodeBase.CoreBase.GameStateModel;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace CodeBase.DialogsSystem
 {
@@ -10,8 +12,9 @@ namespace CodeBase.DialogsSystem
         [SerializeField] protected Button closeArea;
         [SerializeField] protected Button confirm;
         [SerializeField] protected Button decline;
-
+        
         public event Action OnDialogClosedEvent;
+        public event Action OnDialogHideEvent;
 
         protected void Start()
         {
@@ -32,8 +35,7 @@ namespace CodeBase.DialogsSystem
         
         public virtual void CloseDialog()
         {
-            ClearDialogData();
-            gameObject.SetActive(false);
+            Hide();
             OnDialogClosedEvent?.Invoke();
         }
 
@@ -47,9 +49,20 @@ namespace CodeBase.DialogsSystem
             
         }
 
+        protected virtual void Hide()
+        {
+            ClearDialogData();
+            gameObject.SetActive(false);
+        }
+
         protected virtual void ClearDialogData()
         {
             
+        }
+
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
         }
     }
 }
