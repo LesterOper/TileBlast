@@ -15,5 +15,5 @@ MonoBehaviour:
   tileOriginalSize: 120
   top: 0.75
   bottom: 0.1
-  edge: 0.02
-  borderDelta: 0.3
+  edge: 0.03
+  borderDelta: 0.02

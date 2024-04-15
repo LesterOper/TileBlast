@@ -13,6 +13,8 @@ namespace CodeBase.CoreBase.CellBase
     {
         public void Initialize(CellView cellView, ItemData item);
 
+        public void BlockCell();
+
         public bool IsCellEmpty { get; }
         
         public CellView CellViewProperty { get; }
@@ -27,5 +29,7 @@ namespace CodeBase.CoreBase.CellBase
         public bool IsBooster();
         
         public ItemData ItemDataProperty { get; }
+        
+        public bool IsCellBlocked { get; }
     }
 }

@@ -32,9 +32,9 @@ MonoBehaviour:
     - itemType: 4
     - itemType: 1
     - itemType: 2
-    - itemType: 4
-    - itemType: 5
-    - itemType: 2
+    - itemType: 0
+    - itemType: 0
+    - itemType: 0
     - itemType: 2
     - itemType: 4
     - itemType: 3
@@ -58,18 +58,18 @@ MonoBehaviour:
     - itemType: 3
     - itemType: 3
     - itemType: 3
-    - itemType: 1
-    - itemType: 1
-    - itemType: 5
+    - itemType: 0
+    - itemType: 0
+    - itemType: 0
     - itemType: 4
     - itemType: 1
     - itemType: 5
     - itemType: 4
-    - itemType: 3
-    - itemType: 4
+    - itemType: 0
+    - itemType: 0
     - itemType: 2
     - itemType: 5
-    - itemType: 2
+    - itemType: 0
     - itemType: 5
     - itemType: 4
     - itemType: 5

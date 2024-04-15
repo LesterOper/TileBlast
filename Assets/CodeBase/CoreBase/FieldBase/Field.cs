@@ -7,6 +7,7 @@ using CodeBase.CoreBase.GameStateModel;
 using CodeBase.CoreBase.ItemBase;
 using CodeBase.Factory;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.CoreBase.FieldBase
 {
@@ -26,28 +27,32 @@ namespace CodeBase.CoreBase.FieldBase
         private SpawnController _spawnController;
         private GameModel _gameModel;
 
+        private GameObject bgEffect;
+
         public Field(
             FieldBoard fieldBoard,
             SpawnController spawnController,
             GameModel gameModel,
             Transform fieldParent,
-            SpriteRenderer spriteRendererFieldBg)
+            SpriteRenderer spriteRendererFieldBg,
+            GameObject bgEffect)
         {
             _fieldBoard = fieldBoard;
             _spawnController = spawnController;
             _gameModel = gameModel;
             _fieldParent = fieldParent;
             _spriteRendererFieldBg = spriteRendererFieldBg;
+            this.bgEffect = bgEffect;
         }
 
         public void Initialize()
         {
-            InitializeFieldCellMatrix();
             CalculateFieldSize();
-            _spriteRendererFieldBg.size = new Vector2(_gameModel.FieldModel.FieldSize._column * _fieldBoard.TileSize + _fieldBoard._borderDelta, _gameModel.FieldModel.FieldSize._row * _fieldBoard.TileSize + _fieldBoard._borderDelta);
+            InitializeFieldCellMatrix();
+            /*_spriteRendererFieldBg.size = new Vector2(_gameModel.FieldModel.FieldSize._column * _fieldBoard.TileSize + _fieldBoard._borderDelta, _gameModel.FieldModel.FieldSize._row * _fieldBoard.TileSize + _fieldBoard._borderDelta);
             _spriteRendererFieldBg.transform.GetChild(0).localScale = new Vector2(
                 _gameModel.FieldModel.FieldSize._column * _fieldBoard.TileSize + _fieldBoard._borderDelta,
-                _gameModel.FieldModel.FieldSize._row * _fieldBoard.TileSize + _fieldBoard._borderDelta);
+                _gameModel.FieldModel.FieldSize._row * _fieldBoard.TileSize + _fieldBoard._borderDelta);*/
         }
         
         private void CalculateFieldSize()
@@ -75,19 +80,31 @@ namespace CodeBase.CoreBase.FieldBase
             {
                 for (int j = 0; j < cells.GetUpperBound(1) + 1; j++)
                 {
-                    var position = _fieldBoard.WorldPosition(i, j);
                     var fieldPosition = new FieldPosition(i, j);
-                    var cellView =
-                        _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize, fieldPosition);
                     var item = CreateItem(fieldPosition, _fieldBoard.TileSize);
+                    if (item.itemType != ItemType.NONE)
+                    {
+                        var position = _fieldBoard.WorldPosition(i, j);
+                        var cellView =
+                            _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize,
+                                fieldPosition);
+                        cells[i, j].Initialize(cellView, item);
+                        GameObject fieldBg = Object.Instantiate(bgEffect);
+                        fieldBg.transform.localScale = Vector3.one * _fieldBoard.TileSize;
+                        fieldBg.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
+                    }
+                    else
+                    {
+                        cells[i,j].BlockCell();
+                    }
                     
-                    cells[i, j].Initialize(cellView, item);
                 }
             }
             
-            _spriteRendererFieldBg.transform.localPosition = new Vector3(
+            /*_spriteRendererFieldBg.transform.localPosition = new Vector3(
                 Mathf.Lerp(_fieldBoard.BoardEdge.BottomLeft.x, _fieldBoard.BoardEdge.BottomRight.x, 0.5f), 
                 Mathf.Lerp(_fieldBoard.WorldPosition(0, 0).y, _fieldBoard.WorldPosition(_gameModel.FieldModel.FieldSize._row - 1, 0).y, 0.5f), 0);
+        */
         }
 
         private ItemData CreateItem(FieldPosition fieldPosition, float scale)

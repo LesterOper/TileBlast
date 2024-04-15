@@ -10,7 +10,16 @@ namespace CodeBase.CoreBase.CellBase
 
         private ItemData _itemData;
 
-        
+        private bool isCellBlocked;
+
+        public bool IsCellBlocked => isCellBlocked;
+
+
+        public void BlockCell()
+        {
+            isCellBlocked = true;
+        }
+
         public bool IsCellEmpty => _cellView == null;
 
         public CellView CellViewProperty => _cellView;
@@ -46,6 +55,7 @@ namespace CodeBase.CoreBase.CellBase
             _cellView = cellView;
             _itemData = item;
             _cellView.Initialize(_itemData.cellColor, _itemData.item);
+            isCellBlocked = false;
         }
     }
 }
