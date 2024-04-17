@@ -27,6 +27,7 @@ namespace CodeBase.StateMachine.GameLoopStates
             _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.LevelAims);
             _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.moves;
             _gameModel.FieldModel.Cells = new ICell[level.row, level.column];
+            _gameModel.FieldModel.SetActiveCellsCount();
             _gameModel.FieldModel.FieldSize = new FieldSize(level.row, level.column);
             _gameModel.Level = level;
             _signalBus.Fire(new NextStateSignal(typeof(CreateFieldState)));

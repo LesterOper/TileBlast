@@ -15,6 +15,7 @@ namespace CodeBase.CoreBase.BoostersOnField
     {
         private GameModel _gameModel;
         private SpawnController _spawnController;
+        private AimController _aimController;
         
 
         public BoostersOnFieldActivator(
@@ -24,6 +25,7 @@ namespace CodeBase.CoreBase.BoostersOnField
         {
             _gameModel = gameModel;
             _spawnController = spawnController;
+            _aimController = new AimController(_gameModel);
         }
 
         public void ActivateFieldBooster(FieldPosition fieldPosition, ItemType boosterItemType)
@@ -83,8 +85,11 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                 if (cell != null)
                 {
-                    CheckDespawnCellsForAimByItemType(cell.ItemDataProperty.itemType);
-                    DespawnCell(cell);
+                    if (!cell.IsCellEmpty)
+                    {
+                        UpdateAim(cell.ItemDataProperty.itemType, 1);
+                        DespawnCell(cell);
+                    }
                 }
             }
             
@@ -110,7 +115,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                 if (!_gameModel.FieldModel.Cells[row, i].IsCellEmpty)
                 {
                     CellView cellView = _gameModel.FieldModel.Cells[row, i].CellViewProperty;
-                    CheckDespawnCellsForAimByItemType(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType);
+                    UpdateAim(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType, 1);
                     _gameModel.FieldModel.Cells[row, i].ClearCell();
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
@@ -120,12 +125,14 @@ namespace CodeBase.CoreBase.BoostersOnField
         private void ActivateRocketVertical(FieldPosition fieldPosition)
         {
             int column = fieldPosition.Column;
+            
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
             {
                 if (!_gameModel.FieldModel.Cells[i, column].IsCellEmpty)
                 {
+                    
                     CellView cellView = _gameModel.FieldModel.Cells[i, column].CellViewProperty;
-                    CheckDespawnCellsForAimByItemType(_gameModel.FieldModel.Cells[i, column].ItemDataProperty.itemType);
+                    UpdateAim(_gameModel.FieldModel.Cells[i, column].ItemDataProperty.itemType, 1);
                     _gameModel.FieldModel.Cells[i, column].ClearCell();
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
@@ -144,7 +151,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                 for (int j = 0; j < column; j++)
                 {
                     if(i == fieldPosition.Row && j == fieldPosition.Column) continue;
-                    if (cells[i, j].ItemDataProperty.itemType == disco.itemTypeToDestroyForDiscoBooster)
+                    if (cells[i, j].ItemDataProperty?.itemType == disco.itemTypeToDestroyForDiscoBooster)
                     {
                         countToDespawn++;
                         DespawnCell(cells[i,j]);
@@ -152,28 +159,15 @@ namespace CodeBase.CoreBase.BoostersOnField
                 }
             }
             
-            CheckAimForDiscoType(disco.ItemDataProperty.itemType, countToDespawn);
+            UpdateAim(disco.itemTypeToDestroyForDiscoBooster, countToDespawn);
             DespawnCell(_gameModel.FieldModel[fieldPosition]);
         }
 
-        private void CheckDespawnCellsForAimByItemType(ItemType itemType)
+        private void UpdateAim(ItemType itemType, int count)
         {
-            IAimSetter aim = _gameModel.GameplayCountersModelProperty
-                .AimModelSetterProperty
-                .Aims.FirstOrDefault(local => local.AimItemType == itemType);
-            if (aim != null)
-                aim.Value = -1;
+            _aimController.UpdateAims(itemType, count);
         }
-
-        private void CheckAimForDiscoType(ItemType itemType, int count)
-        {
-            IAimSetter aim = _gameModel.GameplayCountersModelProperty
-                .AimModelSetterProperty
-                .Aims.FirstOrDefault(local => local.AimItemType == itemType);
-            if (aim != null)
-                aim.Value = -count;
-        }
-
+        
         private (bool isBooster, ItemType itemType) CheckNeighboursCellsBeforeBoosterActivated(FieldPosition fieldPosition)
         {
             ItemType itemType = ItemType.NONE;

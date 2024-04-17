@@ -42,10 +42,10 @@ namespace CodeBase.MonoInstallers
             Container.Bind<AimTopBarController>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<MoveTickable>().FromNew().AsSingle();
             Container.Bind<SpawnController>().FromNew().AsSingle();
-            Container.BindMemoryPool<CellView, ItemPool>().WithInitialSize(200)
+            Container.BindMemoryPool<CellView, ItemPool>().WithInitialSize(100)
                 .FromComponentInNewPrefab(CellView)
                 .UnderTransform(parent);
-            Container.Bind<BoostersOnFieldActivator>().FromNew().AsSingle();
+            //Container.Bind<BoostersOnFieldActivator>().FromNew().AsSingle();
 
 
             Container.Bind<InitializeLevelState>().FromNew().AsSingle();
