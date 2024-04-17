@@ -25,11 +25,11 @@ namespace CodeBase.MetaBase.Views
         {
             _globalGameStateModel = globalGameStateModel;
             _timeModel = timeModel;
+            _timerChecker = new TimerChecker(_globalGameStateModel, _timeModel);
         }
         
         private void Start()
         {
-            _timerChecker = new TimerChecker(_globalGameStateModel, _timeModel);
             TryToRecoverHealth();
         }
         

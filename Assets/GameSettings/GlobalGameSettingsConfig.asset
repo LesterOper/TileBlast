@@ -20,3 +20,5 @@ MonoBehaviour:
   MovesReviveAmount: 5
   HealthReviveCost: 1
   HealthReviveAmount: 5
+  softMoneyPrizeForCompleteLevel: 250
+  starsPrizeForCompleteLevel: 1

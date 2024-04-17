@@ -9,6 +9,7 @@ namespace CodeBase.CoreBase
 
         private List<Recovery> _healthRecovery;
         private int _currentLevel;
+        private int _stars;
         
         public GlobalGameStateModel(
             ICurrencySetter currencySetter,
@@ -53,6 +54,12 @@ namespace CodeBase.CoreBase
         {
             get => _currentLevel;
             set => _currentLevel = value;
+        }
+
+        public int Stars
+        {
+            get => _stars;
+            set => _stars = value;
         }
     }
 

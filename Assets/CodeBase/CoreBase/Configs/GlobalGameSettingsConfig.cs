@@ -15,5 +15,8 @@ namespace CodeBase.CoreBase.Configs
 
         public int HealthReviveCost;
         public int HealthReviveAmount;
+
+        public int softMoneyPrizeForCompleteLevel;
+        public int starsPrizeForCompleteLevel;
     }
 }

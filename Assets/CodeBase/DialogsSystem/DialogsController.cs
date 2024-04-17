@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.CoreBase.Input;
 using CodeBase.DialogsSystem.ReviveHealth;
 
 namespace CodeBase.DialogsSystem
@@ -11,6 +12,7 @@ namespace CodeBase.DialogsSystem
         private ReviveHealthDialog _reviveHealthDialog;
         private PauseDialog.PauseDialog _pauseDialog;
         private PauseRestartConfirmationDialog.PauseRestartConfirmationDialog _pauseRestartConfirmationDialog;
+        private IInputSystem _inputSystem;
 
         private Stack<DialogBase> _activeDialogs;
 
@@ -22,7 +24,8 @@ namespace CodeBase.DialogsSystem
             ReviveMovesDialog.ReviveMovesDialog reviveMovesDialog,
             ReviveHealthDialog reviveHealthDialog,
             PauseDialog.PauseDialog pauseDialog,
-            PauseRestartConfirmationDialog.PauseRestartConfirmationDialog pauseRestartConfirmationDialog)
+            PauseRestartConfirmationDialog.PauseRestartConfirmationDialog pauseRestartConfirmationDialog,
+            IInputSystem inputSystem)
         {
             _winDialog = winDialog;
             _looseDialog = looseDialog;
@@ -30,6 +33,7 @@ namespace CodeBase.DialogsSystem
             _reviveHealthDialog = reviveHealthDialog;
             _pauseDialog = pauseDialog;
             _pauseRestartConfirmationDialog = pauseRestartConfirmationDialog;
+            _inputSystem = inputSystem;
         }
 
         public void ShowWinDialog()
@@ -64,19 +68,28 @@ namespace CodeBase.DialogsSystem
             ShowDialog();
         }
 
-        public void ShowPauseRestartConfirmationDialog()
+        public void ShowPauseRestartConfirmationDialog(bool backHome)
         {
             _activeDialog = _pauseRestartConfirmationDialog;
+            _activeDialog.InitializePauseRestart(backHome);
             ShowDialog();
         }
 
-        private void ShowDialog()
+        
+        private void SubscribeActiveDialogEvent()
         {
             _activeDialog.OnDialogClosedEvent += ActiveDialogClosed;
             _activeDialog.OnDialogHideEvent += HideDialog;
+        }
+        
+        private void ShowDialog()
+        {
+            SubscribeActiveDialogEvent();
             _activeDialog.Initialize();
             _activeDialogs ??= new Stack<DialogBase>();
             _activeDialogs.Push(_activeDialog);
+            
+            _inputSystem.SetEnableBySomeDialogsWhichOpen(false);
         }
 
         private void ActiveDialogClosed()
@@ -94,6 +107,8 @@ namespace CodeBase.DialogsSystem
                 _activeDialogs.Push(_activeDialog);
                 ShowDialogFromQueue();
             }
+            
+            if(_activeDialogs.Count <= 0) _inputSystem.SetEnableBySomeDialogsWhichOpen(true);
         }
 
         private void ShowDialogFromQueue()

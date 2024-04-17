@@ -30,7 +30,11 @@ namespace CodeBase.DialogsSystem
 
         public virtual void Initialize()
         {
-            gameObject.SetActive(true);
+            Show();
+        }
+
+        public virtual void InitializePauseRestart(bool backHome)
+        {
         }
         
         public virtual void CloseDialog()
