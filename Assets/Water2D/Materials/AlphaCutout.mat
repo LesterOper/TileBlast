@@ -64,7 +64,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.049
+    - _Cutoff: 0.398
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Frecuency: 200
@@ -75,11 +75,11 @@ Material:
     - _Parallax: 0.02
     - _RefractOffset: 0.0421
     - _SrcBlend: 1
-    - _Stroke: 0.11
+    - _Stroke: 0.577
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5529412}
+    - _Color: {r: 0.2627451, g: 0.44705886, b: 0.42352945, a: 0.85882354}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _StrokeColor: {r: 0, g: 0, b: 0, a: 0.50980395}
+    - _StrokeColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -94,7 +94,7 @@ namespace CodeBase.CoreBase.FieldBase
                                 fieldPosition);
                         cells[i, j].Initialize(cellView, item);
                         GameObject fieldBg = Object.Instantiate(bgEffect);
-                        fieldBg.transform.localScale = Vector3.one * _fieldBoard.TileSize;
+                        fieldBg.transform.localScale = Vector3.one * (_fieldBoard.TileSize + 0.04f);
                         fieldBg.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
                     }
                     else
