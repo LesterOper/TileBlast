@@ -93,7 +93,6 @@ namespace CodeBase.CoreBase.BoostersOnField
                         FieldPosition position = cell.FieldPositionProperty;
                         _aimController.UpdateAims(itemType, 1, position);
                         DespawnCell(cell);
-                        //UpdateAim(itemType, 1);
                     }
                 }
             }
@@ -124,9 +123,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                     ItemType itemType = _gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType;
                     FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
                     _aimController.UpdateAims(itemType, 1, position);
-                    //_aimController.CollectObjects(itemType, 1, position);
                     _gameModel.FieldModel.Cells[row, i].ClearCell();
-                    //UpdateAim(itemType, 1);
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
             }
