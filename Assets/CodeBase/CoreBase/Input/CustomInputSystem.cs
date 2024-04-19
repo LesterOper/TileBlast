@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.CoreBase.Input
@@ -9,6 +10,8 @@ namespace CodeBase.CoreBase.Input
     {
         public event Action<Vector2> OnClick;
         public void SetEnable(bool enable);
+
+        public void SetEnableBySomeDialogsWhichOpen(bool enable);
     }
     
     public class CustomInputSystem : MonoBehaviour, IPointerClickHandler, IInputSystem, ITickable
@@ -16,8 +19,12 @@ namespace CodeBase.CoreBase.Input
         [SerializeField] private float clickDelay;
         private float delay;
         private bool _isEnable;
+        private bool _isNoOneDialogOpen = true;
+        
+
         public void OnPointerClick(PointerEventData eventData)
         {
+            if(!_isNoOneDialogOpen) return;
             if (_isEnable && delay > clickDelay)
             {
                 delay = 0;
@@ -30,6 +37,11 @@ namespace CodeBase.CoreBase.Input
         public void SetEnable(bool enable)
         {
             _isEnable = enable;
+        }
+
+        public void SetEnableBySomeDialogsWhichOpen(bool enable)
+        {
+            _isNoOneDialogOpen = enable;
         }
 
         public void Tick()

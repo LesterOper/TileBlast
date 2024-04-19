@@ -20,9 +20,12 @@ namespace CodeBase.CoreBase.AimTopBar
             foreach (var levelAim in levelAims)
                 _levelAims.Add(new Aim(levelAim.ItemType, levelAim.amount));
         }
-
+        
         public List<IAimSetter> Aims => _levelAims;
 
-        public bool IsLevelPassed() => _levelAims.FindAll(aim => aim.IsComplete).Count == _levelAims.Count;
+        public bool IsLevelPassed()
+        {
+            return _levelAims.FindAll(aim => aim.IsComplete).Count == _levelAims.Count;
+        }
     }
 }

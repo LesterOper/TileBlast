@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.CoreBase.Counter;
+using UnityEngine;
 
 namespace CodeBase.CoreBase
 {
@@ -32,6 +33,7 @@ namespace CodeBase.CoreBase
             }
         }
         public event Action OnUpdateCounterEvent;
+        public Transform counterTr { get; set; }
 
         public int MaxHealthAmount
         {

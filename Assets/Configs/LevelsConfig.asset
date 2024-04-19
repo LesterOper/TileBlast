@@ -14,102 +14,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   levels:
-  - moves: 5
+  - levelType: 2
+    moves: 50
     row: 11
     column: 8
     LevelAims:
-    - ItemType: 2
-      amount: 30
     - ItemType: 3
-      amount: 30
+      amount: 10
+    - ItemType: 4
+      amount: 20
     - ItemType: 1
-      amount: 40
+      amount: 30
     levelItemsDatas:
+    - itemType: 5
+    - itemType: 5
+    - itemType: 5
+    - itemType: 2
+    - itemType: 5
+    - itemType: 3
+    - itemType: 4
+    - itemType: 3
+    - itemType: 5
+    - itemType: 3
+    - itemType: 2
     - itemType: 1
     - itemType: 3
-    - itemType: 3
+    - itemType: 2
+    - itemType: 1
+    - itemType: 1
+    - itemType: 2
+    - itemType: 5
+    - itemType: 5
+    - itemType: 5
+    - itemType: 5
+    - itemType: 4
     - itemType: 1
     - itemType: 4
     - itemType: 1
     - itemType: 2
-    - itemType: 0
-    - itemType: 0
-    - itemType: 0
-    - itemType: 2
+    - itemType: 5
     - itemType: 4
-    - itemType: 3
     - itemType: 2
+    - itemType: 5
+    - itemType: 2
+    - itemType: 2
+    - itemType: 2
+    - itemType: 3
+    - itemType: 5
     - itemType: 5
     - itemType: 2
     - itemType: 3
     - itemType: 2
     - itemType: 5
-    - itemType: 5
-    - itemType: 2
-    - itemType: 3
-    - itemType: 4
-    - itemType: 3
-    - itemType: 1
     - itemType: 3
     - itemType: 5
-    - itemType: 2
-    - itemType: 3
-    - itemType: 2
-    - itemType: 3
-    - itemType: 3
-    - itemType: 3
-    - itemType: 0
-    - itemType: 0
-    - itemType: 0
-    - itemType: 4
-    - itemType: 1
     - itemType: 5
-    - itemType: 4
-    - itemType: 0
-    - itemType: 0
-    - itemType: 2
     - itemType: 5
-    - itemType: 0
     - itemType: 5
-    - itemType: 4
     - itemType: 5
-    - itemType: 1
-    - itemType: 2
-    - itemType: 3
-    - itemType: 2
-    - itemType: 2
-    - itemType: 5
-    - itemType: 3
-    - itemType: 4
-    - itemType: 5
-    - itemType: 3
-    - itemType: 2
-    - itemType: 4
-    - itemType: 2
-    - itemType: 1
-    - itemType: 1
     - itemType: 3
     - itemType: 3
     - itemType: 1
-    - itemType: 3
-    - itemType: 5
-    - itemType: 3
-    - itemType: 1
-    - itemType: 2
-    - itemType: 1
-    - itemType: 4
-    - itemType: 5
-    - itemType: 1
-    - itemType: 2
-    - itemType: 3
-    - itemType: 2
-    - itemType: 3
-    - itemType: 4
-    - itemType: 3
     - itemType: 4
     - itemType: 1
     - itemType: 3
     - itemType: 4
+    - itemType: 5
+    - itemType: 2
+    - itemType: 2
+    - itemType: 3
     - itemType: 4
+    - itemType: 2
+    - itemType: 5
+    - itemType: 1
+    - itemType: 1
+    - itemType: 4
+    - itemType: 5
     - itemType: 1
     - itemType: 5
+    - itemType: 5
+    - itemType: 2
+    - itemType: 5
+    - itemType: 1
+    - itemType: 4
+    - itemType: 4
+    - itemType: 1
+    - itemType: 4
+    - itemType: 2
+    - itemType: 5
+    - itemType: 1
+    - itemType: 1
+    - itemType: 2
+    - itemType: 2
+    - itemType: 3
+    - itemType: 4
+    - itemType: 5
+    - itemType: 4
+    - itemType: 5
+    - itemType: 4
+    - itemType: 2
+    - itemType: 3

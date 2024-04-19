@@ -14,7 +14,7 @@ namespace CodeBase.StateMachine
             
         }
 
-        public virtual void Exit()
+        public virtual void Exit(NextStateSignal nextStateSignal)
         {
             
         }

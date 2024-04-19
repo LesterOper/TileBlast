@@ -15,15 +15,18 @@ namespace CodeBase.CoreBase.BoostersOnField
     {
         private GameModel _gameModel;
         private SpawnController _spawnController;
+        private AimController _aimController;
         
 
         public BoostersOnFieldActivator(
             GameModel gameModel,
-            SpawnController spawnController
+            SpawnController spawnController,
+            AimController aimController
         )
         {
             _gameModel = gameModel;
             _spawnController = spawnController;
+            _aimController = aimController;
         }
 
         public void ActivateFieldBooster(FieldPosition fieldPosition, ItemType boosterItemType)
@@ -83,8 +86,15 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                 if (cell != null)
                 {
-                    CheckDespawnCellsForAimByItemType(cell.ItemDataProperty.itemType);
-                    DespawnCell(cell);
+                    if(cell.ItemDataProperty.IsDropBottomItem) continue;
+                    if (!cell.IsCellEmpty)
+                    {
+                        ItemType itemType = cell.ItemDataProperty.itemType;
+                        FieldPosition position = cell.FieldPositionProperty;
+                        _aimController.UpdateAims(itemType, 1, position);
+                        DespawnCell(cell);
+                        //UpdateAim(itemType, 1);
+                    }
                 }
             }
             
@@ -107,11 +117,16 @@ namespace CodeBase.CoreBase.BoostersOnField
             int row = fieldPosition.Row;
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
             {
+                if(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.IsDropBottomItem) continue;
                 if (!_gameModel.FieldModel.Cells[row, i].IsCellEmpty)
                 {
                     CellView cellView = _gameModel.FieldModel.Cells[row, i].CellViewProperty;
-                    CheckDespawnCellsForAimByItemType(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType);
+                    ItemType itemType = _gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType;
+                    FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
+                    _aimController.UpdateAims(itemType, 1, position);
+                    //_aimController.CollectObjects(itemType, 1, position);
                     _gameModel.FieldModel.Cells[row, i].ClearCell();
+                    //UpdateAim(itemType, 1);
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
             }
@@ -120,12 +135,19 @@ namespace CodeBase.CoreBase.BoostersOnField
         private void ActivateRocketVertical(FieldPosition fieldPosition)
         {
             int column = fieldPosition.Column;
+            
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
             {
+                if(_gameModel.Level.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM && 
+                   _gameModel.FieldModel.Cells[i, column].ItemDataProperty.IsDropBottomItem) continue;
+                
                 if (!_gameModel.FieldModel.Cells[i, column].IsCellEmpty)
                 {
+                    
                     CellView cellView = _gameModel.FieldModel.Cells[i, column].CellViewProperty;
-                    CheckDespawnCellsForAimByItemType(_gameModel.FieldModel.Cells[i, column].ItemDataProperty.itemType);
+                    ItemType itemType = _gameModel.FieldModel.Cells[i, column].ItemDataProperty.itemType;
+                    FieldPosition position = _gameModel.FieldModel.Cells[i, column].FieldPositionProperty;
+                    _aimController.UpdateAims(itemType, 1, position);
                     _gameModel.FieldModel.Cells[i, column].ClearCell();
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
@@ -144,7 +166,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                 for (int j = 0; j < column; j++)
                 {
                     if(i == fieldPosition.Row && j == fieldPosition.Column) continue;
-                    if (cells[i, j].ItemDataProperty.itemType == disco.itemTypeToDestroyForDiscoBooster)
+                    if (cells[i, j].ItemDataProperty?.itemType == disco.itemTypeToDestroyForDiscoBooster)
                     {
                         countToDespawn++;
                         DespawnCell(cells[i,j]);
@@ -152,28 +174,15 @@ namespace CodeBase.CoreBase.BoostersOnField
                 }
             }
             
-            CheckAimForDiscoType(disco.ItemDataProperty.itemType, countToDespawn);
+            UpdateAim(disco.itemTypeToDestroyForDiscoBooster, countToDespawn);
             DespawnCell(_gameModel.FieldModel[fieldPosition]);
         }
 
-        private void CheckDespawnCellsForAimByItemType(ItemType itemType)
+        private void UpdateAim(ItemType itemType, int count)
         {
-            IAimSetter aim = _gameModel.GameplayCountersModelProperty
-                .AimModelSetterProperty
-                .Aims.FirstOrDefault(local => local.AimItemType == itemType);
-            if (aim != null)
-                aim.Value = -1;
+            _aimController.UpdateAims(itemType, count);
         }
-
-        private void CheckAimForDiscoType(ItemType itemType, int count)
-        {
-            IAimSetter aim = _gameModel.GameplayCountersModelProperty
-                .AimModelSetterProperty
-                .Aims.FirstOrDefault(local => local.AimItemType == itemType);
-            if (aim != null)
-                aim.Value = -count;
-        }
-
+        
         private (bool isBooster, ItemType itemType) CheckNeighboursCellsBeforeBoosterActivated(FieldPosition fieldPosition)
         {
             ItemType itemType = ItemType.NONE;

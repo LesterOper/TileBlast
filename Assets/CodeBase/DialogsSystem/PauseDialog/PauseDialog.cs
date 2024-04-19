@@ -16,12 +16,13 @@ namespace CodeBase.DialogsSystem.PauseDialog
         protected override void Confirm()
         {
             base.Confirm();
-            //_gameModel.DialogsController.
+            _gameModel.DialogsController.ShowPauseRestartConfirmationDialog(false);
         }
 
         protected override void Decline()
         {
             base.Decline();
+            _gameModel.DialogsController.ShowPauseRestartConfirmationDialog(true);
         }
     }
 }

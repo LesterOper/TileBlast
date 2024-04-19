@@ -17,6 +17,7 @@ namespace CodeBase
             Container.Bind<CommonSaving>().FromNew().AsSingle();
             Container.Bind<TimeModel>().FromNew().AsSingle();
             Container.Bind<GetTimeFromTimeAPI>().FromNew().AsSingle();
+            Container.Bind<CoroutineRunner>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

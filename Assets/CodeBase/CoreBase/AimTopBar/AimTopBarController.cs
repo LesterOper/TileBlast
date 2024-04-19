@@ -22,7 +22,7 @@ namespace CodeBase.CoreBase.AimTopBar
             {
                 IAimSetter aimSetter = aimModelSetter.Aims[i];
                 AimView aimView = Object.Instantiate(aimPrefab, parent);
-                aimView.Initialize(aimSetter, _itemsConfig.GetItem(aimSetter.AimItemType).item);
+                aimView.Initialize(aimSetter, _itemsConfig.GetItem(aimSetter.AimItemType).item, _gameModel.Level.levelType);
                 aimModelSetter.Aims[i].OnUpdateCounterEvent += aimView.UpdateAimCounter;
             }
         }

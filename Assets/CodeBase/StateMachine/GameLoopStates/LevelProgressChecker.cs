@@ -3,20 +3,20 @@ using Zenject;
 
 namespace CodeBase.StateMachine.GameLoopStates
 {
-    public class LevelProgressCheckerState : State
+    public class LevelProgressChecker : State
     {
         private GameEndingChecker _gameEndingChecker;
-
-        public LevelProgressCheckerState(
-            SignalBus signalBus,
+        private GameModel _gameModel;
+        public LevelProgressChecker(SignalBus signalBus,
+            GameModel gameModel,
             GameEndingChecker gameEndingChecker) : base(signalBus)
         {
             _gameEndingChecker = gameEndingChecker;
+            _gameModel = gameModel;
         }
 
         public override void Execute()
         {
-            base.Execute();
             _gameEndingChecker.CheckGameEnding();
             _signalBus.Fire(new NextStateSignal(typeof(UserClickState)));
         }

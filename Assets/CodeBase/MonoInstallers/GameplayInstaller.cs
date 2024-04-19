@@ -46,15 +46,14 @@ namespace CodeBase.MonoInstallers
             Container.BindMemoryPool<CellView, ItemPool>().WithInitialSize(100)
                 .FromComponentInNewPrefab(CellView)
                 .UnderTransform(parent);
-            Container.Bind<BoostersOnFieldActivator>().FromNew().AsSingle();
-
+            Container.Bind<AimController>().FromNew().AsSingle();
 
             Container.Bind<InitializeLevelState>().FromNew().AsSingle();
             Container.Bind<CreateFieldState>().FromNew().AsSingle();
             Container.Bind<UserClickState>().FromNew().AsSingle();
             Container.Bind<MatchState>().FromNew().AsSingle();
             Container.Bind<MoveState>().FromNew().AsSingle();
-            Container.Bind<LevelProgressCheckerState>().FromNew().AsSingle();
+            Container.Bind<LevelProgressChecker>().FromNew().AsSingle();
 
 
             Container.Bind<Transform>().FromComponentOn(field.gameObject).AsSingle();

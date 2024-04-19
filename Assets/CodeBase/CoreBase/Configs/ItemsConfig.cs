@@ -52,6 +52,8 @@ namespace CodeBase.CoreBase.Configs
         public Sprite item;
         public Sprite cellColor;
         
+        public bool canMatch = true;
+        
         [ShowIf(nameof(IsBooster))]
         [SerializeField] private int minCountNeedItems;
         [ShowIf(nameof(IsBooster))]
@@ -65,6 +67,8 @@ namespace CodeBase.CoreBase.Configs
                 return matchCount >= minCountNeedItems && matchCount <= maxCountNeedItems;
             return matchCount >= minCountNeedItems;
         }
+
+        public bool IsDropBottomItem => itemType.GetAttribute<ItemAttribute>()._isDropBottomItem;
     }
     
     public enum ItemType
@@ -95,15 +99,20 @@ namespace CodeBase.CoreBase.Configs
         DISCO = 9,
 
         #endregion
+        
+        [ItemAttribute(false, true)]
+        DROP_BOTTOM = 10,
     }
 
     public class ItemAttribute : Attribute
     {
         public bool _isBooster;
+        public bool _isDropBottomItem;
 
-        public ItemAttribute(bool isBooster)
+        public ItemAttribute(bool isBooster, bool isDropBottomItem = false)
         {
             _isBooster = isBooster;
+            _isDropBottomItem = isDropBottomItem;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace CodeBase.CoreBase.CellBase
         public ItemType itemTypeToDestroyForDiscoBooster { get; set; }
         public bool IsBooster()
         {
-            return _itemData.IsBooster;
+            return !IsCellEmpty && _itemData.IsBooster;
         }
 
         public ItemData ItemDataProperty => _itemData;

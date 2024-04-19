@@ -11,6 +11,8 @@ namespace CodeBase.CoreBase.Item
         [SerializeField] private SpriteRenderer itemIcon;
         private Tween _moveTween;
 
+        public SpriteRenderer R => itemIcon;
+        
         public void Initialize(Sprite itemSprite)
         {
             itemIcon.sprite = itemSprite;

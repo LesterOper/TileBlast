@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.DialogsSystem;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
@@ -26,13 +27,16 @@ namespace CodeBase.CoreBase.Configs
     [Serializable]
     public class Level
     {
+        public LevelType levelType;
+        
+        [BoxGroup("Amount of moves", CenterLabel = true)]
         public float moves;
         [InfoBox("Assigned row count", InfoMessageType.Error, nameof(IsRowCountLessThanZero))]
         public int row;
         [InfoBox("Assigned column count", InfoMessageType.Error, nameof(IsColumnCountLessThanZero))]
         public int column;
-
-        [InfoBox("Assigned level's aims")] 
+        
+        [InfoBox("Assigned level's aims")]
         public List<LevelAim> LevelAims;
         
         [BoxGroup]
@@ -66,7 +70,7 @@ namespace CodeBase.CoreBase.Configs
         {
             foreach (var item in levelItemsDatas)
             {
-                item.itemType = (ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length);
+                item.itemType = (ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 5);
             }
         }
 
@@ -115,6 +119,9 @@ namespace CodeBase.CoreBase.Configs
             }
         }
 
+        private bool IsNotClearAllLevelType() => levelType != LevelType.CLEAR_FIELD;
+        private bool IsClearAllLevelType() => levelType == LevelType.CLEAR_FIELD;
+
 
         private bool IsLevelItemsDataListNotEmpty() => levelItemsDatas is {Count: > 0};
         private bool IsElementsCountIncreased() => levelItemsDatas !=null && levelItemsDatas.Count < row * column;
@@ -122,6 +129,21 @@ namespace CodeBase.CoreBase.Configs
         private bool IsRowAndColumnCountAssigned() => row > 0 && column > 0;
         private bool IsRowCountLessThanZero() => row <= 0;
         private bool IsColumnCountLessThanZero() => column <= 0;
+
+        
+        [ShowIf(nameof(IsClearAllLevelType))]
+        [InfoBox("Count aim amount")]
+        [Button]
+        private void CreateAimIfClearFieldLevelType()
+        {
+            LevelAims = new List<LevelAim>(1);
+            LevelAim levelAim = new LevelAim
+            {
+                ItemType = ItemType.NONE,
+                amount = levelItemsDatas.Count(local => local.itemType != ItemType.NONE)
+            };
+            LevelAims.Add(levelAim);
+        } 
     }
 
     [Serializable]
@@ -138,5 +160,13 @@ namespace CodeBase.CoreBase.Configs
         public FieldPosition FieldPosition;
         [BoxGroup]
         public ItemType itemType;
+    }
+
+    public enum LevelType
+    {
+        NONE = 0,
+        DROP_OBJECTS_TO_BOTTOM = 1,
+        COLLECT_OBJECTS = 2,
+        CLEAR_FIELD = 3,
     }
 }

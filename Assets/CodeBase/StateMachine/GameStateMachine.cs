@@ -15,7 +15,7 @@ namespace CodeBase.StateMachine
             UserClickState userClickState,
             MatchState matchState,
             MoveState moveState,
-            LevelProgressCheckerState levelProgressCheckerState
+            LevelProgressChecker levelProgressChecker
         ) : base(signalBus)
         {
             states.Add(typeof(InitializeLevelState), initializeLevelState);
@@ -23,7 +23,7 @@ namespace CodeBase.StateMachine
             states.Add(typeof(UserClickState), userClickState);
             states.Add(typeof(MatchState), matchState);
             states.Add(typeof(MoveState), moveState);
-            states.Add(typeof(LevelProgressCheckerState), levelProgressCheckerState);
+            //states.Add(typeof(LevelProgressChecker), levelProgressChecker);
         }
     }
 }

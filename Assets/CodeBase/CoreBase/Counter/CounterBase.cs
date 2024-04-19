@@ -14,6 +14,7 @@ public abstract class CounterBase : MonoBehaviour
         {
             UpdateCounter();
             _counterSetter.OnUpdateCounterEvent += UpdateCounter;
+            _counterSetter.counterTr = transform;
         }
     }
 
@@ -25,6 +26,7 @@ public abstract class CounterBase : MonoBehaviour
     public virtual void SetCounterSetter(ICounter counter)
     {
         _counterSetter = counter;
+        _counterSetter.counterTr = transform;
         UpdateCounter();
     }
 }

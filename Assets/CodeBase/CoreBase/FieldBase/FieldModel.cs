@@ -8,6 +8,7 @@ namespace CodeBase.CoreBase.FieldBase
     {
         public FieldSize FieldSize;
         public ICell[,] Cells;
+        public int activeCellsCount = 0;
 
         public List<ICell> GetEmptyCells()
         {
@@ -23,6 +24,21 @@ namespace CodeBase.CoreBase.FieldBase
             }
 
             return emptyCells;
+        }
+
+        public int GetEmptyCellsCount()
+        {
+            int count = 0;
+            for (int j = 0; j < FieldSize._column; j++)
+            {
+                for (int i = 0; i < FieldSize._row; i++)
+                {
+                    if (Cells[i, j].IsCellEmpty)
+                        count++;
+                }
+            }
+
+            return count;
         }
 
         public List<ICell> GetColumnIfHasEmptyCellsElseReturnNull(int columnIndex)
@@ -60,6 +76,32 @@ namespace CodeBase.CoreBase.FieldBase
             Cells[fieldPosition.Row, fieldPosition.Column].ItemDataProperty.itemType;
 
         public ICell this[FieldPosition fieldPosition] => Cells[fieldPosition.Row, fieldPosition.Column];
-        
+
+        public void SetActiveCellsCount() // TODO ADD IF-STATEMENT WHEN FIELD WILL BE NOT SQUERE MATRIX
+        {
+            for (int i = 0; i < FieldSize._row; i++)
+            {
+                for (int j = 0; j < FieldSize._column; j++)
+                {
+                    if (Cells[i, j] != null)
+                    {
+                        activeCellsCount++;
+                    }
+                }
+            }
+        }
+
+        public ICell[] GetFirstRow()
+        {
+            ICell[] firstRow = new ICell[FieldSize._column];
+
+            for (int column = 0; column < FieldSize._column; column++)
+            {
+                firstRow[column] = Cells[0, column];
+            }
+
+            return firstRow;
+        }
+
     }
 }
