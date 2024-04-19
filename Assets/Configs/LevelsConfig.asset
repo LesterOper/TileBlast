@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66babc1a51e0474cb1db79bb41cd4f2e, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  level: 5
+  level: 3
   levels:
   - levelType: 2
     moves: 50
@@ -142,7 +142,9 @@ MonoBehaviour:
     moves: 20
     row: 8
     column: 8
-    LevelAims: []
+    LevelAims:
+    - ItemType: 2
+      amount: 10
     levelItemsDatas:
     - itemType: 0
     - itemType: 0
@@ -166,8 +168,8 @@ MonoBehaviour:
     - itemType: 3
     - itemType: 1
     - itemType: 3
-    - itemType: 5
-    - itemType: 5
+    - itemType: 0
+    - itemType: 0
     - itemType: 3
     - itemType: 2
     - itemType: 2
@@ -179,8 +181,8 @@ MonoBehaviour:
     - itemType: 2
     - itemType: 3
     - itemType: 1
-    - itemType: 5
-    - itemType: 4
+    - itemType: 0
+    - itemType: 0
     - itemType: 1
     - itemType: 4
     - itemType: 5

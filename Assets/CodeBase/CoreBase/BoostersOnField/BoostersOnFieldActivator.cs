@@ -86,6 +86,8 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                 if (cell != null)
                 {
+                    if(cell.IsCellBlocked) continue;
+
                     if(cell.ItemDataProperty.IsDropBottomItem) continue;
                     if (!cell.IsCellEmpty)
                     {
@@ -117,6 +119,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             int row = fieldPosition.Row;
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
             {
+                if(_gameModel.FieldModel.Cells[row, i].IsCellBlocked) continue;
                 if(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.IsDropBottomItem) continue;
                 if (!_gameModel.FieldModel.Cells[row, i].IsCellEmpty)
                 {
@@ -124,9 +127,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                     ItemType itemType = _gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType;
                     FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
                     _aimController.UpdateAims(itemType, 1, position);
-                    //_aimController.CollectObjects(itemType, 1, position);
                     _gameModel.FieldModel.Cells[row, i].ClearCell();
-                    //UpdateAim(itemType, 1);
                     DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
                 }
             }
@@ -138,6 +139,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
             {
+                if(_gameModel.FieldModel.Cells[i, column].IsCellBlocked) continue;
                 if(_gameModel.Level.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM && 
                    _gameModel.FieldModel.Cells[i, column].ItemDataProperty.IsDropBottomItem) continue;
                 

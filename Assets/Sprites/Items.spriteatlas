@@ -54,11 +54,16 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
   - {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
   - {fileID: 21300000, guid: a4cee47309112bf46ab62a689e72b27f, type: 3}
+  - {fileID: 21300000, guid: 1cef789315b134f42a09b0e8bd08ecd2, type: 3}
   - {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
   - {fileID: 21300000, guid: 5009b496cdf20d2448d4037c05d96b10, type: 3}
   - {fileID: 21300000, guid: 61df0bd6ba0f88b45bc7019f06c26865, type: 3}
   - {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
   - {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
+  - {fileID: 21300000, guid: 7940be6883a337140a0de74f66c8916c, type: 3}
+  - {fileID: 21300000, guid: 19c16088cc4d32f43b05c5f4b7166cef, type: 3}
+  - {fileID: 21300000, guid: 1ef2211953adfff48a4eeea3e780362a, type: 3}
+  - {fileID: 21300000, guid: 340bdd4955d2f3e48b89fab088e700ad, type: 3}
   - {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
   - {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
   - {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
@@ -71,11 +76,16 @@ SpriteAtlas:
   - Bucket_3
   - Apple_green
   - Cell
+  - CellGreenRoundAngles
   - "\u0412all"
   - CellYellow
   - Background_Core
   - "\u0421rab 1"
   - CellGreen
+  - CellRedRoundAngles
+  - CellYellowRoundAngles
+  - CellBlueRoundAngles
+  - CellPurpleRoundAngles
   - Mango
   - Shell yellow
   - Carambola 1

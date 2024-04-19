@@ -18,7 +18,7 @@ namespace CodeBase.CoreBase.FieldBase
             {
                 for (int i = 0; i < FieldSize._row; i++)
                 {
-                    if(Cells[i,j].IsCellEmpty)
+                    if(Cells[i,j].IsCellEmpty && !Cells[i,j].IsCellBlocked)
                         emptyCells.Add(Cells[i,j]);
                 }
             }
@@ -33,7 +33,7 @@ namespace CodeBase.CoreBase.FieldBase
             {
                 for (int i = 0; i < FieldSize._row; i++)
                 {
-                    if (Cells[i, j].IsCellEmpty)
+                    if (Cells[i, j].IsCellEmpty && !Cells[i,j].IsCellBlocked)
                         count++;
                 }
             }

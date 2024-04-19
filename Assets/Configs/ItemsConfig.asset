@@ -21,31 +21,31 @@ MonoBehaviour:
     maxCountNeedItems: 0
   - itemType: 2
     item: {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
-    cellColor: {fileID: 21300000, guid: 5009b496cdf20d2448d4037c05d96b10, type: 3}
+    cellColor: {fileID: 21300000, guid: 19c16088cc4d32f43b05c5f4b7166cef, type: 3}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 1
     item: {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
-    cellColor: {fileID: 21300000, guid: a4cee47309112bf46ab62a689e72b27f, type: 3}
+    cellColor: {fileID: 21300000, guid: 7940be6883a337140a0de74f66c8916c, type: 3}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 3
     item: {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
-    cellColor: {fileID: 21300000, guid: 10075e8a0660c5a4e958a4ad8544d8c6, type: 3}
+    cellColor: {fileID: 21300000, guid: 1ef2211953adfff48a4eeea3e780362a, type: 3}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 4
     item: {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
-    cellColor: {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
+    cellColor: {fileID: 21300000, guid: 1cef789315b134f42a09b0e8bd08ecd2, type: 3}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 5
     item: {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
-    cellColor: {fileID: 21300000, guid: 995624fd23db4904f8ee251b80cd5e1d, type: 3}
+    cellColor: {fileID: 21300000, guid: 340bdd4955d2f3e48b89fab088e700ad, type: 3}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0

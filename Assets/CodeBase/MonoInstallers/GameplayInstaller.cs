@@ -22,7 +22,7 @@ namespace CodeBase.MonoInstallers
         public SpriteRenderer fieldBg;
         public Transform parent;
         public CellView CellView;
-        public GameObject bgEffect;
+        public SpriteRenderer bgEffect;
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
@@ -57,8 +57,8 @@ namespace CodeBase.MonoInstallers
 
 
             Container.Bind<Transform>().FromComponentOn(field.gameObject).AsSingle();
-            Container.Bind<SpriteRenderer>().FromComponentOn(fieldBg.gameObject).AsSingle();
-            Container.Bind<GameObject>().FromInstance(bgEffect).AsSingle();
+            Container.Bind<SpriteRenderer>().FromInstance(bgEffect).AsSingle();
+            Container.Bind<GameObject>().FromInstance(fieldBg.gameObject).AsSingle();
 
         }
     }
