@@ -33,14 +33,15 @@ namespace CodeBase.CoreBase.FieldBase
             SpawnController spawnController,
             GameModel gameModel,
             Transform fieldParent,
-            SpriteRenderer spriteRendererFieldBg)
+            SpriteRenderer spriteRendererFieldBg,
+            AimController aimController)
         {
             _fieldBoard = fieldBoard;
             _spawnController = spawnController;
             _gameModel = gameModel;
             _fieldParent = fieldParent;
             _spriteRendererFieldBg = spriteRendererFieldBg;
-            _aimController = new AimController(gameModel, spawnController);
+            _aimController = aimController;
         }
 
         public void Initialize()
@@ -111,14 +112,18 @@ namespace CodeBase.CoreBase.FieldBase
 
             if (_gameModel.Level.levelType != LevelType.CLEAR_FIELD)
             {
+                float yDelta = 1;
+                float y = 0;
                 for (int i = 0; i < empty.Count; i++)
                 {
                     FieldPosition fieldPosition = empty[i].FieldPositionProperty;
                     Vector2 position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
+                    
                     var cell = _spawnController.SpawnRandomCell(empty[i].FieldPositionProperty,
-                        new Vector2(position.x, 0), _fieldBoard.TileSize);
+                        new Vector2(position.x, y), _fieldBoard.TileSize);
                     itemsFromPool.Add(cell.Item1);
                     itemsDataFromPool.Add(cell.Item2);
+                    y += yDelta;
                 }
             }
 
@@ -154,7 +159,7 @@ namespace CodeBase.CoreBase.FieldBase
 
                 if (_gameModel.Level.levelType != LevelType.CLEAR_FIELD)
                 {
-                    for (int k = emptyCells.Count - 1; k >= 0; k--)
+                    for (int k = 0; k < emptyCells.Count; k++)
                     {
                         emptyCells[k].Initialize(itemsFromPool[0], itemsDataFromPool[0]);
                         emptyCells[k].itemTypeToDestroyForDiscoBooster = ItemType.NONE;
@@ -169,8 +174,6 @@ namespace CodeBase.CoreBase.FieldBase
                 }
             }
             
-            if(_gameModel.Level.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM)
-                _aimController.UpdateAims();
             return movableItems;
         }
     }

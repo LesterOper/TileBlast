@@ -27,7 +27,7 @@ namespace CodeBase.StateMachine
         private void ChangeState(NextStateSignal nextStateSignal)
         {
             if(currentState != null)
-                currentState.Exit();
+                currentState.Exit( nextStateSignal);
 
             if (states.ContainsKey(nextStateSignal.nextState))
             {

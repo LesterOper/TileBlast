@@ -61,11 +61,19 @@ namespace CodeBase.Factory
             {
                 cellView = _itemPool.Spawn(fieldPosition);
                 cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-                cellView.transform.localScale = Vector3.one * _fieldBoard.TileSize;
+                cellView.transform.localScale *=  _fieldBoard.TileSize;
                 cellView.Initialize(itemData.cellColor, itemData.item);
             }
 
             return (cellView, itemData);
+        }
+
+        public ItemView SpawnAnimatedItemView(Vector3 position, ItemType itemType)
+        {
+            ItemView itemView = _cellFactory.CreateInstance(position);
+            itemView.R.sprite = _itemsConfig.GetItem(itemType).item;
+            itemView.transform.localScale *= _fieldBoard.TileSize;
+            return itemView;
         }
 
         private ItemData GetBoosterItemData(int matchedCount)

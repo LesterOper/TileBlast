@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.CoreBase.Counter;
+using UnityEngine;
 
 namespace CodeBase.CoreBase.GameStateModel
 {
@@ -21,6 +22,7 @@ namespace CodeBase.CoreBase.GameStateModel
             } 
         }
         public event Action OnUpdateCounterEvent;
+        public Transform counterTr { get; set; }
         public event Action OnAmountOfMovesEqualsZeroEvent;
     }
 

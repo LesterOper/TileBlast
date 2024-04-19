@@ -38,11 +38,12 @@ namespace CodeBase.CoreBase.CellBase
         public void MoveToTargetCell(Vector2 position, Action callback)
         {
             _moveTween?.Kill();
-            _moveTween = transform.MoveLocalToZeroOfParent(position, 0.4f)
+            _moveTween = transform.MoveLocalToZeroOfParent(position, 0.13f)
                 .SetEase(Ease.OutQuart)
                 .OnComplete(callback.Invoke);
         }
 
+        public SpriteRenderer R => _itemView.R;
         public void BoosterActivated()
         {
             Debug.Log(nameof(BoosterActivated));

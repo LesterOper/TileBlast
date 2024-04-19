@@ -10,13 +10,16 @@ namespace CodeBase.StateMachine.GameLoopStates
     {
         private LevelsConfig _levelsConfig;
         private GameModel _gameModel;
+        private GameEndingChecker _gameEndingChecker;
 
         public InitializeLevelState(SignalBus signalBus,
             LevelsConfig levelsConfig,
-            GameModel gameModel) : base(signalBus)
+            GameModel gameModel,
+            GameEndingChecker gameEndingChecker) : base(signalBus)
         {
             _levelsConfig = levelsConfig;
             _gameModel = gameModel;
+            _gameEndingChecker = gameEndingChecker;
         }
 
         public override void Execute()
@@ -25,6 +28,7 @@ namespace CodeBase.StateMachine.GameLoopStates
             _levelsConfig.GetLevel().GenerateFieldPosition();
             var level = _levelsConfig.GetLevel();
             _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.LevelAims);
+            _gameEndingChecker.SubscribeAimSetters();
             _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.moves;
             _gameModel.FieldModel.Cells = new ICell[level.row, level.column];
             _gameModel.FieldModel.SetActiveCellsCount();

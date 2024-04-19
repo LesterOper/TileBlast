@@ -47,6 +47,11 @@ namespace CodeBase.CoreBase.FieldBase
 
         public Vector3 WorldPosition(int rowIndex, int columnIndex) =>
             new(OriginalPosition.x + columnIndex * TileSize, OriginalPosition.y + rowIndex * TileSize, 0);
+
+        public Vector3 WorldPosition(FieldPosition fieldPosition)
+        {
+            return new(OriginalPosition.x + fieldPosition.Column * TileSize, OriginalPosition.y + fieldPosition.Row * TileSize, 0);
+        }
     }
     
     public struct BoardEdge

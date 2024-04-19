@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.Counter;
+using UnityEngine;
 
 namespace CodeBase.CoreBase.AimTopBar
 {
@@ -18,8 +19,11 @@ namespace CodeBase.CoreBase.AimTopBar
             _levelAimItemType = itemType;
         }
 
+        public Transform counterTr { get; set; }
         public ItemType AimItemType => _levelAimItemType;
         public bool IsComplete => _complete;
+        public event Action OnAimChanged;
+
         public int Value
         {
             get => _levelAimAmount;
@@ -32,6 +36,7 @@ namespace CodeBase.CoreBase.AimTopBar
                     _complete = true;
                 }
                 OnUpdateCounterEvent?.Invoke();
+                OnAimChanged?.Invoke();
             }
         }
     }
@@ -40,5 +45,7 @@ namespace CodeBase.CoreBase.AimTopBar
     {
         ItemType AimItemType { get;}
         bool IsComplete { get; }
+
+        event Action OnAimChanged;
     }
 }

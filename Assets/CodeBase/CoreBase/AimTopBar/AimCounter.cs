@@ -1,4 +1,6 @@
-﻿namespace CodeBase.CoreBase.AimTopBar
+﻿using CodeBase.CoreBase.FieldBase;
+
+namespace CodeBase.CoreBase.AimTopBar
 {
     public class AimCounter : CounterBase
     {

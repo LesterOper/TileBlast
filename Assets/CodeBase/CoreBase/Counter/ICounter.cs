@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace CodeBase.CoreBase.Counter
 {
@@ -6,5 +7,7 @@ namespace CodeBase.CoreBase.Counter
     {
         int Value { get; set; }
         event Action OnUpdateCounterEvent;
+        Transform counterTr { get; set; }
+
     }
 }

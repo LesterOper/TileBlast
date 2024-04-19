@@ -50,7 +50,7 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 10
-    item: {fileID: 21300000, guid: 26c581f1c9cea2e4cbe2c8573c01729a, type: 3}
+    item: {fileID: 21300000, guid: e2497ddb75b2228498f741c446c8803f, type: 3}
     cellColor: {fileID: 0}
     canMatch: 0
     minCountNeedItems: 0

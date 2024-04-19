@@ -13,6 +13,11 @@ namespace CodeBase.CoreBase.GameStateModel
             _inputSystem = inputSystem;
         }
 
+        public void SubscribeAimSetters()
+        {
+            _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.Aims.ForEach(local => local.OnAimChanged += CheckGameEnding);
+        }
+        
         public void CheckGameEnding()
         {
             if (_gameModel.GameplayCountersModelProperty.MovesModelProperty.Value <= 0)

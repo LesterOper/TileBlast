@@ -39,9 +39,9 @@ namespace CodeBase.StateMachine.GameLoopStates
             _signalBus.Fire(new NextStateSignal(typeof(MatchState)));
         }
 
-        public override void Exit()
+        public override void Exit(NextStateSignal nextStateSignal)
         {
-            base.Exit();
+            base.Exit( nextStateSignal);
             _inputSystem.OnClick -= OnClickHandler;
         }
 

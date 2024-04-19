@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.ApplicationBase;
 using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.BoostersOnField;
 using CodeBase.CoreBase.CellBase;
@@ -18,12 +19,12 @@ namespace CodeBase.CoreBase.FieldBase
         private BoostersOnFieldActivator _boostersOnFieldActivator;
         private AimController _aimController;
         
-        public Matcher(GameModel gameModel, SpawnController spawnController)
+        public Matcher(GameModel gameModel, SpawnController spawnController, AimController aimController)
         {
             _gameModel = gameModel;
             _spawnController = spawnController;
-            _boostersOnFieldActivator = new BoostersOnFieldActivator(_gameModel, _spawnController);
-            _aimController = new AimController(_gameModel);
+            _aimController = aimController;
+            _boostersOnFieldActivator = new BoostersOnFieldActivator(_gameModel, _spawnController, aimController);
         }
         public void TryToMatch(FieldPosition fieldPosition)
         {
@@ -65,7 +66,6 @@ namespace CodeBase.CoreBase.FieldBase
                 _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = -1;
                 CheckMatchItemsToMakeBooster(cell.FieldPositionProperty);
                 RemoveMatchedCells();
-                CheckLevelAim(clickedItemType);
             }
         }
 
@@ -74,17 +74,15 @@ namespace CodeBase.CoreBase.FieldBase
             for (int i = 0; i < _matchedCells.Count; i++)
             {
                 CellView cellView = _matchedCells[i].CellViewProperty;
+                ItemType itemType = _matchedCells[i].ItemDataProperty.itemType;
+                FieldPosition fieldPosition = _matchedCells[i].FieldPositionProperty;
                 cellView.PlayEffect(() =>
                 {
                     _spawnController.Despawn(cellView);
                 });
+                _aimController.UpdateAims(itemType, 1, fieldPosition);
                 _matchedCells[i].ClearCell();
             }
-        }
-
-        private void CheckLevelAim(ItemType itemType)
-        {
-            _aimController.UpdateAims(itemType, _matchedCells.Count);
         }
 
         private void CheckMatch(ItemType targetType, int rowIndex, int columnIndex)

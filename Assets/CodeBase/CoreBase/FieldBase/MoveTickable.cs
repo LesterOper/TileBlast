@@ -1,20 +1,39 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.ItemBase;
+using CodeBase.StateMachine;
+using CodeBase.StateMachine.GameLoopStates;
 using UnityEngine;
 using Zenject;
 
 namespace CodeBase.CoreBase.FieldBase
 {
-    public class MoveTickable : ITickable
+    public class MoveTickable
     {
         private MovableItemsContainer _movableItemsContainer = new();
-        
-        public void AddMovableItems(List<MovableItemsContainer.MovableItem> movableItems) =>
+        [Inject]private CoroutineRunner _coroutineRunner;
+        [Inject] private SignalBus _signalBus;
+
+        private Coroutine _coroutine;
+
+        public void AddMovableItems(List<MovableItemsContainer.MovableItem> movableItems)
+        {
+            if (_coroutine != null)
+            {
+                _coroutineRunner.StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+            _movableItemsContainer.ClearCompleteAnimationItems();
             _movableItemsContainer.AddItems(movableItems);
-        
-        public void Tick() => _movableItemsContainer.MoveItems();
+            StartMoving();
+        }
+
+        private void StartMoving()
+        {
+            _coroutine = _coroutineRunner.StartCoroutine(_movableItemsContainer.MoveItems(()=> _signalBus.Fire(new NextStateSignal(typeof(UserClickState)))));
+        }
     }
 
     public class MovableItemsContainer
@@ -25,6 +44,7 @@ namespace CodeBase.CoreBase.FieldBase
             private Vector2 _targetPosition;
             private ICell _cell;
             private ICell _currentCell;
+            public  bool complete;
 
             public MovableItem(CellView cellView, Vector2 targetPosition)
             {
@@ -36,7 +56,7 @@ namespace CodeBase.CoreBase.FieldBase
             {
                 _cellView.MoveToTargetCell(_targetPosition, ()=>
                 {
-                    
+                    complete = true;
                 });
             }
         }
@@ -48,18 +68,26 @@ namespace CodeBase.CoreBase.FieldBase
             _movableItems.AddRange(items);
         }
 
+        public void ClearCompleteAnimationItems()
+        {
+            _movableItems.RemoveAll(local => local.complete);
+        }
+        
         private void ClearList()
         {
             _movableItems.Clear();
         }
 
-        public void MoveItems()
+        private WaitForSeconds _waitForSeconds = new(0.13f * 0.08f);
+        public IEnumerator MoveItems(Action callback)
         {
             for (int i = 0; i < _movableItems.Count; i++)
             {
                 _movableItems[i].MoveToTarget();
+                yield return _waitForSeconds;
             }
             ClearList();
+            callback.Invoke();
         }
     }
 }
