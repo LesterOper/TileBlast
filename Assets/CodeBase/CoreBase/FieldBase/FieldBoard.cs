@@ -38,8 +38,8 @@ namespace CodeBase.CoreBase.FieldBase
             
             TileScale = scaleX < scaleY ? scaleX : scaleY;
 
-            var countOnBottom = _boardEdge.BottomSize / scaleY;
-            TileScale *= 1 - fieldSize._column / countOnBottom;
+            //var countOnBottom = _boardEdge.BottomSize / scaleY;
+            //TileScale *= 1 - fieldSize._column / countOnBottom;
             //TileScale *= 0.8f;
             /*if (scaleY < scaleX)
             {
@@ -112,10 +112,10 @@ namespace CodeBase.CoreBase.FieldBase
 
         public BoardEdge(float top, float bottom, float edge, float borferDelta, Camera camera)
         {
-            BottomLeft = camera.ViewportToWorldPoint(new Vector3(edge , bottom));
-            BottomRight = camera.ViewportToWorldPoint(new Vector3(1 - edge, bottom));
-            TopLeft = camera.ViewportToWorldPoint(new Vector3(edge , top));
-            TopRight = camera.ViewportToWorldPoint(new Vector3(1- edge, top));
+            BottomLeft = camera.ViewportToWorldPoint(new Vector3(edge , bottom, camera.nearClipPlane));
+            BottomRight = camera.ViewportToWorldPoint(new Vector3(1 - edge, bottom,camera.nearClipPlane));
+            TopLeft = camera.ViewportToWorldPoint(new Vector3(edge , top,camera.nearClipPlane));
+            TopRight = camera.ViewportToWorldPoint(new Vector3(1- edge, top,camera.nearClipPlane));
         }
 
         public float BottomSize => BottomRight.x - BottomLeft.x;

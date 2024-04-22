@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FieldSettings
   m_EditorClassIdentifier: 
   tileOriginalSize: 110
-  top: 0.85
-  bottom: 0.25
+  top: 0.8
+  bottom: 0.2
   edge: 0.05
   borderDelta: 0
