@@ -16,14 +16,16 @@ namespace CodeBase.CoreBase.FieldBase
         private readonly float _spriteOriginal;
         private const float PixelPerfectPerUnit = 110f;
         public float _borderDelta;
+        private Camera _camera;
         
 
-        public FieldBoard(FieldSettings fieldSettings)
+        public FieldBoard(FieldSettings fieldSettings, Camera camera)
         {
+            _camera = camera;
             var fieldSettings1 = fieldSettings;
             _spriteOriginal = fieldSettings1.tileOriginalSize / PixelPerfectPerUnit;
             _borderDelta = fieldSettings.borderDelta;
-            _boardEdge = new BoardEdge(fieldSettings1.top, fieldSettings1.bottom, fieldSettings1.edge, _borderDelta);
+            _boardEdge = new BoardEdge(fieldSettings1.top, fieldSettings1.bottom, fieldSettings1.edge, _borderDelta, _camera);
         }
 
         public void Calculate(FieldSize fieldSize)
@@ -36,7 +38,9 @@ namespace CodeBase.CoreBase.FieldBase
             
             TileScale = scaleX < scaleY ? scaleX : scaleY;
 
-            TileScale *= 0.8f;
+            var countOnBottom = _boardEdge.BottomSize / scaleY;
+            TileScale *= 1 - fieldSize._column / countOnBottom;
+            //TileScale *= 0.8f;
             /*if (scaleY < scaleX)
             {
                 var k = (int)(Math.Ceiling(_boardEdge.BottomSize * scaleY));
@@ -106,16 +110,16 @@ namespace CodeBase.CoreBase.FieldBase
         public Vector3 TopLeft;
         public Vector3 TopRight;
 
-        public BoardEdge(float top, float bottom, float edge, float borferDelta)
+        public BoardEdge(float top, float bottom, float edge, float borferDelta, Camera camera)
         {
-            BottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(edge , bottom));
-            BottomRight = Camera.main.ViewportToWorldPoint(new Vector3(1 - edge, bottom));
-            TopLeft = Camera.main.ViewportToWorldPoint(new Vector3(edge , top));
-            TopRight = Camera.main.ViewportToWorldPoint(new Vector3(1- edge, top));
+            BottomLeft = camera.ViewportToWorldPoint(new Vector3(edge , bottom));
+            BottomRight = camera.ViewportToWorldPoint(new Vector3(1 - edge, bottom));
+            TopLeft = camera.ViewportToWorldPoint(new Vector3(edge , top));
+            TopRight = camera.ViewportToWorldPoint(new Vector3(1- edge, top));
         }
 
-        public float BottomSize => Vector3.Distance(BottomRight,BottomLeft);
-        public float TopSize => Vector3.Distance(TopLeft, BottomLeft);
+        public float BottomSize => BottomRight.x - BottomLeft.x;
+        public float TopSize => TopLeft.y - BottomLeft.y;
     }
 
     [Serializable]

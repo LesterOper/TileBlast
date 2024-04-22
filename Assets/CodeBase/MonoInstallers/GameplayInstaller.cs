@@ -23,6 +23,7 @@ namespace CodeBase.MonoInstallers
         public Transform parent;
         public CellView CellView;
         public SpriteRenderer bgEffect;
+        public Camera Camera;
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
@@ -59,6 +60,7 @@ namespace CodeBase.MonoInstallers
             Container.Bind<Transform>().FromComponentOn(field.gameObject).AsSingle();
             Container.Bind<SpriteRenderer>().FromInstance(bgEffect).AsSingle();
             Container.Bind<GameObject>().FromInstance(fieldBg.gameObject).AsSingle();
+            Container.Bind<Camera>().FromInstance(Camera).AsSingle();
 
         }
     }

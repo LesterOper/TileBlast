@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileOriginalSize: 110
   top: 0.85
-  bottom: 0.18
+  bottom: 0.25
   edge: 0.05
   borderDelta: 0
