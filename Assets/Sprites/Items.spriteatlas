@@ -45,7 +45,6 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 2aa13ce73574e7f438e7357da52077ad, type: 3}
-    - {fileID: 102900000, guid: d2dcc17f356faf243b8145adc20a2f0b, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -57,7 +56,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1cef789315b134f42a09b0e8bd08ecd2, type: 3}
   - {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
   - {fileID: 21300000, guid: 5009b496cdf20d2448d4037c05d96b10, type: 3}
-  - {fileID: 21300000, guid: 61df0bd6ba0f88b45bc7019f06c26865, type: 3}
   - {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
   - {fileID: 21300000, guid: 5964f708195c5bb4f8e910aed03e232f, type: 3}
   - {fileID: 21300000, guid: 7940be6883a337140a0de74f66c8916c, type: 3}
@@ -79,7 +77,6 @@ SpriteAtlas:
   - CellGreenRoundAngles
   - "\u0412all"
   - CellYellow
-  - Background_Core
   - "\u0421rab 1"
   - CellGreen
   - CellRedRoundAngles

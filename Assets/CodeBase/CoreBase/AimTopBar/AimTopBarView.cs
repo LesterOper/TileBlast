@@ -10,13 +10,13 @@ namespace CodeBase.CoreBase.AimTopBar
     public class AimTopBarView : MonoBehaviour
     {
         [SerializeField] private AimView aimPrefab;
+        [SerializeField] private Transform layout;
 
         [Inject] private AimTopBarController _aimTopBarController;
-        [Inject] private GameModel _gameModel;
 
         private void Start()
         {
-            _aimTopBarController.InitializeLevelAim(aimPrefab, transform);
+            _aimTopBarController.InitializeLevelAim(aimPrefab, layout);
         }
     }
 }

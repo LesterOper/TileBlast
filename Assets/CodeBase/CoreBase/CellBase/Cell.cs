@@ -54,7 +54,7 @@ namespace CodeBase.CoreBase.CellBase
         {
             _cellView = cellView;
             _itemData = item;
-            _cellView.Initialize(_itemData.cellColor, _itemData.item);
+            _cellView.Initialize(_itemData.cellColor, _itemData.item, item.color);
             isCellBlocked = false;
         }
     }

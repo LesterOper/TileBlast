@@ -55,6 +55,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 765e11d23b7e01b458fe5e2f19fb2fb6, type: 3}
   - {fileID: 21300000, guid: 47344cd3b0df9774e8a2cea0005a147e, type: 3}
   - {fileID: 21300000, guid: aceb38244ada9964eaeb2aff302e852c, type: 3}
+  - {fileID: 21300000, guid: ddff7c2425602c547935ea957ddf16a7, type: 3}
   - {fileID: 21300000, guid: 5774de557aacc3b4a8e0c5e8e08c60b8, type: 3}
   - {fileID: 21300000, guid: f1db13e6b6847f34089e72a277bb20b6, type: 3}
   - {fileID: 21300000, guid: f98b4ab7d8bd17849b077d1bec287b67, type: 3}
@@ -71,6 +72,7 @@ SpriteAtlas:
   - indicator
   - leave
   - top_bar_bg
+  - topBarAimBg
   - leave3
   - leave4
   - leave6

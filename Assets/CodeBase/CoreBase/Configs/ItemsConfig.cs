@@ -51,6 +51,7 @@ namespace CodeBase.CoreBase.Configs
         public ItemType itemType;
         public Sprite item;
         public Sprite cellColor;
+        public Color color;
         
         public bool canMatch = true;
         

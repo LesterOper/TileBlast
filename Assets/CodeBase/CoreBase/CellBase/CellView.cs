@@ -10,16 +10,18 @@ namespace CodeBase.CoreBase.CellBase
     {
         [SerializeField] private SpriteRenderer _renderComponent;
         [SerializeField] private ItemView _itemView;
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private ParticleSystem effect;
         
         private Tween _moveTween;
 
         public Transform CellTransform => transform;
 
-        public void Initialize(Sprite coloredCellSprite, Sprite itemSprite)
+        public void Initialize(Sprite coloredCellSprite, Sprite itemSprite, Color colorForParticle)
         {
             _renderComponent.sprite = coloredCellSprite;
             _itemView.Initialize(itemSprite);
+            var main = effect.main;
+            main.startColor = new ParticleSystem.MinMaxGradient(colorForParticle);
         }
 
         public virtual void FadeCell(float endValue, float duration)
@@ -31,8 +33,8 @@ namespace CodeBase.CoreBase.CellBase
         public void PlayEffect(Action callback)
         {
             FadeCell(0, 0.1f);
-            _particleSystem.Play();
-            DOVirtual.DelayedCall(_particleSystem.main.duration, callback.Invoke);
+            effect.Play();
+            DOVirtual.DelayedCall(effect.main.duration, callback.Invoke);
         }
         
         public void MoveToTargetCell(Vector2 position, Action callback)
