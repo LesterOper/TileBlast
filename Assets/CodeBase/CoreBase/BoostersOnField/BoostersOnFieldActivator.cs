@@ -143,7 +143,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
             {
                 if(_gameModel.FieldModel.Cells[i, column].IsCellBlocked) continue;
-                if(_gameModel.Level.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM && 
+                if(_gameModel.Level.levelData.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM && 
                    _gameModel.FieldModel.Cells[i, column].ItemDataProperty.IsDropBottomItem) continue;
                 
                 if (!_gameModel.FieldModel.Cells[i, column].IsCellEmpty)

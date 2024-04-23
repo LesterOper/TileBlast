@@ -40,11 +40,11 @@ namespace CodeBase.StateMachine.GameLoopStates
         public override void Exit(NextStateSignal nextStateSignal)
         {
             base.Exit(nextStateSignal);
-            if (_gameModel.Level.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM)
+            if (_gameModel.Level.levelData.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM)
             {
                 _aimController.UpdateAims();
             }
-            if (_gameModel.Level.levelType != LevelType.CLEAR_FIELD)
+            if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
             {
                 if (_gameModel.FieldModel.GetEmptyCellsCount() > 0)
                 {
