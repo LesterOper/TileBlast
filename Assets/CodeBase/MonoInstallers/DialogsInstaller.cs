@@ -13,7 +13,7 @@ namespace CodeBase.MonoInstallers
     {
         public override void InstallBindings()
         {
-            Container.Bind<DialogsController>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<DialogsController>().FromNew().AsSingle();
             Container.Bind<WinDialog>().FromComponentInHierarchy().AsSingle();
             Container.Bind<LooseDialog>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ReviveMovesDialog>().FromComponentInHierarchy().AsSingle();

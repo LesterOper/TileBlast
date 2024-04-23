@@ -49,7 +49,7 @@ namespace CodeBase.DialogsSystem.ReviveHealth
         protected override void Decline()
         {
             base.Decline();
-            CloseDialog();
+            SceneManager.LoadScene(1);
         }
     }
 }

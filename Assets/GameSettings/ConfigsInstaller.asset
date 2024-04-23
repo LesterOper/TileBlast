@@ -16,3 +16,4 @@ MonoBehaviour:
   _fieldSettings: {fileID: 11400000, guid: d281b8517d87af6429398470d0c37fa1, type: 2}
   _levelsConfig: {fileID: 11400000, guid: ad6085de3f3d19e4cacf90d889c14ed5, type: 2}
   _gameSettingsConfig: {fileID: 11400000, guid: bba2d36ffdca441489c4cbdd9e72baa2, type: 2}
+  _vfxConfig: {fileID: 11400000, guid: 980d1e811135b89499955a446ffc17b4, type: 2}

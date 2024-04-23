@@ -80,6 +80,7 @@ namespace CodeBase.CoreBase.BoostersOnField
 
         private void ActivateBomb(FieldPosition fieldPosition)
         {
+            _spawnController.SpawnEffect(VfxType.BOMB, fieldPosition);
             foreach (DirectionForBooster direction in Enum.GetValues(typeof(DirectionForBooster)))
             {
                 var cell = GetNeighbour(fieldPosition, direction);
@@ -93,9 +94,10 @@ namespace CodeBase.CoreBase.BoostersOnField
                     {
                         ItemType itemType = cell.ItemDataProperty.itemType;
                         FieldPosition position = cell.FieldPositionProperty;
+                        CellView cellView = cell.CellViewProperty;
+                        cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
                         _aimController.UpdateAims(itemType, 1, position);
-                        DespawnCell(cell);
-                        //UpdateAim(itemType, 1);
+                        cell.ClearCell();
                     }
                 }
             }
@@ -127,8 +129,9 @@ namespace CodeBase.CoreBase.BoostersOnField
                     ItemType itemType = _gameModel.FieldModel.Cells[row, i].ItemDataProperty.itemType;
                     FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
                     _aimController.UpdateAims(itemType, 1, position);
+                    cellView.PlayEffect(() => { _spawnController.Despawn(cellView);});
                     _gameModel.FieldModel.Cells[row, i].ClearCell();
-                    DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
+                    //DOVirtual.DelayedCall(0.05f, () => );
                 }
             }
         }
@@ -149,9 +152,10 @@ namespace CodeBase.CoreBase.BoostersOnField
                     CellView cellView = _gameModel.FieldModel.Cells[i, column].CellViewProperty;
                     ItemType itemType = _gameModel.FieldModel.Cells[i, column].ItemDataProperty.itemType;
                     FieldPosition position = _gameModel.FieldModel.Cells[i, column].FieldPositionProperty;
+                    cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
                     _aimController.UpdateAims(itemType, 1, position);
                     _gameModel.FieldModel.Cells[i, column].ClearCell();
-                    DOVirtual.DelayedCall(0.05f, () => _spawnController.Despawn(cellView));
+                    //DOVirtual.DelayedCall(0.05f, () => );
                 }
             }
         }
@@ -171,7 +175,10 @@ namespace CodeBase.CoreBase.BoostersOnField
                     if (cells[i, j].ItemDataProperty?.itemType == disco.itemTypeToDestroyForDiscoBooster)
                     {
                         countToDespawn++;
-                        DespawnCell(cells[i,j]);
+                        ICell cell = cells[i, j];
+                        CellView cellView = cell.CellViewProperty;
+                        cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
+                        cell.ClearCell();
                     }
                 }
             }

@@ -14,7 +14,7 @@ namespace Board
 
         private void Start()
         {
-            _boardBounds = new FieldBoard(boundsBoardSettings);
+            //_boardBounds = new FieldBoard(boundsBoardSettings);
             _boardBounds.Calculate(_size);
             
             // for (int i = 0; i < _size.Column; i++)

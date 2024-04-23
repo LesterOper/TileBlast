@@ -16,6 +16,8 @@ namespace CodeBase.CoreBase.GameStateModel
         public void SubscribeAimSetters()
         {
             _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.Aims.ForEach(local => local.OnAimChanged += CheckGameEnding);
+            _gameModel.GameplayCountersModelProperty.MovesModelProperty.OnAmountOfMovesEqualsZeroEvent +=
+                CheckGameEnding;
         }
         
         public void CheckGameEnding()

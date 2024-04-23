@@ -11,6 +11,9 @@ namespace CodeBase.CoreBase.CellBase
         [SerializeField] private SpriteRenderer _renderComponent;
         [SerializeField] private ItemView _itemView;
         [SerializeField] private ParticleSystem effect;
+        [SerializeField] private ParticleSystem smoke;
+
+        [SerializeField] private ParticleSystem bombEffect;
         
         private Tween _moveTween;
 
@@ -20,8 +23,18 @@ namespace CodeBase.CoreBase.CellBase
         {
             _renderComponent.sprite = coloredCellSprite;
             _itemView.Initialize(itemSprite);
-            var main = effect.main;
-            main.startColor = new ParticleSystem.MinMaxGradient(colorForParticle);
+            if (effect != null)
+            {
+                var main = effect.main;
+                main.startColor = new ParticleSystem.MinMaxGradient(colorForParticle);
+            }
+
+            if (smoke != null)
+            {
+                var main = smoke.main;
+                main.startColor = new ParticleSystem.MinMaxGradient(new Color(colorForParticle.r, colorForParticle.g,
+                    colorForParticle.b, 0.5f));
+            }
         }
 
         public virtual void FadeCell(float endValue, float duration)
@@ -29,7 +42,7 @@ namespace CodeBase.CoreBase.CellBase
             _renderComponent.DOFade(endValue, duration);
             _itemView.FadeOut(endValue, duration);
         }
-        
+
         public void PlayEffect(Action callback)
         {
             FadeCell(0, 0.1f);
@@ -49,6 +62,18 @@ namespace CodeBase.CoreBase.CellBase
         public void BoosterActivated()
         {
             Debug.Log(nameof(BoosterActivated));
+        }
+
+        public void PlayBombEffect(Action callback)
+        {
+            FadeCell(0, 0.1f);
+            bombEffect.gameObject.SetActive(true);
+            bombEffect.Play();
+            DOVirtual.DelayedCall(effect.main.duration, () =>
+            {
+                bombEffect.gameObject.SetActive(false);
+                callback.Invoke();
+            });
         }
     }
 }

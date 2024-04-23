@@ -37,55 +37,8 @@ namespace CodeBase.CoreBase.FieldBase
             float scaleY = _boardEdge.TopSize / totalHeight;
             
             TileScale = scaleX < scaleY ? scaleX : scaleY;
-
-            //var countOnBottom = _boardEdge.BottomSize / scaleY;
-            //TileScale *= 1 - fieldSize._column / countOnBottom;
-            //TileScale *= 0.8f;
-            /*if (scaleY < scaleX)
-            {
-                var k = (int)(Math.Ceiling(_boardEdge.BottomSize * scaleY));
-                if (k <= fieldSize._column)
-                {
-                    TileScale = scaleY;
-                }
-                else
-                {
-                    TileScale = scaleY * ((float)fieldSize._column / k );
-                }
-            }*/
-            
-            
             TileSize = _spriteOriginal * TileScale;
 
-            float offsetX = scaleY < scaleX ? (_boardEdge.BottomSize - TileSize * fieldSize._column) * 0.5f : 0;
-            
-            float startX = _boardEdge.BottomLeft.x + TileSize * 0.5f + offsetX;
-            float startY = _boardEdge.BottomLeft.y + TileSize * 0.5f;
-
-            OriginalPosition = new Vector2(startX, startY);
-        }
-
-        public void Calc(FieldSize fieldSize)
-        {
-            float totalWidth = fieldSize._column;
-            float totalHeight = fieldSize._row;
-
-            float scaleX = _boardEdge.BottomSize / totalWidth;
-            float scaleY = _boardEdge.TopSize / totalHeight;
-            
-            if (scaleX > _spriteOriginal)
-            {
-                if (scaleY <= _spriteOriginal)
-                {
-                    float delta = _boardEdge.BottomSize / scaleY;
-
-                    float percent = fieldSize._column / delta;
-
-                    TileScale = scaleX * percent;
-                    TileSize = _spriteOriginal * TileScale;
-                }
-            }
-            
             float offsetX = scaleY < scaleX ? (_boardEdge.BottomSize - TileSize * fieldSize._column) * 0.5f : 0;
             
             float startX = _boardEdge.BottomLeft.x + TileSize * 0.5f + offsetX;

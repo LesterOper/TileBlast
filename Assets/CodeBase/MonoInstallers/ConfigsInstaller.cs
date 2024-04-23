@@ -15,9 +15,11 @@ namespace CodeBase.MonoInstallers
         [SerializeField] private FieldSettings _fieldSettings;
         [SerializeField] private LevelsConfig _levelsConfig;
         [SerializeField] private GlobalGameSettingsConfig _gameSettingsConfig;
+        [SerializeField] private VfxConfig _vfxConfig;
 
         public override void InstallBindings()
         {
+            Container.Bind<VfxConfig>().FromScriptableObject(_vfxConfig).AsSingle();
             Container.Bind<ItemsConfig>().FromScriptableObject(_itemsConfig).AsCached();
             Container.Bind<FieldSettings>().FromScriptableObject(_fieldSettings).AsSingle().WhenInjectedInto<FieldBoard>();
             Container.Bind<LevelsConfig>().FromScriptableObject(_levelsConfig).AsSingle()

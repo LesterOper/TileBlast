@@ -37,10 +37,10 @@ namespace CodeBase.ApplicationBase
             animatedObj.maskInteraction = SpriteMaskInteraction.None;
             Sequence sequence = DOTween.Sequence();
 
-            sequence.Append(animatedObj.transform.DOScale(animatedObj.transform.localScale * 1.5f, time * 0.2f));
+            sequence.Append(animatedObj.transform.DOScale(animatedObj.transform.localScale * 3f, time * 0.2f));
 
-            sequence.Append(animatedObj.transform.DOScale(animatedObj.transform.localScale * 1.2f, time * 0.5f));
-            animatedObj.transform.DOScale(Vector3.zero, time * 0.5f).SetDelay(time * 0.8f);
+            sequence.Append(animatedObj.transform.DOScale(animatedObj.transform.localScale * 1.8f, time * 0.5f));
+            animatedObj.transform.DOScale(Vector3.zero, time * 0.6f).SetDelay(time * 0.7f);
 
             Sequence sequenceMove = DOTween.Sequence();
             sequenceMove.Append(animatedObj.transform.DOMoveY(target.position.y, time).SetEase(Ease.InQuart).OnComplete(() =>
@@ -48,7 +48,7 @@ namespace CodeBase.ApplicationBase
                 callback?.Invoke();
                 Object.Destroy(animatedObj);
             }));
-            sequenceMove.Join(animatedObj.transform.DOMoveX(target.position.x + (target.position.x * 0.3f), time)
+            sequenceMove.Join(animatedObj.transform.DOMoveX(target.position.x + (target.position.x * 0.3f), time * 0.5f)
                 .SetEase(Ease.Linear));
             sequenceMove.Append(animatedObj.transform.DOMoveX(target.position.x, time).SetEase(Ease.Linear));
             

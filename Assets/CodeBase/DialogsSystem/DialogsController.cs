@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.CoreBase.Input;
 using CodeBase.DialogsSystem.ReviveHealth;
 
 namespace CodeBase.DialogsSystem
 {
-    public class DialogsController
+    public class DialogsController : IDisposable
     {
         private WinDialog.WinDialog _winDialog;
         private LooseDialog.LooseDialog _looseDialog;
@@ -118,6 +119,11 @@ namespace CodeBase.DialogsSystem
 
         private void HideDialog()
         {
+        }
+
+        public void Dispose()
+        {
+            _activeDialogs.Clear();
         }
     }
 }

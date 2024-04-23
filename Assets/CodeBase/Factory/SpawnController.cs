@@ -7,6 +7,7 @@ using CodeBase.CoreBase.Item;
 using CodeBase.CoreBase.ItemBase;
 using CodeBase.Pool;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace CodeBase.Factory
@@ -17,17 +18,20 @@ namespace CodeBase.Factory
         private ItemsConfig _itemsConfig;
         private ItemPool _itemPool;
         private FieldBoard _fieldBoard;
+        private VfxConfig _vfxConfig;
 
         public SpawnController(
             CellFactory cellFactory, 
             ItemsConfig itemsConfig,
             ItemPool itemPool,
-            FieldBoard fieldBoard)
+            FieldBoard fieldBoard,
+            VfxConfig vfxConfig)
         {
             _cellFactory = cellFactory;
             _itemsConfig = itemsConfig;
             _itemPool = itemPool;
             _fieldBoard = fieldBoard;
+            _vfxConfig = vfxConfig;
         }
 
         public CellView SpawnCell(Transform parent, Vector3 position, float scale, FieldPosition fieldPosition)
@@ -81,6 +85,13 @@ namespace CodeBase.Factory
             ItemData boosterData = _itemsConfig.GetBoosterItemData(matchedCount);
 
             return boosterData;
+        }
+
+        public GameObject SpawnEffect(VfxType vfxType, FieldPosition fieldPosition)
+        {
+            GameObject pref = _vfxConfig.GetVfxByType(vfxType);
+            GameObject inst = Object.Instantiate(pref, _fieldBoard.WorldPosition(fieldPosition), Quaternion.identity);
+            return inst;
         }
 
         private ItemData GetNewItemData()
