@@ -30,6 +30,7 @@ namespace CodeBase.CoreBase.CellBase
         {
             _cellView = null;
             _itemData = null;
+            itemTypeToDestroyForDiscoBooster = ItemType.NONE;
         }
 
         public void PlayEffect(Action callback)

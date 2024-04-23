@@ -122,7 +122,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
             {
                 if(_gameModel.FieldModel.Cells[row, i].IsCellBlocked) continue;
-                if(_gameModel.FieldModel.Cells[row, i].ItemDataProperty.IsDropBottomItem) continue;
+                if(_gameModel.FieldModel.Cells[row, i].ItemDataProperty is {IsDropBottomItem: true}) continue;
                 if (!_gameModel.FieldModel.Cells[row, i].IsCellEmpty)
                 {
                     CellView cellView = _gameModel.FieldModel.Cells[row, i].CellViewProperty;
@@ -172,18 +172,21 @@ namespace CodeBase.CoreBase.BoostersOnField
                 for (int j = 0; j < column; j++)
                 {
                     if(i == fieldPosition.Row && j == fieldPosition.Column) continue;
-                    if (cells[i, j].ItemDataProperty?.itemType == disco.itemTypeToDestroyForDiscoBooster)
+                    
+                    ItemType itemType = cells[i, j].ItemDataProperty.itemType;
+                    if ( itemType == disco.itemTypeToDestroyForDiscoBooster)
                     {
                         countToDespawn++;
                         ICell cell = cells[i, j];
                         CellView cellView = cell.CellViewProperty;
+                        _aimController.UpdateAims(itemType, 1, cell.FieldPositionProperty);
                         cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
                         cell.ClearCell();
                     }
                 }
             }
             
-            UpdateAim(disco.itemTypeToDestroyForDiscoBooster, countToDespawn);
+            //UpdateAim(disco.itemTypeToDestroyForDiscoBooster, countToDespawn);
             DespawnCell(_gameModel.FieldModel[fieldPosition]);
         }
 

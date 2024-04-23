@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f9a5af7ca44a7bb26de77c67215ca8, type: 3}
   m_Name: GlobalGameSettingsConfig
   m_EditorClassIdentifier: 
-  HealthAmountOnGameStartedFirstTime: 1
+  HealthAmountOnGameStartedFirstTime: 100
   DefaultSoftMoneyAmount: 100
-  MaxHealthAmount: 1
+  MaxHealthAmount: 100
   ResetDurationOfOneHealthInSeconds: 30
   MovesReviveCost: 250
   MovesReviveAmount: 5
