@@ -109,8 +109,8 @@ namespace CodeBase.CoreBase.FieldBase
 
         private ItemData CreateItem(FieldPosition fieldPosition, float scale)
         {
-            ItemType itemType = _gameModel.Level.levelItemsContainer.LevelItemsDatas
-                .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.itemType;
+            ItemType itemType = _gameModel.Level.levelItemsContainer.levelFieldConfig.types
+                .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.item;
 
             return _spawnController.GetItemDataByType(itemType);
         }

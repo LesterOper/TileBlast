@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.DialogsSystem;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
-using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
-using Zenject;
-using Random = UnityEngine.Random;
 
 namespace CodeBase.CoreBase.Configs
 {
@@ -30,67 +24,18 @@ namespace CodeBase.CoreBase.Configs
     public class Level
     {
         public LevelData levelData;
-        //[BoxGroup]
-        //[ShowIf(nameof(IsRowAndColumnCountAssigned))]
-        public LevelItemsContainer levelItemsContainer;
-        /*[BoxGroup]
-        [ShowIf(nameof(IsRowAndColumnCountAssigned))]
-        [InfoBox("Generate empty list of items or regenerate exist")]
-        [Button]
-        private void GenerateListOfLevelItems()
-        {
-            levelItemsContainer.LevelItemsDatas = new List<LevelItemsData>(levelData.row * levelData.column);
-            int levelListIndex = 0;
-            for (int i = 0; i < levelData.row; i++)
-            {
-                for (int j = 0; j < levelData.column; j++)
-                {
-                    levelItemsContainer.LevelItemsDatas.Add(new LevelItemsData());
-                    levelItemsContainer.LevelItemsDatas[levelListIndex].FieldPosition = new FieldPosition(i, j);
-                    levelListIndex++;
-                }
-            }
-        }
         
-        [BoxGroup]
-        [ShowIf(nameof(IsLevelItemsDataListNotEmpty))]
-        [InfoBox("Generate randomly items")]
-        [Button]
-        private void RandomGenerationOfItemsType()
-        {
-            foreach (var item in levelItemsContainer.LevelItemsDatas)
-            {
-                item.itemType = (ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 5);
-            }
-        }*/
-
-        [BoxGroup]
-        [ShowIf(nameof(IsLevelItemsDataListNotEmpty))]
-        [InfoBox("Generate field position indexes of items or regenerate exist")]
+        public LevelItemsContainer levelItemsContainer;
+        
+        [InfoBox("Generate random field")]
         [Button]
         public void GenerateFieldPosition()
         {
-            int levelListIndex = 0;
-
-            for (int i = 0; i < levelItemsContainer.row; i++)
-            {
-                for (int j = 0; j < levelItemsContainer.column; j++)
-                {
-                    levelItemsContainer.LevelItemsDatas[levelListIndex].FieldPosition = new FieldPosition(i, j);
-                    levelListIndex++;
-                }
-            }
+            levelItemsContainer.levelFieldConfig.GenerateRandomField();
         }
-        
         
         private bool IsNotClearAllLevelType() => levelData.levelType != LevelType.CLEAR_FIELD;
         private bool IsClearAllLevelType() => levelData.levelType == LevelType.CLEAR_FIELD;
-
-
-        private bool IsLevelItemsDataListNotEmpty() => levelItemsContainer.LevelItemsDatas is {Count: > 0};
-        //private bool IsRowAndColumnCountAssigned() => levelData.row > 0 && levelData.column > 0;
-        
-
         
         [ShowIf(nameof(IsClearAllLevelType))]
         [InfoBox("Count aim amount")]
@@ -101,7 +46,7 @@ namespace CodeBase.CoreBase.Configs
             LevelAim levelAim = new LevelAim
             {
                 ItemType = ItemType.NONE,
-                amount = levelItemsContainer.LevelItemsDatas.Count(local => local.itemType != ItemType.NONE)
+                amount = levelItemsContainer.levelFieldConfig.types.Count(local => local.item != ItemType.NONE)
             };
             levelData.LevelAims.Add(levelAim);
         } 
@@ -110,61 +55,9 @@ namespace CodeBase.CoreBase.Configs
     [Serializable]
     public class LevelItemsContainer
     {
-        [InfoBox("Assigned row count", InfoMessageType.Error, nameof(IsRowCountLessThanZero))]
-        public int row;
-        [InfoBox("Assigned column count", InfoMessageType.Error, nameof(IsColumnCountLessThanZero))]
-        public int column;
-        
-        [TableList]
-        public List<LevelItemsData> LevelItemsDatas;
-
-        public int Count => row * column;
-        
-        private bool IsRowCountLessThanZero() => row <= 0;
-        private bool IsColumnCountLessThanZero() => column <= 0;
-        
-        [BoxGroup]
-        [ShowIf(nameof(IsElementsCountIncreased))]
-        [InfoBox("Count of elements changed, click button to add", InfoMessageType.Error)]
-        [Button]
-        private void AddElements()
-        {
-            int diff = (row * column) - LevelItemsDatas.Count;
-
-            for (int i = 0; i < diff; i++)
-            {
-                LevelItemsDatas.Add(new LevelItemsData());
-            }
-        }
-        
-        [BoxGroup]
-        [ShowIf(nameof(IsElementsCountDecreased))]
-        [InfoBox("Count of elements changed, click button to remove", InfoMessageType.Error)]
-        [Button]
-        private void RemoveElements()
-        {
-            int diff = LevelItemsDatas.Count - (row * column);
-
-            for (int i = 0; i < diff; i++)
-            {
-                LevelItemsDatas.RemoveAt(LevelItemsDatas.Count - 1);
-            }
-        }
-        
-        private bool IsElementsCountIncreased() => LevelItemsDatas !=null && LevelItemsDatas.Count < Count;
-        private bool IsElementsCountDecreased() => LevelItemsDatas !=null && LevelItemsDatas.Count > Count;
-
-
-        static LevelItemsData DrawElement(Rect rect, LevelItemsData value)
-        {
-            //SerializedProperty propertyField = new SerializedProperty();
-            //EditorGUI.PropertyField(rect, )
-            return value;
-        }
-        
+        public LevelFieldConfig levelFieldConfig;
     }
-    
-    
+
     [Serializable]
     public class LevelData
     {
@@ -189,16 +82,25 @@ namespace CodeBase.CoreBase.Configs
         public int amount;
     }
     
-    [Serializable]
-    public class LevelItemsData
-    {
-        [BoxGroup]
-        public FieldPosition FieldPosition;
-        [BoxGroup]
-        public ItemType itemType;
-    }
 
-    
+    [Serializable]
+    public class LevelItem
+    {
+        public int row;
+        public int column;
+        public ItemType item;
+
+        private FieldPosition _fieldPosition;
+        public FieldPosition FieldPosition => _fieldPosition;
+
+        public LevelItem(int rowInd, int columnInd, ItemType itemType)
+        {
+            item = itemType;
+            row = rowInd;
+            column = columnInd;
+            _fieldPosition = new FieldPosition(row, column);
+        }
+    }
 
     public enum LevelType
     {

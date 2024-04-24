@@ -6,15 +6,15 @@ namespace CodeBase.CoreBase
     [Serializable]
     public class FieldPosition
     {
-        [ShowInInspector] [ReadOnly]
-        private int _row;
+        [ShowInInspector] 
+        public int _row;
 
         public int Row => _row;
 
         public int Column => _column;
 
-        [ShowInInspector] [ReadOnly]        
-        private int _column;
+        [ShowInInspector]        
+        public int _column;
 
         public FieldPosition(int row, int column)
         {
