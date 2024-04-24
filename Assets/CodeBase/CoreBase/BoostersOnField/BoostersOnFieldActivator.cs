@@ -171,6 +171,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             {
                 for (int j = 0; j < column; j++)
                 {
+                    if(cells[i,j].ItemDataProperty == null) continue;
                     if(i == fieldPosition.Row && j == fieldPosition.Column) continue;
                     
                     ItemType itemType = cells[i, j].ItemDataProperty.itemType;
@@ -186,7 +187,6 @@ namespace CodeBase.CoreBase.BoostersOnField
                 }
             }
             
-            //UpdateAim(disco.itemTypeToDestroyForDiscoBooster, countToDespawn);
             DespawnCell(_gameModel.FieldModel[fieldPosition]);
         }
 

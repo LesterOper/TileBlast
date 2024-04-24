@@ -12,159 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66babc1a51e0474cb1db79bb41cd4f2e, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  level: 2
+  level: 3
   levels:
   - levelData:
       levelType: 2
       moves: 10
-      LevelAims: []
-    levelItemsContainer:
-      row: 9
-      column: 11
-      LevelItemsDatas:
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      LevelItems: {fileID: 0}
+      LevelAims:
+      - ItemType: 2
+        amount: 81
+    levelFieldConfig: {fileID: 11400000, guid: 805cb9a08f7ca01468ff2b720401e369, type: 2}
   - levelData:
       levelType: 0
       moves: 0
       LevelAims: []
-    levelItemsContainer:
-      row: 6
-      column: 6
-      LevelItemsDatas:
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      - itemType: 0
-      LevelItems: {fileID: 0}
+    levelFieldConfig: {fileID: 11400000, guid: f24fd8285f276ac42bd6a053d49e0b64, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 20
+      LevelAims:
+      - ItemType: 4
+        amount: 10
+    levelFieldConfig: {fileID: 11400000, guid: 660386f344432a04d8e95d9a7430ea77, type: 2}

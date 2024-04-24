@@ -11,7 +11,7 @@ namespace CodeBase.CoreBase.Configs
     {
         [InfoBox("Only for debug, used for play exact level")]
         public int level;
-        [BoxGroup]
+        
         public List<Level> levels;
 
         [InfoBox("Level should be more than 0", InfoMessageType.Error, nameof(IsLevelLessThanZero))]
@@ -20,20 +20,25 @@ namespace CodeBase.CoreBase.Configs
         private bool IsLevelLessThanZero() => level <= 0;
     }
 
+    
     [Serializable]
+    
     public class Level
     {
         public LevelData levelData;
         
-        public LevelItemsContainer levelItemsContainer;
+        [InfoBox("Need to assigned LevelFieldConfig", InfoMessageType.Error, nameof(IsLevelFieldConfigNotAssigned))]
+        public LevelFieldConfig levelFieldConfig;
         
+        [HideIf(nameof(IsLevelFieldConfigNotAssigned))]
         [InfoBox("Generate random field")]
         [Button]
-        public void GenerateFieldPosition()
+        public void GenerateRandomField()
         {
-            levelItemsContainer.levelFieldConfig.GenerateRandomField();
+            levelFieldConfig.GenerateRandomField();
         }
-        
+
+        private bool IsLevelFieldConfigNotAssigned() => levelFieldConfig == null;
         private bool IsNotClearAllLevelType() => levelData.levelType != LevelType.CLEAR_FIELD;
         private bool IsClearAllLevelType() => levelData.levelType == LevelType.CLEAR_FIELD;
         
@@ -46,16 +51,10 @@ namespace CodeBase.CoreBase.Configs
             LevelAim levelAim = new LevelAim
             {
                 ItemType = ItemType.NONE,
-                amount = levelItemsContainer.levelFieldConfig.types.Count(local => local.item != ItemType.NONE)
+                amount = levelFieldConfig.types.Count(local => local.item != ItemType.NONE)
             };
             levelData.LevelAims.Add(levelAim);
         } 
-    }
-
-    [Serializable]
-    public class LevelItemsContainer
-    {
-        public LevelFieldConfig levelFieldConfig;
     }
 
     [Serializable]

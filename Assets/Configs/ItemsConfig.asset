@@ -23,7 +23,7 @@ MonoBehaviour:
   - itemType: 2
     item: {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
     cellColor: {fileID: 21300000, guid: 19c16088cc4d32f43b05c5f4b7166cef, type: 3}
-    color: {r: 1, g: 0.92926645, b: 0, a: 1}
+    color: {r: 0.7803922, g: 0.7725491, b: 0.25490198, a: 1}
     canMatch: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
