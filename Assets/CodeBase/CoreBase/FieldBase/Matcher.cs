@@ -29,7 +29,7 @@ namespace CodeBase.CoreBase.FieldBase
         public void TryToMatch(FieldPosition fieldPosition)
         {
             var currentClicked = _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column];
-            if (currentClicked.ItemDataProperty.itemType == ItemType.NONE)
+            if (currentClicked.ItemDataProperty == null)
             {
                 return;
             }

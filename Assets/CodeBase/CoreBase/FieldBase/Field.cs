@@ -109,8 +109,8 @@ namespace CodeBase.CoreBase.FieldBase
 
         private ItemData CreateItem(FieldPosition fieldPosition, float scale)
         {
-            ItemType itemType = _gameModel.Level.levelItemsDatas
-                .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.itemType;
+            ItemType itemType = _gameModel.Level.levelItemsContainer.levelFieldConfig.types
+                .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.item;
 
             return _spawnController.GetItemDataByType(itemType);
         }
@@ -123,7 +123,7 @@ namespace CodeBase.CoreBase.FieldBase
             List<CellView> itemsFromPool = new List<CellView>(empty.Count);
             List<ItemData> itemsDataFromPool = new List<ItemData>(empty.Count);
 
-            if (_gameModel.Level.levelType != LevelType.CLEAR_FIELD)
+            if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
             {
                 float yDelta = 1;
                 float y = 0;
@@ -170,7 +170,7 @@ namespace CodeBase.CoreBase.FieldBase
                     }
                 }
 
-                if (_gameModel.Level.levelType != LevelType.CLEAR_FIELD)
+                if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
                 {
                     for (int k = 0; k < emptyCells.Count; k++)
                     {

@@ -25,14 +25,14 @@ namespace CodeBase.StateMachine.GameLoopStates
         public override void Execute()
         {
             base.Execute();
-            _levelsConfig.GetLevel().GenerateFieldPosition();
+                //_levelsConfig.GetLevel().GenerateFieldPosition();
             var level = _levelsConfig.GetLevel();
-            _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.LevelAims);
+            _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.levelData.LevelAims);
             _gameEndingChecker.SubscribeAimSetters();
-            _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.moves;
-            _gameModel.FieldModel.Cells = new ICell[level.row, level.column];
+            _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.levelData.moves;
+            _gameModel.FieldModel.Cells = new ICell[level.levelItemsContainer.levelFieldConfig.row, level.levelItemsContainer.levelFieldConfig.columns];
             _gameModel.FieldModel.SetActiveCellsCount();
-            _gameModel.FieldModel.FieldSize = new FieldSize(level.row, level.column);
+            _gameModel.FieldModel.FieldSize = new FieldSize(level.levelItemsContainer.levelFieldConfig.row, level.levelItemsContainer.levelFieldConfig.columns);
             _gameModel.Level = level;
             _signalBus.Fire(new NextStateSignal(typeof(CreateFieldState)));
         }

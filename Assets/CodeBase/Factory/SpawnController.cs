@@ -4,7 +4,6 @@ using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.CoreBase.Item;
-using CodeBase.CoreBase.ItemBase;
 using CodeBase.Pool;
 using UnityEngine;
 using Object = UnityEngine.Object;

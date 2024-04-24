@@ -31,7 +31,7 @@ namespace CodeBase.CoreBase.AimTopBar
 
         public void UpdateAims(ItemType itemType = ItemType.NONE, int amount = 0, FieldPosition fieldPosition = null)
         {
-            LevelType levelType = _gameModel.Level.levelType;
+            LevelType levelType = _gameModel.Level.levelData.levelType;
 
             switch (levelType)
             {
@@ -101,7 +101,7 @@ namespace CodeBase.CoreBase.AimTopBar
             IAimSetter aimSetter = _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.Aims[0];
 
             aimSetter.Value = -(aimSetter.Value -
-                                (_gameModel.Level.LevelAims[0].amount - _gameModel.FieldModel.GetEmptyCellsCount()));
+                                (_gameModel.Level.levelData.LevelAims[0].amount - _gameModel.FieldModel.GetEmptyCellsCount()));
         }
 
         private void DropObjectsToBottom()
