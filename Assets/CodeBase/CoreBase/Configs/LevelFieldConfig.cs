@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,7 +14,7 @@ namespace CodeBase.CoreBase.Configs
         public int row;
         [ReadOnly]
         public int columns;
-        public LevelItem[] types;
+        public List<LevelItem> types;
         
         public LevelItem GetValue(int row, int column)
         {

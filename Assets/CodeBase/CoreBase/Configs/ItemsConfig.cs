@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -75,6 +74,8 @@ namespace CodeBase.CoreBase.Configs
     public enum ItemType
     {
         [ItemAttribute(false)]
+        EMPTY = -1,
+        [ItemAttribute(false)]
         NONE = 0,
         [ItemAttribute(false)]
         RED = 1,
@@ -103,17 +104,22 @@ namespace CodeBase.CoreBase.Configs
         
         [ItemAttribute(false, true)]
         DROP_BOTTOM = 10,
+        
+        [ItemAttribute(false, false, true)]
+        BOX = 11,
     }
 
     public class ItemAttribute : Attribute
     {
         public bool _isBooster;
         public bool _isDropBottomItem;
+        public bool _isBlock;
 
-        public ItemAttribute(bool isBooster, bool isDropBottomItem = false)
+        public ItemAttribute(bool isBooster, bool isDropBottomItem = false, bool isBlock = false)
         {
             _isBooster = isBooster;
             _isDropBottomItem = isDropBottomItem;
+            _isBlock = isBlock;
         }
     }
 }

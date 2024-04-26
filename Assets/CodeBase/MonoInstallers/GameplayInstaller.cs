@@ -48,6 +48,7 @@ namespace CodeBase.MonoInstallers
                 .FromComponentInNewPrefab(CellView)
                 .UnderTransform(parent);
             Container.Bind<AimController>().FromNew().AsSingle();
+            Container.Bind<AfterMatchFieldNormalizer>().FromNew().AsSingle();
 
             Container.Bind<InitializeLevelState>().FromNew().AsSingle();
             Container.Bind<CreateFieldState>().FromNew().AsSingle();

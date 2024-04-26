@@ -12,6 +12,6 @@ namespace CodeBase.CoreBase.ItemBase
         
         public Sprite CurrentCellColor { get; }
         
-        public void MoveToZeroPositionOfParent(Vector2 target, ICell targetCell, ICell currentCell);
+        public void MoveToZeroPositionOfParent(Vector2 target, ICellBase targetCellBase, ICellBase currentCellBase);
     }
 }

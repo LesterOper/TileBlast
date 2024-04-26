@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: ItemsConfig
   m_EditorClassIdentifier: 
   items:
+  - itemType: -1
+    item: {fileID: 0}
+    cellColor: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    canMatch: 0
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 0
     item: {fileID: 0}
     cellColor: {fileID: 0}
@@ -58,6 +65,13 @@ MonoBehaviour:
   - itemType: 10
     item: {fileID: 21300000, guid: e2497ddb75b2228498f741c446c8803f, type: 3}
     cellColor: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    canMatch: 0
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
+  - itemType: 11
+    item: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: 52a596483f6a65142975849f11751a81, type: 3}
     color: {r: 0, g: 0, b: 0, a: 0}
     canMatch: 0
     minCountNeedItems: 0

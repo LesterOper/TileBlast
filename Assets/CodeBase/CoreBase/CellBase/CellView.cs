@@ -59,10 +59,6 @@ namespace CodeBase.CoreBase.CellBase
         }
 
         public SpriteRenderer R => _itemView.R;
-        public void BoosterActivated()
-        {
-            Debug.Log(nameof(BoosterActivated));
-        }
 
         public void PlayBombEffect(Action callback)
         {

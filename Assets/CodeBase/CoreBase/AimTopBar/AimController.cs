@@ -63,7 +63,7 @@ namespace CodeBase.CoreBase.AimTopBar
 
             if (aimSetter is {IsComplete: false})
             {
-                List<ICell> empty = _gameModel.FieldModel.GetEmptyCells();
+                List<IFieldCell> empty = _gameModel.FieldModel.GetEmptyCells();
                 for (int i = 0; i < amount; i++)
                 {
                     ItemView itemView = _spawnController.SpawnAnimatedItemView(
@@ -107,18 +107,18 @@ namespace CodeBase.CoreBase.AimTopBar
         private void DropObjectsToBottom()
         {
             bool collect = false;
-            ICell[] firstRow = _gameModel.FieldModel.GetFirstRow();
+            IFieldCell[] firstRow = _gameModel.FieldModel.GetFirstRow();
             IAimSetter aimSetter = _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.Aims[0];
             for (int i = 0; i < firstRow.Length; i++)
             {
-                if(firstRow[i].ItemDataProperty == null) continue;
-                if (firstRow[i].ItemDataProperty.IsDropBottomItem)
+                if(firstRow[i].Cell.ItemDataProperty == null) continue;
+                if (firstRow[i].Cell.ItemDataProperty.IsDropBottomItem)
                 {
-                    ICell cell = firstRow[i];
-                    SpriteRenderer animate = cell.CellViewProperty.R;
+                    ICellBase cellBase = firstRow[i].Cell;
+                    SpriteRenderer animate = cellBase.CellViewProperty.R;
                     AnimationSource.Parabolla(aimSetter.counterTr, animate, 1f, ()=>{aimSetter.Value = -1;});
-                    _spawnController.Despawn(cell.CellViewProperty);
-                    cell.ClearCell();
+                    _spawnController.Despawn(cellBase.CellViewProperty);
+                    cellBase.ClearCell();
                     collect = true;
                 }
             }
