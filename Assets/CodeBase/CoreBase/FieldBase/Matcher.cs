@@ -65,7 +65,7 @@ namespace CodeBase.CoreBase.FieldBase
 
                 _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = -1;
                 CheckMatchItemsToMakeBooster(cellBase.FieldPositionProperty);
-                //MatchBlockers();
+                MatchBlockers();
                 RemoveMatchedCells();
             }
         }
@@ -151,9 +151,10 @@ namespace CodeBase.CoreBase.FieldBase
             var cell = _gameModel.FieldModel.Cells[row, column];
             if (cell.IsBlocked)
             {
-                cell.Cell.PlayEffect(() =>
+                CellView cellView = cell.Cell.CellViewProperty;
+                cellView.PlayEffect(() =>
                 {
-                    _spawnController.Despawn(cell.Cell.CellViewProperty);
+                    _spawnController.Despawn(cellView);
                 });
 
                 cell.Cell = new EmptyCell();
@@ -170,6 +171,7 @@ namespace CodeBase.CoreBase.FieldBase
                     itemType;
                 _matchedCells.RemoveAt(0);
                 _spawnController.Despawn(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.CellViewProperty);
+                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell = new FieldBooster();
                 _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.Initialize(booster.boosterView, booster.boosterData);
             } 
         }

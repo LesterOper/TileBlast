@@ -95,7 +95,7 @@ namespace CodeBase.Factory
 
         private ItemData GetNewItemData()
         {
-            return _itemsConfig.GetItem((ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 7));
+            return _itemsConfig.GetItem((ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 8));
         }
 
         public void Despawn(CellView cellView) => _itemPool.Despawn(cellView);

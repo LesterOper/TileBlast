@@ -87,32 +87,30 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                 if (cell != null)
                 {
-                    if(cell is IEmptyCell) continue;
+                    if(cell.IsEmpty) continue;
 
-                    if(cell.ItemDataProperty.IsDropBottomItem) continue;
-                    if (!cell.IsCellEmpty)
-                    {
-                        ItemType itemType = cell.ItemDataProperty.itemType;
-                        FieldPosition position = cell.FieldPositionProperty;
-                        CellView cellView = cell.CellViewProperty;
-                        cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
-                        _aimController.UpdateAims(itemType, 1, position);
-                        cell.ClearCell();
-                    }
+                    if(cell.Cell.ItemDataProperty.IsDropBottomItem) continue;
+                    
+                    ItemType itemType = cell.Cell.ItemDataProperty.itemType;
+                    FieldPosition position = cell.FieldPositionProperty;
+                    CellView cellView = cell.Cell.CellViewProperty;
+                    cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
+                    _aimController.UpdateAims(itemType, 1, position);
+                    cell.Cell = new EmptyCell();
                 }
             }
             
-            DespawnCell(_gameModel.FieldModel[fieldPosition]);
+            DespawnCell(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column]);
         }
 
-        private ICellBase GetNeighbour(FieldPosition fieldPosition, DirectionForBooster direction)
+        private IFieldCell GetNeighbour(FieldPosition fieldPosition, DirectionForBooster direction)
         {
-            ICellBase cellBase = null;
+            IFieldCell cellBase = null;
             DirectionForBombBoosterAttribute directionAttribute = direction.GetAttribute<DirectionForBombBoosterAttribute>();
             FieldPosition neighbourPosition = new FieldPosition(fieldPosition.Row + directionAttribute.RowIncrement,
                 fieldPosition.Column + directionAttribute.ColumnIncrement);
             if(!_gameModel.FieldModel.IsFieldPositionOutOfSize(neighbourPosition))
-                cellBase = _gameModel.FieldModel[neighbourPosition];
+                cellBase = _gameModel.FieldModel.Cells[neighbourPosition._row, neighbourPosition._column];
             return cellBase;
         }
 
@@ -121,17 +119,15 @@ namespace CodeBase.CoreBase.BoostersOnField
             int row = fieldPosition.Row;
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
             {
-                if(_gameModel.FieldModel.Cells[row, i].Cell is IEmptyCell) continue;
+                if(_gameModel.FieldModel.Cells[row, i].IsEmpty) continue;
                 if(_gameModel.FieldModel.Cells[row, i].Cell.ItemDataProperty is {IsDropBottomItem: true}) continue;
-                if (!_gameModel.FieldModel.Cells[row, i].Cell.IsCellEmpty)
-                {
-                    CellView cellView = _gameModel.FieldModel.Cells[row, i].Cell.CellViewProperty;
-                    ItemType itemType = _gameModel.FieldModel.Cells[row, i].Cell.ItemDataProperty.itemType;
-                    FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
-                    _aimController.UpdateAims(itemType, 1, position);
-                    cellView.PlayEffect(() => { _spawnController.Despawn(cellView);});
-                    _gameModel.FieldModel.Cells[row, i].Cell.ClearCell();
-                }
+                
+                CellView cellView = _gameModel.FieldModel.Cells[row, i].Cell.CellViewProperty;
+                ItemType itemType = _gameModel.FieldModel.Cells[row, i].Cell.ItemDataProperty.itemType;
+                FieldPosition position = _gameModel.FieldModel.Cells[row, i].FieldPositionProperty;
+                _aimController.UpdateAims(itemType, 1, position);
+                cellView.PlayEffect(() => { _spawnController.Despawn(cellView);});
+                _gameModel.FieldModel.Cells[row, i].Cell = new EmptyCell();
             }
         }
 
@@ -141,20 +137,16 @@ namespace CodeBase.CoreBase.BoostersOnField
             
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
             {
-                if(_gameModel.FieldModel.Cells[i, column] is IEmptyCell) continue;
+                if(_gameModel.FieldModel.Cells[i, column].IsEmpty) continue;
                 if(_gameModel.Level.levelData.levelType == LevelType.DROP_OBJECTS_TO_BOTTOM && 
                    _gameModel.FieldModel.Cells[i, column].Cell.ItemDataProperty.IsDropBottomItem) continue;
                 
-                if (!_gameModel.FieldModel.Cells[i, column].Cell.IsCellEmpty)
-                {
-                    
-                    CellView cellView = _gameModel.FieldModel.Cells[i, column].Cell.CellViewProperty;
-                    ItemType itemType = _gameModel.FieldModel.Cells[i, column].Cell.ItemDataProperty.itemType;
-                    FieldPosition position = _gameModel.FieldModel.Cells[i, column].FieldPositionProperty;
-                    cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
-                    _aimController.UpdateAims(itemType, 1, position);
-                    _gameModel.FieldModel.Cells[i, column].Cell.ClearCell();
-                }
+                CellView cellView = _gameModel.FieldModel.Cells[i, column].Cell.CellViewProperty;
+                ItemType itemType = _gameModel.FieldModel.Cells[i, column].Cell.ItemDataProperty.itemType;
+                FieldPosition position = _gameModel.FieldModel.Cells[i, column].FieldPositionProperty;
+                cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
+                _aimController.UpdateAims(itemType, 1, position);
+                _gameModel.FieldModel.Cells[i, column].Cell.ClearCell();
             }
         }
 
@@ -178,12 +170,12 @@ namespace CodeBase.CoreBase.BoostersOnField
                         CellView cellView = cellBase.CellViewProperty;
                         _aimController.UpdateAims(itemType, 1, cellBase.FieldPositionProperty);
                         cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
-                        cellBase.ClearCell();
+                        cells[i, j].Cell = new EmptyCell();
                     }
                 }
             }
             
-            DespawnCell(_gameModel.FieldModel[fieldPosition]);
+            DespawnCell(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column]);
         }
 
         private (bool isBooster, ItemType itemType) CheckNeighboursCellsBeforeBoosterActivated(FieldPosition fieldPosition)
@@ -200,11 +192,11 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                 if (!_gameModel.FieldModel.IsFieldPositionOutOfSize(neighbourPosition))
                 {
-                    ICellBase cellBase = _gameModel.FieldModel[neighbourPosition];
+                    IFieldCell cellBase = _gameModel.FieldModel.Cells[neighbourPosition._row, neighbourPosition._column];
 
-                    if (cellBase.IsBooster())
+                    if (cellBase.IsBooster)
                     {
-                        itemType = cellBase.ItemDataProperty.itemType;
+                        itemType = cellBase.Cell.ItemDataProperty.itemType;
                         return (true, itemType);
                     }
                 }
@@ -213,10 +205,10 @@ namespace CodeBase.CoreBase.BoostersOnField
             return (false, itemType);
         }
 
-        private void DespawnCell(ICellBase cellBase)
+        private void DespawnCell(IFieldCell cellBase)
         {
-            _spawnController.Despawn(cellBase.CellViewProperty);
-            cellBase.ClearCell();
+            _spawnController.Despawn(cellBase.Cell.CellViewProperty);
+            cellBase.Cell = new EmptyCell();
         }
 
         private void RocketCombo(FieldPosition fieldPosition)

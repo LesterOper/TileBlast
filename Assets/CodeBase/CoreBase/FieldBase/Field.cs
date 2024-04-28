@@ -96,14 +96,20 @@ namespace CodeBase.CoreBase.FieldBase
                         continue;
                     }
                     
-                    var itemAttribute = item.itemType.GetAttribute<ItemAttribute>();
                     var cellView =
                         _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize,
                             fieldPosition);
-                    if (itemAttribute._isBlock)
+                    if (item.isBlock)
                     {
                         cells[i, j].Cell = new BlockedCell();
                         cells[i, j].Cell.Initialize(cellView, item);
+                        continue;
+                    }
+
+                    if (item.isBooster)
+                    {
+                        cells[i, j].Cell = new FieldBooster();
+                        cells[i,j].Cell.Initialize(cellView, item);
                         continue;
                     }
 

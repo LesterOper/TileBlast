@@ -38,7 +38,7 @@ namespace CodeBase.CoreBase.FieldBase
                     for (int i = 0; i < _gameModel.FieldModel.FieldSize._row; i++)
                     {
                         current = _gameModel.FieldModel.Cells[i, j];
-                        
+                        if(current.IsNonActive) continue;
                         if (current.IsBlocked)
                         {
                             empty.Clear();
@@ -77,13 +77,13 @@ namespace CodeBase.CoreBase.FieldBase
                             Vector2 worldPosition = _fieldBoard.WorldPosition(fieldPosition);
                             var cell = _spawnController.SpawnRandomCell(fieldPosition, new Vector2(worldPosition.x, 0),
                                 _fieldBoard.TileSize);
-                            empty[0].Cell = new Cell();
-                            empty[0].Cell.Initialize(cell.Item1, cell.Item2);
-                            empty[0].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
+                            empty[i].Cell = new Cell();
+                            empty[i].Cell.Initialize(cell.Item1, cell.Item2);
+                            empty[i].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
                             MovableItemsContainer.MovableItem movableItem =
-                                new MovableItemsContainer.MovableItem(empty[0].Cell.CellViewProperty, worldPosition);
+                                new MovableItemsContainer.MovableItem(empty[i].Cell.CellViewProperty, worldPosition);
                             movableItems.Add(movableItem);
-                            empty.RemoveAt(0);
+                            //empty.RemoveAt(0);
                         }
                     }
                 }

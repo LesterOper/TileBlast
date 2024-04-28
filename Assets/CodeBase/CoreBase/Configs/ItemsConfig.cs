@@ -12,14 +12,8 @@ namespace CodeBase.CoreBase.Configs
     {
         [BoxGroup]
         [InfoBox("Basic game items")]
-        [InfoBox("List of boosters has invalid item, which IS booster", InfoMessageType.Error, nameof(HasItemInListWhichIsABooster))]
         public List<ItemData> items;
-        [Space(30)]
-        [BoxGroup]
-        [InfoBox("Booster game items")]
-        [InfoBox("List of boosters has invalid item, which ISN'T booster", InfoMessageType.Error, nameof(HasItemInListWhichNotABooster))]
-        public List<ItemData> boosterDatas;
-
+       
         public ItemData GetItem(ItemType itemType)
         {
             return items.FirstOrDefault(local => local.itemType == itemType);
@@ -27,20 +21,9 @@ namespace CodeBase.CoreBase.Configs
 
         public ItemData GetBoosterItemData(int matchCount)
         {
+            List<ItemData> boosterDatas = items.FindAll(local => local.isBooster);
             List<ItemData> boosterData = boosterDatas.FindAll(local => local.IsCorrectBoosterByMatchItemsCount(matchCount));
             return boosterData.Count > 0 ? boosterData[Random.Range(0, boosterData.Count)] : null;
-        }
-
-        private bool HasItemInListWhichNotABooster()
-        {
-            var notBooster = boosterDatas.Find(local => !local.IsBooster);
-            return notBooster != null;
-        }
-        
-        private bool HasItemInListWhichIsABooster()
-        {
-            var notBooster = items.Find(local => local.IsBooster);
-            return notBooster != null;
         }
     }
 
@@ -52,14 +35,18 @@ namespace CodeBase.CoreBase.Configs
         public Sprite cellColor;
         public Color color;
         
+        public bool isBlock = false;
         public bool canMatch = true;
+        [HideIf(nameof(isBlock))]
+        public bool isBooster = true;
         
-        [ShowIf(nameof(IsBooster))]
+        [HideIf(nameof(isBlock))]
+        public bool isDropBottomItem = false;
+        
+        [ShowIf(nameof(isBooster))]
         [SerializeField] private int minCountNeedItems;
-        [ShowIf(nameof(IsBooster))]
+        [ShowIf(nameof(isBooster))]
         [SerializeField] private int maxCountNeedItems;
-
-        public bool IsBooster => itemType.GetAttribute<ItemAttribute>()._isBooster;
         
         public bool IsCorrectBoosterByMatchItemsCount(int matchCount)
         {
@@ -68,7 +55,7 @@ namespace CodeBase.CoreBase.Configs
             return matchCount >= minCountNeedItems;
         }
 
-        public bool IsDropBottomItem => itemType.GetAttribute<ItemAttribute>()._isDropBottomItem;
+        public bool IsDropBottomItem => isDropBottomItem;
     }
     
     public enum ItemType

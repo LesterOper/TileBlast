@@ -20,7 +20,7 @@ MonoBehaviour:
     item: 5
   - row: 10
     column: 1
-    item: 4
+    item: 7
   - row: 10
     column: 2
     item: 4
@@ -35,7 +35,7 @@ MonoBehaviour:
     item: 1
   - row: 10
     column: 6
-    item: 0
+    item: 2
   - row: 10
     column: 7
     item: 1
@@ -56,16 +56,16 @@ MonoBehaviour:
     item: 3
   - row: 9
     column: 4
-    item: 0
+    item: 4
   - row: 9
     column: 5
     item: 1
   - row: 9
     column: 6
-    item: 0
+    item: 6
   - row: 9
     column: 7
-    item: 0
+    item: 3
   - row: 9
     column: 8
     item: 3
@@ -152,13 +152,13 @@ MonoBehaviour:
     item: 11
   - row: 5
     column: 0
-    item: 3
+    item: 0
   - row: 5
     column: 1
-    item: 3
+    item: 0
   - row: 5
     column: 2
-    item: 3
+    item: 0
   - row: 5
     column: 3
     item: 11
@@ -170,145 +170,145 @@ MonoBehaviour:
     item: 11
   - row: 5
     column: 6
-    item: 1
+    item: 0
   - row: 5
     column: 7
-    item: 2
+    item: 0
   - row: 5
     column: 8
-    item: 3
+    item: 0
   - row: 4
     column: 0
-    item: 3
+    item: 0
   - row: 4
     column: 1
     item: 0
   - row: 4
     column: 2
-    item: 3
+    item: 0
   - row: 4
     column: 3
-    item: 5
+    item: 0
   - row: 4
     column: 4
-    item: 3
+    item: 0
   - row: 4
     column: 5
-    item: 1
+    item: 0
   - row: 4
     column: 6
-    item: 2
+    item: 0
   - row: 4
     column: 7
-    item: 5
+    item: 0
   - row: 4
     column: 8
-    item: 3
+    item: 0
   - row: 3
     column: 0
-    item: 5
+    item: 0
   - row: 3
     column: 1
-    item: 3
+    item: 0
   - row: 3
     column: 2
     item: 0
   - row: 3
     column: 3
-    item: 3
+    item: 0
   - row: 3
     column: 4
-    item: 4
+    item: 0
   - row: 3
     column: 5
     item: 0
   - row: 3
     column: 6
-    item: 2
+    item: 0
   - row: 3
     column: 7
-    item: 5
+    item: 0
   - row: 3
     column: 8
-    item: 5
+    item: 0
   - row: 2
     column: 0
-    item: 5
+    item: 0
   - row: 2
     column: 1
-    item: 1
+    item: 0
   - row: 2
     column: 2
-    item: 5
+    item: 0
   - row: 2
     column: 3
-    item: 4
+    item: 0
   - row: 2
     column: 4
-    item: 1
+    item: 0
   - row: 2
     column: 5
-    item: 4
+    item: 0
   - row: 2
     column: 6
-    item: 3
+    item: 0
   - row: 2
     column: 7
-    item: 5
+    item: 0
   - row: 2
     column: 8
-    item: 1
+    item: 0
   - row: 1
     column: 0
-    item: 1
+    item: 0
   - row: 1
     column: 1
-    item: 2
+    item: 0
   - row: 1
     column: 2
-    item: 1
+    item: 0
   - row: 1
     column: 3
-    item: 5
+    item: 0
   - row: 1
     column: 4
-    item: 5
+    item: 0
   - row: 1
     column: 5
-    item: 5
+    item: 0
   - row: 1
     column: 6
-    item: 3
+    item: 0
   - row: 1
     column: 7
-    item: 4
+    item: 0
   - row: 1
     column: 8
-    item: 3
+    item: 0
   - row: 0
     column: 0
-    item: 2
+    item: 0
   - row: 0
     column: 1
-    item: 2
+    item: 0
   - row: 0
     column: 2
     item: 0
   - row: 0
     column: 3
-    item: 2
+    item: 0
   - row: 0
     column: 4
-    item: 5
+    item: 0
   - row: 0
     column: 5
-    item: 4
+    item: 0
   - row: 0
     column: 6
-    item: 5
+    item: 0
   - row: 0
     column: 7
-    item: 3
+    item: 0
   - row: 0
     column: 8
-    item: 4
+    item: 0
