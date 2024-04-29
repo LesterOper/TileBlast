@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 namespace CodeBase.CoreBase.Configs
 {
@@ -13,7 +14,7 @@ namespace CodeBase.CoreBase.Configs
         public int row;
         [ReadOnly]
         public int columns;
-        public LevelItem[] types;
+        public List<LevelItem> types;
         
         public LevelItem GetValue(int row, int column)
         {
