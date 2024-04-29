@@ -70,6 +70,20 @@ namespace CodeBase.Factory
 
             return (cellView, itemData);
         }
+        
+        public (CellView boosterView, ItemData boosterData) SpawnBoosterCellView(FieldPosition fieldPosition, ItemType boosterType)
+        {
+            ItemData itemData = _itemsConfig.GetItem(boosterType);
+            CellView cellView = null;
+            if (itemData != null)
+            {
+                cellView = _itemPool.Spawn(fieldPosition);
+                cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
+                cellView.transform.localScale *=  _fieldBoard.TileSize;
+            }
+
+            return (cellView, itemData);
+        }
 
         public ItemView SpawnAnimatedItemView(Vector3 position, ItemType itemType)
         {

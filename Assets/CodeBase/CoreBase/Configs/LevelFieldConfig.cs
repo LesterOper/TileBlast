@@ -39,9 +39,6 @@ namespace CodeBase.CoreBase.Configs
                 {
                     types[index] = new LevelItem(i, j,
                         (ItemType) Random.Range(0, Enum.GetValues(typeof(ItemType)).Length - 5));
-                    /*types[index].item = (ItemType) Random.Range(0, Enum.GetValues(typeof(ItemType)).Length - 5);
-                    types[index].row = i;
-                    types[index].column = j;*/
                     index++;
                 }
             }

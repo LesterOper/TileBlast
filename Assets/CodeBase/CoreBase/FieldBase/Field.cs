@@ -13,7 +13,6 @@ namespace CodeBase.CoreBase.FieldBase
     {
         public void CreateField();
         public void Initialize();
-        List<MovableItemsContainer.MovableItem> GetMovableItems();
     }
 
     public class Field : IField
@@ -131,111 +130,6 @@ namespace CodeBase.CoreBase.FieldBase
                 .FirstOrDefault(local => local.FieldPosition.Equals(fieldPosition))!.item;
 
             return _spawnController.GetItemDataByType(itemType);
-        }
-
-        public List<MovableItemsContainer.MovableItem> GetMovableItems()
-        {
-            List<MovableItemsContainer.MovableItem> movableItems = new List<MovableItemsContainer.MovableItem>(10);
-
-            List<IFieldCell> empty = _gameModel.FieldModel.GetEmptyCells();
-            List<CellView> itemsFromPool = new List<CellView>(empty.Count);
-            List<ItemData> itemsDataFromPool = new List<ItemData>(empty.Count);
-
-            if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
-            {
-                float yDelta = 1;
-                float y = 0;
-                for (int i = 0; i < empty.Count; i++)
-                {
-                    FieldPosition fieldPosition = empty[i].FieldPositionProperty;
-                    Vector2 position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-                    
-                    var cell = _spawnController.SpawnRandomCell(empty[i].FieldPositionProperty,
-                        new Vector2(position.x, y), _fieldBoard.TileSize);
-                    itemsFromPool.Add(cell.Item1);
-                    itemsDataFromPool.Add(cell.Item2);
-                    y += yDelta;
-                }
-            }
-
-            for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
-            {
-                List<IFieldCell> currentColumn = _gameModel.FieldModel.GetColumnIfHasEmptyCellsElseReturnNull(i);
-                if(currentColumn == null) continue;
-                int jIndexStart = currentColumn.FindLastIndex(local => local.IsBlocked);
-                
-                
-                List<IFieldCell> emptyCells = new List<IFieldCell>();
-                for (int j = jIndexStart + 1; j < currentColumn.Count; j++)
-                {
-                    if (currentColumn[j].IsEmpty)
-                    {
-                        emptyCells.Add(currentColumn[j]);
-                        continue;
-                    }
-
-                    if (emptyCells.Count > 0 && !currentColumn[j].IsNonActive)
-                    {
-                        IFieldCell cellBase = currentColumn[j];
-
-                        emptyCells[0].Cell = ConvertEmptyCellToParticularType(cellBase.Cell, emptyCells[0].Cell); 
-                        emptyCells[0].Cell.Initialize(cellBase.Cell.CellViewProperty, cellBase.Cell.ItemDataProperty);
-                        emptyCells[0].Cell.itemTypeToDestroyForDiscoBooster = cellBase.Cell.itemTypeToDestroyForDiscoBooster;
-                        
-                        Vector2 position = _fieldBoard.WorldPosition(emptyCells[0].FieldPositionProperty.Row,
-                            emptyCells[0].FieldPositionProperty.Column);
-                        MovableItemsContainer.MovableItem movableItem =
-                            new MovableItemsContainer.MovableItem(emptyCells[0].Cell.CellViewProperty, position);
-                        movableItems.Add(movableItem);
-                        emptyCells.RemoveAt(0);
-                        var currentColumnItemFieldPos = currentColumn[j].FieldPositionProperty;
-                        currentColumn[j].Cell = new EmptyCell();
-                        emptyCells.Add(currentColumn[j]);
-                    }
-                }
-
-                if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
-                {
-                    for (int k = 0; k < emptyCells.Count; k++)
-                    {
-                        emptyCells[k].Cell = new Cell();
-                        emptyCells[k].Cell.Initialize(itemsFromPool[0], itemsDataFromPool[0]);
-                        emptyCells[k].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
-                        itemsFromPool.RemoveAt(0);
-                        itemsDataFromPool.RemoveAt(0);
-                        Vector2 position = _fieldBoard.WorldPosition(emptyCells[k].FieldPositionProperty.Row,
-                            emptyCells[k].FieldPositionProperty.Column);
-                        MovableItemsContainer.MovableItem movableItem =
-                            new MovableItemsContainer.MovableItem(emptyCells[k].Cell.CellViewProperty, position);
-                        movableItems.Add(movableItem);
-                    }
-                }
-            }
-            
-            return movableItems;
-        }
-
-        private ICellBase ConvertEmptyCellToParticularType(ICellBase cellBase, ICellBase emptyCell)
-        {
-            var fieldPos = emptyCell.FieldPositionProperty;
-            if (cellBase is IBooster)
-            {
-                emptyCell = new FieldBooster();
-            }
-            else if (cellBase is IDropDownItem)
-            {
-                emptyCell = new DropDownItem();
-            }
-            else if (cellBase is ICell)
-            {
-                emptyCell = new Cell();
-            }
-            else if (cellBase is IBlockerCell)
-            {
-                emptyCell = new BlockedCell();
-            }
-
-            return emptyCell;
         }
     }
 
