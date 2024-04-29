@@ -10,26 +10,26 @@ namespace CodeBase.StateMachine.GameLoopStates
     {
         private GameModel _gameModel;
         private MoveTickable _moveTickable;
-        private IField _field;
+        private AfterMatchFieldNormalizer _movables;
         private AimController _aimController;
 
         public MoveState(
             SignalBus signalBus,
             MoveTickable moveTickable,
-            IField field,
+            AfterMatchFieldNormalizer movables,
             GameModel gameModel,
             AimController aimController) : base(signalBus)
         {
             _aimController = aimController;
             _moveTickable = moveTickable;
             _gameModel = gameModel;
-            _field = field;
+            _movables = movables;
         }
 
         public override void Execute()
         {
             base.Execute();
-            var movableItems = _field.GetMovableItems();
+            var movableItems = _movables.GetMovableItems();
             if (movableItems.Count > 0)
             {
                 _moveTickable.AddMovableItems(movableItems);
@@ -48,7 +48,8 @@ namespace CodeBase.StateMachine.GameLoopStates
             {
                 if (_gameModel.FieldModel.GetEmptyCellsCount() > 0)
                 {
-                    nextStateSignal.nextState = typeof(MoveState);
+                    if(_gameModel.FieldModel.NeedToStartMoveState())
+                        nextStateSignal.nextState = typeof(MoveState);
                 }
             }
         }

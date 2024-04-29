@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeBase.CoreBase.Configs;
-using CodeBase.CoreBase.Item;
-using CodeBase.CoreBase.ItemBase;
+
 
 namespace CodeBase.CoreBase.CellBase
 {
@@ -9,7 +8,7 @@ namespace CodeBase.CoreBase.CellBase
     {
         //public void ShakeAnimation();
     }
-    public interface ICell
+    public interface ICellBase
     {
         public void Initialize(CellView cellView, ItemData item);
 
@@ -30,6 +29,20 @@ namespace CodeBase.CoreBase.CellBase
         
         public ItemData ItemDataProperty { get; }
         
+    }
+
+    public interface ICell{}
+    
+    public interface IBlockerCell 
+    {
         public bool IsCellBlocked { get; }
     }
+
+    public interface IDropDownItem{}
+    
+    public interface IBooster{}
+    
+    public interface IEmptyCell { }
+    
+    public interface INotActiveCell{}
 }

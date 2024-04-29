@@ -31,7 +31,7 @@ namespace CodeBase.ApplicationBase
         public async void Initialize()
         {
             Application.targetFrameRate = 60;
-            var success = await _timeModel.TryToRefreshServerTime();
+            //var success = await _timeModel.TryToRefreshServerTime();
             
             //if (PlayerPrefs.GetInt(FIRST_LAUNCH) == 0)
             {
@@ -51,7 +51,7 @@ namespace CodeBase.ApplicationBase
                 _commonSaving.Load();
             }*/
 
-            if (success)
+            //if (success)
                 SceneManager.LoadScene(1);
         }
 

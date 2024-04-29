@@ -17,77 +17,129 @@ MonoBehaviour:
     item: {fileID: 0}
     cellColor: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
-    canMatch: 1
+    isBlock: 0
+    canMatch: 0
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 2
     item: {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
     cellColor: {fileID: 21300000, guid: 19c16088cc4d32f43b05c5f4b7166cef, type: 3}
     color: {r: 0.7803922, g: 0.7725491, b: 0.25490198, a: 1}
+    isBlock: 0
     canMatch: 1
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 1
     item: {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
     cellColor: {fileID: 21300000, guid: 7940be6883a337140a0de74f66c8916c, type: 3}
     color: {r: 1, g: 0, b: 0, a: 1}
+    isBlock: 0
     canMatch: 1
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 3
     item: {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
     cellColor: {fileID: 21300000, guid: 1ef2211953adfff48a4eeea3e780362a, type: 3}
     color: {r: 0, g: 0.7193136, b: 1, a: 1}
+    isBlock: 0
     canMatch: 1
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 4
     item: {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
     cellColor: {fileID: 21300000, guid: 1cef789315b134f42a09b0e8bd08ecd2, type: 3}
     color: {r: 0.04889083, g: 1, b: 0, a: 1}
+    isBlock: 0
     canMatch: 1
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 5
     item: {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
     cellColor: {fileID: 21300000, guid: 340bdd4955d2f3e48b89fab088e700ad, type: 3}
     color: {r: 1, g: 0, b: 0.9708805, a: 1}
+    isBlock: 0
     canMatch: 1
+    isBooster: 0
+    isDropBottomItem: 0
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 10
     item: {fileID: 21300000, guid: e2497ddb75b2228498f741c446c8803f, type: 3}
     cellColor: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
+    isBlock: 0
     canMatch: 0
+    isBooster: 0
+    isDropBottomItem: 1
     minCountNeedItems: 0
     maxCountNeedItems: 0
-  boosterDatas:
+  - itemType: 11
+    item: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: 52a596483f6a65142975849f11751a81, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    isBlock: 1
+    canMatch: 0
+    isBooster: 0
+    isDropBottomItem: 0
+    minCountNeedItems: 0
+    maxCountNeedItems: 0
   - itemType: 7
     item: {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
     cellColor: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
-    canMatch: 1
-    minCountNeedItems: 5
-    maxCountNeedItems: 6
-  - itemType: 8
-    item: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
-    cellColor: {fileID: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
-    canMatch: 1
+    isBlock: 0
+    canMatch: 0
+    isBooster: 1
+    isDropBottomItem: 0
     minCountNeedItems: 5
     maxCountNeedItems: 6
   - itemType: 6
     item: {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
     cellColor: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
-    canMatch: 1
+    isBlock: 0
+    canMatch: 0
+    isBooster: 1
+    isDropBottomItem: 0
     minCountNeedItems: 7
     maxCountNeedItems: 8
   - itemType: 9
     item: {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
     cellColor: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
-    canMatch: 1
+    isBlock: 0
+    canMatch: 0
+    isBooster: 1
+    isDropBottomItem: 0
     minCountNeedItems: 9
+    maxCountNeedItems: 0
+  - itemType: 8
+    item: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
+    cellColor: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    isBlock: 0
+    canMatch: 0
+    isBooster: 1
+    isDropBottomItem: 0
+    minCountNeedItems: 5
+    maxCountNeedItems: 6
+  - itemType: -1
+    item: {fileID: 0}
+    cellColor: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    isBlock: 0
+    canMatch: 0
+    isBooster: 0
+    isDropBottomItem: 0
+    minCountNeedItems: 0
     maxCountNeedItems: 0

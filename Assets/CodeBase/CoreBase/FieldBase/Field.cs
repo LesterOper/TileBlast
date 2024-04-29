@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.GameStateModel;
-using CodeBase.CoreBase.ItemBase;
 using CodeBase.Factory;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -71,32 +68,53 @@ namespace CodeBase.CoreBase.FieldBase
                 for (int j = 0; j < fieldSize._column; j++)
                 {
                     FieldPosition fieldPosition = new FieldPosition(i, j);
-                    _gameModel.FieldModel.Cells[i, j] = new Cell(fieldPosition);
+                    _gameModel.FieldModel.Cells[i, j] = new FieldCell(fieldPosition);
                 }
             }
         }
 
         public void CreateField()
         {
-            ICell[,] cells = _gameModel.FieldModel.Cells;
+            IFieldCell[,] cells = _gameModel.FieldModel.Cells;
             for (int i = 0; i < cells.GetUpperBound(0) + 1; i++)
             {
                 for (int j = 0; j < cells.GetUpperBound(1) + 1; j++)
                 {
                     var fieldPosition = new FieldPosition(i, j);
+                    var position = _fieldBoard.WorldPosition(i, j);
                     var item = CreateItem(fieldPosition, _fieldBoard.TileSize);
-                    if (item.itemType != ItemType.NONE)
+
+                    if (item.itemType == ItemType.EMPTY)
                     {
-                        var position = _fieldBoard.WorldPosition(i, j);
-                        var cellView =
-                            _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize,
-                                fieldPosition);
-                        cells[i, j].Initialize(cellView, item);
+                        cells[i, j].Cell = new NotActiveCell();
+                        continue;
                     }
-                    else
+
+                    if (item.itemType == ItemType.NONE)
                     {
-                        cells[i,j].BlockCell();
+                        cells[i, j].Cell = new EmptyCell();
+                        continue;
                     }
+                    
+                    var cellView =
+                        _spawnController.SpawnCell(_fieldParent.transform, position, _fieldBoard.TileSize,
+                            fieldPosition);
+                    if (item.isBlock)
+                    {
+                        cells[i, j].Cell = new BlockedCell();
+                        cells[i, j].Cell.Initialize(cellView, item);
+                        continue;
+                    }
+
+                    if (item.isBooster)
+                    {
+                        cells[i, j].Cell = new FieldBooster();
+                        cells[i,j].Cell.Initialize(cellView, item);
+                        continue;
+                    }
+
+                    cells[i, j].Cell = new Cell();
+                    cells[i,j].Cell.Initialize(cellView, item);
                 }
             }
             
@@ -119,7 +137,7 @@ namespace CodeBase.CoreBase.FieldBase
         {
             List<MovableItemsContainer.MovableItem> movableItems = new List<MovableItemsContainer.MovableItem>(10);
 
-            List<ICell> empty = _gameModel.FieldModel.GetEmptyCells();
+            List<IFieldCell> empty = _gameModel.FieldModel.GetEmptyCells();
             List<CellView> itemsFromPool = new List<CellView>(empty.Count);
             List<ItemData> itemsDataFromPool = new List<ItemData>(empty.Count);
 
@@ -142,30 +160,36 @@ namespace CodeBase.CoreBase.FieldBase
 
             for (int i = 0; i < _gameModel.FieldModel.FieldSize._column; i++)
             {
-                List<ICell> currentColumn = _gameModel.FieldModel.GetColumnIfHasEmptyCellsElseReturnNull(i);
+                List<IFieldCell> currentColumn = _gameModel.FieldModel.GetColumnIfHasEmptyCellsElseReturnNull(i);
                 if(currentColumn == null) continue;
-
-                List<ICell> emptyCells = new List<ICell>();
-                for (int j = 0; j < currentColumn.Count; j++)
+                int jIndexStart = currentColumn.FindLastIndex(local => local.IsBlocked);
+                
+                
+                List<IFieldCell> emptyCells = new List<IFieldCell>();
+                for (int j = jIndexStart + 1; j < currentColumn.Count; j++)
                 {
-                    if (currentColumn[j].IsCellEmpty && !currentColumn[j].IsCellBlocked)
+                    if (currentColumn[j].IsEmpty)
                     {
                         emptyCells.Add(currentColumn[j]);
                         continue;
                     }
 
-                    if (emptyCells.Count > 0 && !currentColumn[j].IsCellBlocked)
+                    if (emptyCells.Count > 0 && !currentColumn[j].IsNonActive)
                     {
-                        ICell cell = currentColumn[j];
-                        emptyCells[0].Initialize(cell.CellViewProperty, cell.ItemDataProperty);
-                        emptyCells[0].itemTypeToDestroyForDiscoBooster = cell.itemTypeToDestroyForDiscoBooster;
-                        cell.ClearCell();
+                        IFieldCell cellBase = currentColumn[j];
+
+                        emptyCells[0].Cell = ConvertEmptyCellToParticularType(cellBase.Cell, emptyCells[0].Cell); 
+                        emptyCells[0].Cell.Initialize(cellBase.Cell.CellViewProperty, cellBase.Cell.ItemDataProperty);
+                        emptyCells[0].Cell.itemTypeToDestroyForDiscoBooster = cellBase.Cell.itemTypeToDestroyForDiscoBooster;
+                        
                         Vector2 position = _fieldBoard.WorldPosition(emptyCells[0].FieldPositionProperty.Row,
                             emptyCells[0].FieldPositionProperty.Column);
                         MovableItemsContainer.MovableItem movableItem =
-                            new MovableItemsContainer.MovableItem(emptyCells[0].CellViewProperty, position);
+                            new MovableItemsContainer.MovableItem(emptyCells[0].Cell.CellViewProperty, position);
                         movableItems.Add(movableItem);
                         emptyCells.RemoveAt(0);
+                        var currentColumnItemFieldPos = currentColumn[j].FieldPositionProperty;
+                        currentColumn[j].Cell = new EmptyCell();
                         emptyCells.Add(currentColumn[j]);
                     }
                 }
@@ -174,14 +198,15 @@ namespace CodeBase.CoreBase.FieldBase
                 {
                     for (int k = 0; k < emptyCells.Count; k++)
                     {
-                        emptyCells[k].Initialize(itemsFromPool[0], itemsDataFromPool[0]);
-                        emptyCells[k].itemTypeToDestroyForDiscoBooster = ItemType.NONE;
+                        emptyCells[k].Cell = new Cell();
+                        emptyCells[k].Cell.Initialize(itemsFromPool[0], itemsDataFromPool[0]);
+                        emptyCells[k].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
                         itemsFromPool.RemoveAt(0);
                         itemsDataFromPool.RemoveAt(0);
                         Vector2 position = _fieldBoard.WorldPosition(emptyCells[k].FieldPositionProperty.Row,
                             emptyCells[k].FieldPositionProperty.Column);
                         MovableItemsContainer.MovableItem movableItem =
-                            new MovableItemsContainer.MovableItem(emptyCells[k].CellViewProperty, position);
+                            new MovableItemsContainer.MovableItem(emptyCells[k].Cell.CellViewProperty, position);
                         movableItems.Add(movableItem);
                     }
                 }
@@ -189,13 +214,36 @@ namespace CodeBase.CoreBase.FieldBase
             
             return movableItems;
         }
+
+        private ICellBase ConvertEmptyCellToParticularType(ICellBase cellBase, ICellBase emptyCell)
+        {
+            var fieldPos = emptyCell.FieldPositionProperty;
+            if (cellBase is IBooster)
+            {
+                emptyCell = new FieldBooster();
+            }
+            else if (cellBase is IDropDownItem)
+            {
+                emptyCell = new DropDownItem();
+            }
+            else if (cellBase is ICell)
+            {
+                emptyCell = new Cell();
+            }
+            else if (cellBase is IBlockerCell)
+            {
+                emptyCell = new BlockedCell();
+            }
+
+            return emptyCell;
+        }
     }
 
     public static class BackgroundCreator
     {
         public static void CreateFieldBackground(GameModel gameModel, SpriteRenderer bgTile, FieldBoard fieldBoard)
         {
-            ICell[,] cells = gameModel.FieldModel.Cells;
+            IFieldCell[,] cells = gameModel.FieldModel.Cells;
             int rowCount = gameModel.FieldModel.FieldSize._row;
             int columnCount = gameModel.FieldModel.FieldSize._column;
 
@@ -206,7 +254,7 @@ namespace CodeBase.CoreBase.FieldBase
                 count = 0;
                 for (int i = 0; i < rowCount; i++)
                 {
-                    if (cells[i, j].IsCellBlocked)
+                    if (cells[i, j].IsNonActive)
                     {
                         if (count > 0)
                         {

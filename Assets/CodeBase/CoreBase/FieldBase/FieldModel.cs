@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using UnityEngine;
 
 namespace CodeBase.CoreBase.FieldBase
 {
     public class FieldModel
     {
         public FieldSize FieldSize;
-        public ICell[,] Cells;
+        public IFieldCell[,] Cells;
         public int activeCellsCount = 0;
 
-        public List<ICell> GetEmptyCells()
+        public List<IFieldCell> GetEmptyCells()
         {
-            List<ICell> emptyCells = new List<ICell>();
+            List<IFieldCell> emptyCells = new List<IFieldCell>();
             
             for (int j = 0; j < FieldSize._column; j++)
             {
                 for (int i = 0; i < FieldSize._row; i++)
                 {
-                    if(Cells[i,j].IsCellEmpty && !Cells[i,j].IsCellBlocked)
+                    if(Cells[i,j].IsEmpty)
                         emptyCells.Add(Cells[i,j]);
                 }
             }
@@ -33,7 +34,7 @@ namespace CodeBase.CoreBase.FieldBase
             {
                 for (int i = 0; i < FieldSize._row; i++)
                 {
-                    if (Cells[i, j].IsCellEmpty && !Cells[i,j].IsCellBlocked)
+                    if (Cells[i, j].IsEmpty)
                         count++;
                 }
             }
@@ -41,9 +42,9 @@ namespace CodeBase.CoreBase.FieldBase
             return count;
         }
 
-        public List<ICell> GetColumnIfHasEmptyCellsElseReturnNull(int columnIndex)
+        public List<IFieldCell> GetColumnIfHasEmptyCellsElseReturnNull(int columnIndex)
         {
-            List<ICell> currentColumn = new List<ICell>(FieldSize._row);
+            List<IFieldCell> currentColumn = new List<IFieldCell>(FieldSize._row);
 
             var emptyCells = GetEmptyCells();
 
@@ -60,22 +61,46 @@ namespace CodeBase.CoreBase.FieldBase
             return null;
         }
 
+        public bool NeedToStartMoveState()
+        {
+            for (int i = 0; i < FieldSize._column; i++)
+            {
+                var column = GetColumnIfHasEmptyCellsElseReturnNull(i);
+                if(column == null) continue;
+                int index = column.FindLastIndex(local => local.IsBlocked);
+                if (index < 0)
+                {
+                    return true;
+                }
+
+                return column.FindIndex(index, local => local.IsEmpty) >= 0;
+            }
+
+            return false;
+        }
+
         public bool IsFieldPositionOutOfSize(FieldPosition fieldPosition)
         {
             return fieldPosition.Row >= FieldSize._row || fieldPosition.Row < 0 ||
                    fieldPosition.Column >= FieldSize._column || fieldPosition.Column < 0;
         }
+        
+        public bool IsFieldPositionOutOfSize(int row, int column)
+        {
+            return row >= FieldSize._row || row < 0 ||
+                   column >= FieldSize._column || column < 0;
+        }
 
         public bool IsClickedItemBooster(FieldPosition fieldPosition)
         {
-            return (int) Cells[fieldPosition.Row, fieldPosition.Column].ItemDataProperty.itemType >=
+            return (int) Cells[fieldPosition.Row, fieldPosition.Column].Cell.ItemDataProperty.itemType >=
                    (int) ItemType.BOMB;
         }
 
         public ItemType GetItemTypeByFieldPosition(FieldPosition fieldPosition) =>
-            Cells[fieldPosition.Row, fieldPosition.Column].ItemDataProperty.itemType;
+            Cells[fieldPosition.Row, fieldPosition.Column].Cell.ItemDataProperty.itemType;
 
-        public ICell this[FieldPosition fieldPosition] => Cells[fieldPosition.Row, fieldPosition.Column];
+        public ICellBase this[FieldPosition fieldPosition] => Cells[fieldPosition.Row, fieldPosition.Column].Cell;
 
         public void SetActiveCellsCount() // TODO ADD IF-STATEMENT WHEN FIELD WILL BE NOT SQUERE MATRIX
         {
@@ -91,9 +116,9 @@ namespace CodeBase.CoreBase.FieldBase
             }
         }
 
-        public ICell[] GetFirstRow()
+        public IFieldCell[] GetFirstRow()
         {
-            ICell[] firstRow = new ICell[FieldSize._column];
+            IFieldCell[] firstRow = new IFieldCell[FieldSize._column];
 
             for (int column = 0; column < FieldSize._column; column++)
             {
@@ -103,5 +128,32 @@ namespace CodeBase.CoreBase.FieldBase
             return firstRow;
         }
 
+        public (bool hasBlocked, int lastIndex) HasBlockedCellInColumn(int column)
+        {
+            bool has = false;
+            int index = 0;
+            for (int i = 0; i < FieldSize._row; i++)
+            {
+                if (Cells[i, column].IsBlocked)
+                {
+                    Debug.Log($"{i} : {column}");
+                    has = true;
+                    index = i;
+                }
+            }
+
+            return (has, index);
+        }
+
+        public List<IFieldCell> GetColumn(int column)
+        {
+            List<IFieldCell> currentColumn = new List<IFieldCell>(FieldSize._row);
+            for (int i = 0; i < FieldSize._row; i++)
+            {
+                currentColumn.Add(Cells[i, column]);
+            }
+
+            return currentColumn;
+        }
     }
 }

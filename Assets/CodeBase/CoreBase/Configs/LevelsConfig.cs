@@ -88,16 +88,14 @@ namespace CodeBase.CoreBase.Configs
         public int row;
         public int column;
         public ItemType item;
-
-        private FieldPosition _fieldPosition;
-        public FieldPosition FieldPosition => _fieldPosition;
+        
+        public FieldPosition FieldPosition => new FieldPosition(row, column);
 
         public LevelItem(int rowInd, int columnInd, ItemType itemType)
         {
             item = itemType;
             row = rowInd;
             column = columnInd;
-            _fieldPosition = new FieldPosition(row, column);
         }
     }
 

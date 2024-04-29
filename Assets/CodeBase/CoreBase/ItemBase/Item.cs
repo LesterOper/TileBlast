@@ -21,7 +21,7 @@ namespace CodeBase.CoreBase.ItemBase
         public ItemView ItemView => _itemView;
         public Sprite CurrentCellColor => _itemData.cellColor;
 
-        public void MoveToZeroPositionOfParent(Vector2 target, ICell targetCell, ICell currentCell) => 
+        public void MoveToZeroPositionOfParent(Vector2 target, ICellBase targetCellBase, ICellBase currentCellBase) => 
             _itemView.MoveToTargetCell(target,() => { });
 
         public void ShakeAnimation() => _itemView.ShakeAnimation();

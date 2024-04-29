@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using CodeBase.ApplicationBase;
 using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.BoostersOnField;
 using CodeBase.CoreBase.CellBase;
@@ -13,11 +11,12 @@ namespace CodeBase.CoreBase.FieldBase
 {
     public class Matcher
     {
-        private List<ICell> _matchedCells;
+        private List<IFieldCell> _matchedCells;
         private readonly GameModel _gameModel;
         private SpawnController _spawnController;
         private BoostersOnFieldActivator _boostersOnFieldActivator;
         private AimController _aimController;
+        private List<IFieldCell> _neigboursBlockers;
         
         public Matcher(GameModel gameModel, SpawnController spawnController, AimController aimController)
         {
@@ -29,31 +28,32 @@ namespace CodeBase.CoreBase.FieldBase
         public void TryToMatch(FieldPosition fieldPosition)
         {
             var currentClicked = _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column];
-            if (currentClicked.ItemDataProperty == null)
+            if (currentClicked.IsEmpty || currentClicked.IsNonActive)
             {
                 return;
             }
             
-            if (currentClicked.IsBooster())
+            if (currentClicked.IsBooster)
             {
                 ActivateBooster(currentClicked);
             }
             else TryToMatch(currentClicked);
         }
 
-        private void ActivateBooster(ICell cell)
+        private void ActivateBooster(IFieldCell cellBase)
         {
-            _boostersOnFieldActivator.ActivateFieldBooster(cell.FieldPositionProperty, cell.ItemDataProperty.itemType);
+            _boostersOnFieldActivator.ActivateFieldBooster(cellBase.FieldPositionProperty, cellBase.Cell.ItemDataProperty.itemType);
         }
         
-        private void TryToMatch(ICell cell)
+        private void TryToMatch(IFieldCell cellBase)
         {
-            ItemType clickedItemType = cell.ItemDataProperty.itemType;
+            ItemType clickedItemType = cellBase.Cell.ItemDataProperty.itemType;
 
-            if (cell.ItemDataProperty.canMatch)
+            if (cellBase.Cell.ItemDataProperty.canMatch)
             {
-                _matchedCells = new List<ICell> {cell};
-                CheckMatch(clickedItemType, cell.FieldPositionProperty.Row, cell.FieldPositionProperty.Column);
+                _matchedCells = new List<IFieldCell> {cellBase};
+                _neigboursBlockers = new List<IFieldCell>();
+                CheckMatch(clickedItemType, cellBase.FieldPositionProperty.Row, cellBase.FieldPositionProperty.Column);
                 Debug.Log(_matchedCells.Count);
 
                 if (_matchedCells.Count == 1)
@@ -64,7 +64,8 @@ namespace CodeBase.CoreBase.FieldBase
                 }
 
                 _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = -1;
-                CheckMatchItemsToMakeBooster(cell.FieldPositionProperty);
+                CheckMatchItemsToMakeBooster(cellBase.FieldPositionProperty);
+                MatchBlockers();
                 RemoveMatchedCells();
             }
         }
@@ -73,16 +74,18 @@ namespace CodeBase.CoreBase.FieldBase
         {
             for (int i = 0; i < _matchedCells.Count; i++)
             {
-                CellView cellView = _matchedCells[i].CellViewProperty;
-                ItemType itemType = _matchedCells[i].ItemDataProperty.itemType;
+                CellView cellView = _matchedCells[i].Cell.CellViewProperty;
+                ItemType itemType = _matchedCells[i].Cell.ItemDataProperty.itemType;
                 FieldPosition fieldPosition = _matchedCells[i].FieldPositionProperty;
                 cellView.PlayEffect(() =>
                 {
                     _spawnController.Despawn(cellView);
                 });
                 _aimController.UpdateAims(itemType, 1, fieldPosition);
-                _matchedCells[i].ClearCell();
+                _gameModel.FieldModel.Cells[fieldPosition._row, fieldPosition._column].Cell = new EmptyCell();
             }
+            
+            _matchedCells.Clear();
         }
 
         private void CheckMatch(ItemType targetType, int rowIndex, int columnIndex)
@@ -111,7 +114,7 @@ namespace CodeBase.CoreBase.FieldBase
         private void CheckItem(ItemType targetType, int rowIndex, int columnIndex)
         {
             var cell = _gameModel.FieldModel.Cells[rowIndex, columnIndex];
-            if (cell.ItemDataProperty != null)
+            if ((!cell.IsEmpty || !cell.IsNonActive) && cell.Cell.ItemDataProperty != null)
             {
                 if (_matchedCells.Exists(local => local.FieldPositionProperty.Equals(cell.FieldPositionProperty)))
                 {
@@ -119,7 +122,8 @@ namespace CodeBase.CoreBase.FieldBase
                     return;
                 }
 
-                if (targetType == cell.ItemDataProperty.itemType)
+                
+                if (targetType == cell.Cell.ItemDataProperty.itemType)
                 {
                     _matchedCells.Add(cell);
                     CheckMatch(targetType, rowIndex, columnIndex);
@@ -127,18 +131,48 @@ namespace CodeBase.CoreBase.FieldBase
             }
         }
 
+        private void MatchBlockers()
+        {
+            for (int i = 0; i < _matchedCells.Count; i++)
+            {
+                var position = _matchedCells[i].FieldPositionProperty;
+                    
+                CheckBlocker(position._row, position._column + 1);
+                CheckBlocker(position._row, position._column - 1);
+                CheckBlocker(position._row + 1, position._column);
+                CheckBlocker(position._row - 1, position._column);
+            }
+        }
         
+        private void CheckBlocker(int row, int column)
+        {
+            if (_gameModel.FieldModel.IsFieldPositionOutOfSize(row, column)) return;
+
+            var cell = _gameModel.FieldModel.Cells[row, column];
+            if (cell.IsBlocked)
+            {
+                CellView cellView = cell.Cell.CellViewProperty;
+                cellView.PlayEffect(() =>
+                {
+                    _spawnController.Despawn(cellView);
+                });
+
+                cell.Cell = new EmptyCell();
+            }
+        }
+
         private void CheckMatchItemsToMakeBooster(FieldPosition fieldPosition)
         {
             var booster = _spawnController.SpawnBoosterCellView(fieldPosition, _matchedCells.Count);
             if (booster.boosterView != null && booster.boosterData != null)
             {
-                ItemType itemType = _matchedCells[0].ItemDataProperty.itemType;
-                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].itemTypeToDestroyForDiscoBooster =
+                ItemType itemType = _matchedCells[0].Cell.ItemDataProperty.itemType;
+                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.itemTypeToDestroyForDiscoBooster =
                     itemType;
                 _matchedCells.RemoveAt(0);
-                _spawnController.Despawn(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].CellViewProperty);
-                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Initialize(booster.boosterView, booster.boosterData);
+                _spawnController.Despawn(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.CellViewProperty);
+                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell = new FieldBooster();
+                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.Initialize(booster.boosterView, booster.boosterData);
             } 
         }
     }

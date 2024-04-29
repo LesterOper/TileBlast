@@ -30,7 +30,7 @@ namespace CodeBase.StateMachine.GameLoopStates
             _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.levelData.LevelAims);
             _gameEndingChecker.SubscribeAimSetters();
             _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.levelData.moves;
-            _gameModel.FieldModel.Cells = new ICell[level.levelFieldConfig.row, level.levelFieldConfig.columns];
+            _gameModel.FieldModel.Cells = new IFieldCell[level.levelFieldConfig.row, level.levelFieldConfig.columns];
             _gameModel.FieldModel.SetActiveCellsCount();
             _gameModel.FieldModel.FieldSize = new FieldSize(level.levelFieldConfig.row, level.levelFieldConfig.columns);
             _gameModel.Level = level;
