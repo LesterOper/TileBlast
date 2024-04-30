@@ -25,8 +25,8 @@ namespace CodeBase.StateMachine.GameLoopStates
             base.Execute();
             if (!_gameModel.IsClickedFieldPositionOutOfIndex())
             {
-                _matcher.TryToMatch(_gameModel.ClickFieldPosition);
-                DOVirtual.DelayedCall(0.2f, ()=>_signalBus.Fire(new NextStateSignal(typeof(MoveState))));
+                _matcher.TryToMatch(_gameModel.ClickFieldPosition, () => _signalBus.Fire(new NextStateSignal(typeof(MoveState))));
+                //DOVirtual.DelayedCall(0.2f, ()=>_signalBus.Fire(new NextStateSignal(typeof(MoveState))));
             }
             else
             {

@@ -27,6 +27,7 @@ namespace CodeBase.CoreBase.CellBase
         
         public FieldBooster() : base()
         {
+            
         }
     }
 

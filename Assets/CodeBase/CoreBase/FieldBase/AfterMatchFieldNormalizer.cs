@@ -69,21 +69,26 @@ namespace CodeBase.CoreBase.FieldBase
                         }
                     }
 
-                    if (empty.Count > 0)
+                    if (_gameModel.Level.levelData.levelType != LevelType.CLEAR_FIELD)
                     {
-                        for (int i = 0; i < empty.Count; i++)
+                        if (empty.Count > 0)
                         {
-                            FieldPosition fieldPosition = empty[i].FieldPositionProperty;
-                            Vector2 worldPosition = _fieldBoard.WorldPosition(fieldPosition);
-                            var cell = _spawnController.SpawnRandomCell(fieldPosition, new Vector2(worldPosition.x, 0),
-                                _fieldBoard.TileSize);
-                            empty[i].Cell = new Cell();
-                            empty[i].Cell.Initialize(cell.Item1, cell.Item2);
-                            empty[i].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
-                            MovableItemsContainer.MovableItem movableItem =
-                                new MovableItemsContainer.MovableItem(empty[i].Cell.CellViewProperty, worldPosition);
-                            movableItems.Add(movableItem);
-                            //empty.RemoveAt(0);
+                            for (int i = 0; i < empty.Count; i++)
+                            {
+                                FieldPosition fieldPosition = empty[i].FieldPositionProperty;
+                                Vector2 worldPosition = _fieldBoard.WorldPosition(fieldPosition);
+                                var cell = _spawnController.SpawnRandomCell(fieldPosition,
+                                    new Vector2(worldPosition.x, 0),
+                                    _fieldBoard.TileSize);
+                                empty[i].Cell = new Cell();
+                                empty[i].Cell.Initialize(cell.Item1, cell.Item2);
+                                empty[i].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
+                                MovableItemsContainer.MovableItem movableItem =
+                                    new MovableItemsContainer.MovableItem(empty[i].Cell.CellViewProperty,
+                                        worldPosition);
+                                movableItems.Add(movableItem);
+                                //empty.RemoveAt(0);
+                            }
                         }
                     }
                 }

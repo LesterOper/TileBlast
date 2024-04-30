@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66babc1a51e0474cb1db79bb41cd4f2e, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   levels:
   - levelData:
-      levelType: 2
-      moves: 10
+      levelType: 1
+      moves: 110
       LevelAims:
-      - ItemType: 2
-        amount: 81
+      - ItemType: 10
+        amount: 3
     levelFieldConfig: {fileID: 11400000, guid: 805cb9a08f7ca01468ff2b720401e369, type: 2}
   - levelData:
-      levelType: 0
-      moves: 0
-      LevelAims: []
+      levelType: 3
+      moves: 100
+      LevelAims:
+      - ItemType: 0
+        amount: 90
     levelFieldConfig: {fileID: 11400000, guid: f24fd8285f276ac42bd6a053d49e0b64, type: 2}
   - levelData:
       levelType: 2

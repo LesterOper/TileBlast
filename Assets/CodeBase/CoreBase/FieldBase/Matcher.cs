@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.BoostersOnField;
 using CodeBase.CoreBase.CellBase;
@@ -16,17 +18,20 @@ namespace CodeBase.CoreBase.FieldBase
         private SpawnController _spawnController;
         private BoostersOnFieldActivator _boostersOnFieldActivator;
         private AimController _aimController;
-        private List<IFieldCell> _neigboursBlockers;
+        private CoroutineRunner _coroutineRunner;
+        private Action _matchCallback;
         
-        public Matcher(GameModel gameModel, SpawnController spawnController, AimController aimController)
+        public Matcher(GameModel gameModel, SpawnController spawnController, AimController aimController, CoroutineRunner coroutineRunner)
         {
             _gameModel = gameModel;
             _spawnController = spawnController;
             _aimController = aimController;
-            _boostersOnFieldActivator = new BoostersOnFieldActivator(_gameModel, _spawnController, aimController);
+            _coroutineRunner = coroutineRunner;
+            _boostersOnFieldActivator = new BoostersOnFieldActivator(_gameModel, _spawnController, aimController, coroutineRunner);
         }
-        public void TryToMatch(FieldPosition fieldPosition)
+        public void TryToMatch(FieldPosition fieldPosition, Action callback)
         {
+            _matchCallback = callback;
             var currentClicked = _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column];
             if (currentClicked.IsEmpty || currentClicked.IsNonActive)
             {
@@ -42,7 +47,7 @@ namespace CodeBase.CoreBase.FieldBase
 
         private void ActivateBooster(IFieldCell cellBase)
         {
-            _boostersOnFieldActivator.ActivateFieldBooster(cellBase.FieldPositionProperty, cellBase.Cell.ItemDataProperty.itemType);
+            _boostersOnFieldActivator.ActivateBooster(cellBase.FieldPositionProperty, cellBase.Cell.ItemDataProperty.itemType, _matchCallback);
         }
         
         private void TryToMatch(IFieldCell cellBase)
@@ -52,25 +57,24 @@ namespace CodeBase.CoreBase.FieldBase
             if (cellBase.Cell.ItemDataProperty.canMatch)
             {
                 _matchedCells = new List<IFieldCell> {cellBase};
-                _neigboursBlockers = new List<IFieldCell>();
                 CheckMatch(clickedItemType, cellBase.FieldPositionProperty.Row, cellBase.FieldPositionProperty.Column);
-                Debug.Log(_matchedCells.Count);
 
                 if (_matchedCells.Count == 1)
                 {
-                    Debug.Log("Not enough matched elements");
                     _matchedCells.Clear();
+                    _matchCallback.Invoke();
                     return;
                 }
 
                 _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = -1;
                 CheckMatchItemsToMakeBooster(cellBase.FieldPositionProperty);
                 MatchBlockers();
-                RemoveMatchedCells();
+                _coroutineRunner.StartCoroutine(RemoveMatchedCells());
             }
+            else _matchCallback.Invoke();
         }
 
-        private void RemoveMatchedCells()
+        private IEnumerator RemoveMatchedCells()
         {
             for (int i = 0; i < _matchedCells.Count; i++)
             {
@@ -83,9 +87,11 @@ namespace CodeBase.CoreBase.FieldBase
                 });
                 _aimController.UpdateAims(itemType, 1, fieldPosition);
                 _gameModel.FieldModel.Cells[fieldPosition._row, fieldPosition._column].Cell = new EmptyCell();
+                yield return new WaitForSeconds(0.02f);
             }
-            
+            _matchCallback.Invoke();
             _matchedCells.Clear();
+            yield return null;
         }
 
         private void CheckMatch(ItemType targetType, int rowIndex, int columnIndex)
