@@ -301,18 +301,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                 }
             }
         }
-        
-        private IFieldCell GetNeighbour(FieldPosition fieldPosition, DirectionForBooster direction)
-        {
-            IFieldCell cellBase = null;
-            DirectionForBombBoosterAttribute directionAttribute = direction.GetAttribute<DirectionForBombBoosterAttribute>();
-            FieldPosition neighbourPosition = new FieldPosition(fieldPosition.Row + directionAttribute.RowIncrement,
-                fieldPosition.Column + directionAttribute.ColumnIncrement);
-            if(!_gameModel.FieldModel.IsFieldPositionOutOfSize(neighbourPosition))
-                cellBase = _gameModel.FieldModel.Cells[neighbourPosition._row, neighbourPosition._column];
-            return cellBase;
-        }
-        
+
         private async Task LeftRocket(int startColumn, int row)
         {
             for (int i = startColumn - 1; i >= 0; i--)
@@ -503,6 +492,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             {
                 for (int j = 0; j < column; j++)
                 {
+                    if(cells[i,j].IsDropDown) continue;
                     if(!cells[i,j].IsDefaultCell) continue;
                     if(cells[i,j].Cell.ItemDataProperty == null) continue;
                     if(i == discoFieldPosition.Row && j == discoFieldPosition.Column) continue;
@@ -516,13 +506,13 @@ namespace CodeBase.CoreBase.BoostersOnField
                         _aimController.UpdateAims(itemType, 1, fieldCell.FieldPositionProperty);
                         cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
                         cells[i, j].Cell = new FieldBooster();
-                        await Task.Delay(25);
+                        await Task.Delay(10);
                         var boosters = _spawnController.SpawnBoosterCellView(cells[i, j].FieldPositionProperty,
                             neighbourCellBooster.Cell.ItemDataProperty.itemType);
                         cells[i,j].Cell.Initialize(boosters.boosterView, boosters.boosterData);
                     
                         spawned.Add(cells[i,j]);
-                        await Task.Delay(25);
+                        await Task.Delay(10);
                     }
                 }
             }
@@ -532,6 +522,7 @@ namespace CodeBase.CoreBase.BoostersOnField
             ItemType spawnedBoosterType = neighbourCellBooster.Cell.ItemDataProperty.itemType;
             for (int i = 0; i < spawned.Count; i++)
             {
+                await DespawnCell(spawned[i]);
                 await CheckBoosterByType(spawnedBoosterType, spawned[i].FieldPositionProperty);
             }
             
