@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f0f294f10e4835b83f4121f55793d1, type: 3}
+  m_Name: LevelFieldConfig 12
+  m_EditorClassIdentifier: 
+  row: 8
+  columns: 9
+  types:
+  - row: 7
+    column: 0
+    item: -1
+  - row: 7
+    column: 1
+    item: -1
+  - row: 7
+    column: 2
+    item: 3
+  - row: 7
+    column: 3
+    item: 3
+  - row: 7
+    column: 4
+    item: 2
+  - row: 7
+    column: 5
+    item: 4
+  - row: 7
+    column: 6
+    item: 5
+  - row: 7
+    column: 7
+    item: -1
+  - row: 7
+    column: 8
+    item: -1
+  - row: 6
+    column: 0
+    item: -1
+  - row: 6
+    column: 1
+    item: 4
+  - row: 6
+    column: 2
+    item: 3
+  - row: 6
+    column: 3
+    item: 1
+  - row: 6
+    column: 4
+    item: 2
+  - row: 6
+    column: 5
+    item: 3
+  - row: 6
+    column: 6
+    item: 3
+  - row: 6
+    column: 7
+    item: 1
+  - row: 6
+    column: 8
+    item: -1
+  - row: 5
+    column: 0
+    item: 3
+  - row: 5
+    column: 1
+    item: 3
+  - row: 5
+    column: 2
+    item: 3
+  - row: 5
+    column: 3
+    item: 5
+  - row: 5
+    column: 4
+    item: 3
+  - row: 5
+    column: 5
+    item: 1
+  - row: 5
+    column: 6
+    item: 5
+  - row: 5
+    column: 7
+    item: 4
+  - row: 5
+    column: 8
+    item: 4
+  - row: 4
+    column: 0
+    item: 3
+  - row: 4
+    column: 1
+    item: 2
+  - row: 4
+    column: 2
+    item: 2
+  - row: 4
+    column: 3
+    item: 4
+  - row: 4
+    column: 4
+    item: 4
+  - row: 4
+    column: 5
+    item: 3
+  - row: 4
+    column: 6
+    item: 1
+  - row: 4
+    column: 7
+    item: 2
+  - row: 4
+    column: 8
+    item: 5
+  - row: 3
+    column: 0
+    item: 5
+  - row: 3
+    column: 1
+    item: 5
+  - row: 3
+    column: 2
+    item: 4
+  - row: 3
+    column: 3
+    item: 4
+  - row: 3
+    column: 4
+    item: 2
+  - row: 3
+    column: 5
+    item: 1
+  - row: 3
+    column: 6
+    item: 1
+  - row: 3
+    column: 7
+    item: 4
+  - row: 3
+    column: 8
+    item: 1
+  - row: 2
+    column: 0
+    item: 3
+  - row: 2
+    column: 1
+    item: 4
+  - row: 2
+    column: 2
+    item: 1
+  - row: 2
+    column: 3
+    item: 3
+  - row: 2
+    column: 4
+    item: 3
+  - row: 2
+    column: 5
+    item: 1
+  - row: 2
+    column: 6
+    item: 1
+  - row: 2
+    column: 7
+    item: 3
+  - row: 2
+    column: 8
+    item: 4
+  - row: 1
+    column: 0
+    item: -1
+  - row: 1
+    column: 1
+    item: 1
+  - row: 1
+    column: 2
+    item: 3
+  - row: 1
+    column: 3
+    item: 4
+  - row: 1
+    column: 4
+    item: 3
+  - row: 1
+    column: 5
+    item: 4
+  - row: 1
+    column: 6
+    item: 1
+  - row: 1
+    column: 7
+    item: 5
+  - row: 1
+    column: 8
+    item: -1
+  - row: 0
+    column: 0
+    item: -1
+  - row: 0
+    column: 1
+    item: -1
+  - row: 0
+    column: 2
+    item: 3
+  - row: 0
+    column: 3
+    item: 4
+  - row: 0
+    column: 4
+    item: 2
+  - row: 0
+    column: 5
+    item: 2
+  - row: 0
+    column: 6
+    item: 4
+  - row: 0
+    column: 7
+    item: -1
+  - row: 0
+    column: 8
+    item: -1

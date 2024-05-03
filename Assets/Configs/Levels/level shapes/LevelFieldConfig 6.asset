@@ -20,25 +20,25 @@ MonoBehaviour:
     item: 4
   - row: 8
     column: 1
-    item: 0
+    item: -1
   - row: 8
     column: 2
-    item: 0
+    item: -1
   - row: 8
     column: 3
-    item: 0
+    item: -1
   - row: 8
     column: 4
-    item: 0
+    item: -1
   - row: 8
     column: 5
-    item: 0
+    item: -1
   - row: 8
     column: 6
-    item: 0
+    item: -1
   - row: 8
     column: 7
-    item: 0
+    item: -1
   - row: 8
     column: 8
     item: 2
@@ -50,19 +50,19 @@ MonoBehaviour:
     item: 3
   - row: 7
     column: 2
-    item: 0
+    item: -1
   - row: 7
     column: 3
-    item: 0
+    item: -1
   - row: 7
     column: 4
-    item: 0
+    item: -1
   - row: 7
     column: 5
-    item: 0
+    item: -1
   - row: 7
     column: 6
-    item: 0
+    item: -1
   - row: 7
     column: 7
     item: 1
@@ -80,13 +80,13 @@ MonoBehaviour:
     item: 1
   - row: 6
     column: 3
-    item: 0
+    item: -1
   - row: 6
     column: 4
-    item: 0
+    item: -1
   - row: 6
     column: 5
-    item: 0
+    item: -1
   - row: 6
     column: 6
     item: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
     item: 3
   - row: 5
     column: 4
-    item: 0
+    item: -1
   - row: 5
     column: 5
     item: 2

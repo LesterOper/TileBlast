@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66babc1a51e0474cb1db79bb41cd4f2e, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  level: 15
+  level: 1
   levels:
   - levelData:
       levelType: 2
-      moves: 10
+      moves: 80
       LevelAims:
       - ItemType: 2
-        amount: 10
+        amount: 50
     levelFieldConfig: {fileID: 11400000, guid: 805cb9a08f7ca01468ff2b720401e369, type: 2}
   - levelData:
       levelType: 2
@@ -119,3 +119,45 @@ MonoBehaviour:
       - ItemType: 5
         amount: 1
     levelFieldConfig: {fileID: 11400000, guid: cf5a0e2088c1e1a4786755b2b5d62216, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 10
+      LevelAims:
+      - ItemType: 2
+        amount: 10
+    levelFieldConfig: {fileID: 11400000, guid: c3718b7c75c37f54c8b04a79bf0dcda5, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 10
+      LevelAims:
+      - ItemType: 3
+        amount: 10
+    levelFieldConfig: {fileID: 11400000, guid: 6288b8dd581d3d7419bd13145e890e0b, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 10
+      LevelAims:
+      - ItemType: 2
+        amount: 10
+    levelFieldConfig: {fileID: 11400000, guid: 6ae2e3ed29d05b4429dae8bb1afd9c72, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 10
+      LevelAims:
+      - ItemType: 2
+        amount: 10
+    levelFieldConfig: {fileID: 11400000, guid: 6498d8c1b5509a54bbe11cbf2257f331, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 50
+      LevelAims:
+      - ItemType: 2
+        amount: 50
+    levelFieldConfig: {fileID: 11400000, guid: 76c83a5c0144c81488f82993467aadef, type: 2}
+  - levelData:
+      levelType: 2
+      moves: 50
+      LevelAims:
+      - ItemType: 3
+        amount: 50
+    levelFieldConfig: {fileID: 11400000, guid: 1f5ab3c11e6adee46ab6c4679f4d3992, type: 2}

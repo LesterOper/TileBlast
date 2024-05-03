@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70f0f294f10e4835b83f4121f55793d1, type: 3}
-  m_Name: LevelFieldConfig 2
+  m_Name: LevelFieldConfig 17
   m_EditorClassIdentifier: 
   row: 9
   columns: 8
@@ -23,10 +23,10 @@ MonoBehaviour:
     item: 1
   - row: 8
     column: 2
-    item: 0
+    item: -1
   - row: 8
     column: 3
-    item: 0
+    item: -1
   - row: 8
     column: 4
     item: 5
@@ -35,10 +35,10 @@ MonoBehaviour:
     item: 1
   - row: 8
     column: 6
-    item: 0
+    item: -1
   - row: 8
     column: 7
-    item: 0
+    item: -1
   - row: 7
     column: 0
     item: 1
@@ -113,10 +113,10 @@ MonoBehaviour:
     item: 5
   - row: 4
     column: 0
-    item: 1
+    item: 11
   - row: 4
     column: 1
-    item: 3
+    item: 11
   - row: 4
     column: 2
     item: 4
@@ -125,10 +125,10 @@ MonoBehaviour:
     item: 1
   - row: 4
     column: 4
-    item: 2
+    item: 11
   - row: 4
     column: 5
-    item: 5
+    item: 11
   - row: 4
     column: 6
     item: 4
@@ -137,10 +137,10 @@ MonoBehaviour:
     item: 1
   - row: 3
     column: 0
-    item: 1
+    item: 11
   - row: 3
     column: 1
-    item: 2
+    item: 11
   - row: 3
     column: 2
     item: 5
@@ -149,10 +149,10 @@ MonoBehaviour:
     item: 2
   - row: 3
     column: 4
-    item: 5
+    item: 11
   - row: 3
     column: 5
-    item: 2
+    item: 11
   - row: 3
     column: 6
     item: 1
@@ -161,10 +161,10 @@ MonoBehaviour:
     item: 4
   - row: 2
     column: 0
-    item: 2
+    item: 11
   - row: 2
     column: 1
-    item: 3
+    item: 11
   - row: 2
     column: 2
     item: 1
@@ -173,10 +173,10 @@ MonoBehaviour:
     item: 5
   - row: 2
     column: 4
-    item: 2
+    item: 11
   - row: 2
     column: 5
-    item: 2
+    item: 11
   - row: 2
     column: 6
     item: 1
@@ -185,10 +185,10 @@ MonoBehaviour:
     item: 2
   - row: 1
     column: 0
-    item: 5
+    item: 11
   - row: 1
     column: 1
-    item: 1
+    item: 11
   - row: 1
     column: 2
     item: 2
@@ -197,10 +197,10 @@ MonoBehaviour:
     item: 3
   - row: 1
     column: 4
-    item: 3
+    item: 11
   - row: 1
     column: 5
-    item: 3
+    item: 11
   - row: 1
     column: 6
     item: 3
@@ -209,10 +209,10 @@ MonoBehaviour:
     item: 3
   - row: 0
     column: 0
-    item: 0
+    item: -1
   - row: 0
     column: 1
-    item: 0
+    item: -1
   - row: 0
     column: 2
     item: 3
@@ -221,10 +221,10 @@ MonoBehaviour:
     item: 1
   - row: 0
     column: 4
-    item: 0
+    item: -1
   - row: 0
     column: 5
-    item: 0
+    item: -1
   - row: 0
     column: 6
     item: 2
