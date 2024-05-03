@@ -1,6 +1,6 @@
-﻿using System;
-using CodeBase.CoreBase;
+﻿using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.GameStateModel;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace CodeBase.DialogsSystem.WinDialog
         private Tween shineRotation;
 
         [Inject]
-        private void Construct(GlobalGameStateModel globalGameStateModel, GlobalGameSettingsConfig gameSettingsConfig)
+        private void Construct(GlobalGameStateModel globalGameStateModel, GlobalGameSettingsConfig gameSettingsConfig, GameModel gameModel)
         {
             _globalGameStateModel = globalGameStateModel;
             _globalGameSettingsConfig = gameSettingsConfig;
@@ -34,6 +34,7 @@ namespace CodeBase.DialogsSystem.WinDialog
             softMoney.text = $"+{_globalGameSettingsConfig.softMoneyPrizeForCompleteLevel}";
             starsAmount.text = $"+{_globalGameSettingsConfig.starsPrizeForCompleteLevel}";
             level.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";
+            _globalGameStateModel.CurrentLevel += 1;
             shineRotation = shine.DORotate(new Vector3(0f, 0f, 360f), 10f, RotateMode.FastBeyond360).SetLoops(-1);
             base.Initialize();
         }

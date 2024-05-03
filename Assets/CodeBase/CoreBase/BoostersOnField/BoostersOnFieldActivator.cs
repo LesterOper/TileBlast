@@ -144,7 +144,6 @@ namespace CodeBase.CoreBase.BoostersOnField
         private async Task ActivateBomb(FieldPosition fieldPosition, int increment = 0)
         {
             _spawnController.SpawnEffect(VfxType.BOMB, fieldPosition);
-            //await DespawnCell(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column]);
 
             int rowStart = fieldPosition._row - (1 + increment);
             int rowEnd = fieldPosition._row + (1 + increment);
@@ -159,6 +158,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                     IFieldCell cell = _gameModel.FieldModel.Cells[rowStart, col];
                     if(cell.IsNonActive) continue;
                     if(cell.IsEmpty) continue;
+                    if(cell.IsDropDown) continue;
                     
                     CellView cellView = cell.Cell.CellViewProperty;
                     FieldPosition position = cell.FieldPositionProperty;
@@ -181,6 +181,7 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                     if(cell.IsNonActive) continue;
                     if(cell.IsEmpty) continue;
+                    if(cell.IsDropDown) continue;
                     
                     CellView cellView = cell.Cell.CellViewProperty;
                     FieldPosition position = cell.FieldPositionProperty;
@@ -204,6 +205,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                         IFieldCell cell = _gameModel.FieldModel.Cells[rowEnd, col];
                         if(cell.IsNonActive) continue;
                         if(cell.IsEmpty) continue;
+                        if(cell.IsDropDown) continue;
                         
                         CellView cellView = cell.Cell.CellViewProperty;
                         FieldPosition position = cell.FieldPositionProperty;
@@ -229,6 +231,8 @@ namespace CodeBase.CoreBase.BoostersOnField
 
                         if(cell.IsNonActive) continue;
                         if(cell.IsEmpty) continue;
+                        if(cell.IsDropDown) continue;
+                        
                         CellView cellView = cell.Cell.CellViewProperty;
                         FieldPosition position = cell.FieldPositionProperty;
                         if (cell.IsBooster)
@@ -292,7 +296,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                         _aimController.UpdateAims(itemType, 1, cellBase.FieldPositionProperty);
                         cellView.PlayEffect(()=>_spawnController.Despawn(cellView));
                         cells[i, j].Cell = new EmptyCell();
-                        await Task.Delay(25);
+                        await Task.Delay(10);
                     }
                 }
             }

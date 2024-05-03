@@ -33,7 +33,7 @@ namespace CodeBase.ApplicationBase
             Application.targetFrameRate = 60;
             var success = await _timeModel.TryToRefreshServerTime();
             
-            //if (PlayerPrefs.GetInt(FIRST_LAUNCH) == 0)
+            if (PlayerPrefs.GetInt(FIRST_LAUNCH) == 0)
             {
                 _globalGameStateModel.HealthSetter.MaxHealthAmount = _gameSettingsConfig.MaxHealthAmount;
                 _globalGameStateModel.HealthSetter.ResetDuration =
@@ -43,13 +43,13 @@ namespace CodeBase.ApplicationBase
                 _globalGameStateModel.CurrentLevel = 1;
                 PlayerPrefs.SetInt(FIRST_LAUNCH, 1);
             }
-           // else
-            /*{
+            else
+            {
                 _globalGameStateModel.HealthSetter.MaxHealthAmount = _gameSettingsConfig.MaxHealthAmount;
                 _globalGameStateModel.HealthSetter.ResetDuration =
                     _gameSettingsConfig.ResetDurationOfOneHealthInSeconds;
                 _commonSaving.Load();
-            }*/
+            }
 
             if (success)
                 SceneManager.LoadScene(1);

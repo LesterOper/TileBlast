@@ -9,7 +9,6 @@ namespace CodeBase.CoreBase.FieldBase
     {
         public FieldSize FieldSize;
         public IFieldCell[,] Cells;
-        public int activeCellsCount = 0;
 
         public List<IFieldCell> GetEmptyCells()
         {
@@ -100,22 +99,6 @@ namespace CodeBase.CoreBase.FieldBase
         public ItemType GetItemTypeByFieldPosition(FieldPosition fieldPosition) =>
             Cells[fieldPosition.Row, fieldPosition.Column].Cell.ItemDataProperty.itemType;
 
-        public ICellBase this[FieldPosition fieldPosition] => Cells[fieldPosition.Row, fieldPosition.Column].Cell;
-
-        public void SetActiveCellsCount() // TODO ADD IF-STATEMENT WHEN FIELD WILL BE NOT SQUERE MATRIX
-        {
-            for (int i = 0; i < FieldSize._row; i++)
-            {
-                for (int j = 0; j < FieldSize._column; j++)
-                {
-                    if (Cells[i, j] != null)
-                    {
-                        activeCellsCount++;
-                    }
-                }
-            }
-        }
-
         public IFieldCell[] GetFirstRow()
         {
             IFieldCell[] firstRow = new IFieldCell[FieldSize._column];
@@ -127,24 +110,7 @@ namespace CodeBase.CoreBase.FieldBase
 
             return firstRow;
         }
-
-        public (bool hasBlocked, int lastIndex) HasBlockedCellInColumn(int column)
-        {
-            bool has = false;
-            int index = 0;
-            for (int i = 0; i < FieldSize._row; i++)
-            {
-                if (Cells[i, column].IsBlocked)
-                {
-                    Debug.Log($"{i} : {column}");
-                    has = true;
-                    index = i;
-                }
-            }
-
-            return (has, index);
-        }
-
+        
         public List<IFieldCell> GetColumn(int column)
         {
             List<IFieldCell> currentColumn = new List<IFieldCell>(FieldSize._row);

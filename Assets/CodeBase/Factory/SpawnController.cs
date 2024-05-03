@@ -3,6 +3,7 @@ using CodeBase.CoreBase;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.FieldBase;
+using CodeBase.CoreBase.GameStateModel;
 using CodeBase.CoreBase.Item;
 using CodeBase.Pool;
 using UnityEngine;
@@ -18,19 +19,22 @@ namespace CodeBase.Factory
         private ItemPool _itemPool;
         private FieldBoard _fieldBoard;
         private VfxConfig _vfxConfig;
+        private GameModel _gameModel;
 
         public SpawnController(
             CellFactory cellFactory, 
             ItemsConfig itemsConfig,
             ItemPool itemPool,
             FieldBoard fieldBoard,
-            VfxConfig vfxConfig)
+            VfxConfig vfxConfig,
+            GameModel gameModel)
         {
             _cellFactory = cellFactory;
             _itemsConfig = itemsConfig;
             _itemPool = itemPool;
             _fieldBoard = fieldBoard;
             _vfxConfig = vfxConfig;
+            _gameModel = gameModel;
         }
 
         public CellView SpawnCell(Transform parent, Vector3 position, float scale, FieldPosition fieldPosition)
@@ -109,7 +113,7 @@ namespace CodeBase.Factory
 
         private ItemData GetNewItemData()
         {
-            return _itemsConfig.GetItem((ItemType) Random.Range(1, Enum.GetValues(typeof(ItemType)).Length - 7));
+            return _itemsConfig.GetItem(_gameModel.Level.levelData.generatable.Generate());
         }
 
         public void Despawn(CellView cellView) => _itemPool.Despawn(cellView);

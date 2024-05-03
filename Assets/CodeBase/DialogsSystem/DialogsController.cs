@@ -47,12 +47,16 @@ namespace CodeBase.DialogsSystem
 
         public void ShowReviveMovesDialog()
         {
+            if(_activeDialog is WinDialog.WinDialog)
+                return;
             _activeDialog = _reviveMovesDialog;
             ShowDialog();
         }
 
         public void ShowLooseDialog()
         {
+            if(_activeDialog is LooseDialog.LooseDialog)
+                return;
             _activeDialog = _looseDialog;
             ShowDialog();
         }

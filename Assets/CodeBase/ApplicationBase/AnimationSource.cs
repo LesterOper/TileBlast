@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.ApplicationBase
 {
@@ -48,7 +49,8 @@ namespace CodeBase.ApplicationBase
                 callback?.Invoke();
                 Object.Destroy(animatedObj);
             }));
-            sequenceMove.Join(animatedObj.transform.DOMoveX(target.position.x + (target.position.x * 0.3f), time * 0.5f)
+            int mod = Random.Range(-1, 2);
+            sequenceMove.Join(animatedObj.transform.DOMoveX(target.position.x + (mod * (target.position.x * 0.1f)), time * 0.5f)
                 .SetEase(Ease.Linear));
             sequenceMove.Append(animatedObj.transform.DOMoveX(target.position.x, time).SetEase(Ease.Linear));
             

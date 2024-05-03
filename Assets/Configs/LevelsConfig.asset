@@ -14,24 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 2
   levels:
-  - levelData:
+  - LevelNumber: 1
+    levelData:
+      levelDifficultyType: 2
+      levelType: 2
+      moves: 100
+      LevelAims:
+      - ItemType: 3
+        amount: 90
+      generatable:
+        generatable:
+        - item: 3
+          percent: 40
+        - item: 2
+          percent: 20
+        - item: 5
+          percent: 40
+        - item: 4
+          percent: 50
+        - item: 1
+          percent: 60
+    levelFieldConfig: {fileID: 11400000, guid: f24fd8285f276ac42bd6a053d49e0b64, type: 2}
+  - LevelNumber: 2
+    levelData:
+      levelDifficultyType: 2
       levelType: 1
       moves: 110
       LevelAims:
       - ItemType: 10
         amount: 3
+      generatable:
+        generatable:
+        - item: 1
+          percent: 60
+        - item: 4
+          percent: 30
+        - item: 5
+          percent: 75
     levelFieldConfig: {fileID: 11400000, guid: 805cb9a08f7ca01468ff2b720401e369, type: 2}
-  - levelData:
-      levelType: 3
-      moves: 100
-      LevelAims:
-      - ItemType: 0
-        amount: 90
-    levelFieldConfig: {fileID: 11400000, guid: f24fd8285f276ac42bd6a053d49e0b64, type: 2}
-  - levelData:
+  - LevelNumber: 3
+    levelData:
+      levelDifficultyType: 1
       levelType: 2
       moves: 20
       LevelAims:
       - ItemType: 4
         amount: 10
+      generatable:
+        generatable: []
     levelFieldConfig: {fileID: 11400000, guid: 660386f344432a04d8e95d9a7430ea77, type: 2}
