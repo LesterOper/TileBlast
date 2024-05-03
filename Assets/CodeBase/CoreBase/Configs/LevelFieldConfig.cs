@@ -30,7 +30,7 @@ namespace CodeBase.CoreBase.Configs
         }
 
         
-        public void GenerateRandomField()
+        public void GenerateRandomField(GeneratableItemsConfig generatableItemsConfig)
         {
             int index = 0;
 
@@ -39,7 +39,7 @@ namespace CodeBase.CoreBase.Configs
                 for (int j = 0; j < columns; j++)
                 {
                     types[index] = new LevelItem(i, j,
-                        (ItemType) Random.Range(0, Enum.GetValues(typeof(ItemType)).Length - 5));
+                        generatableItemsConfig.Generate());
                     index++;
                 }
             }

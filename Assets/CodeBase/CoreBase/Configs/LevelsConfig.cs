@@ -51,13 +51,17 @@ namespace CodeBase.CoreBase.Configs
         public LevelFieldConfig levelFieldConfig;
         
         [HideIf(nameof(IsLevelFieldConfigNotAssigned))]
+        [HideIf(nameof(IsGeneratableListEmpty))]
         [InfoBox("Generate random field")]
         [Button]
         public void GenerateRandomField()
         {
-            levelFieldConfig.GenerateRandomField();
+            levelFieldConfig.GenerateRandomField(levelData.generatable);
         }
 
+
+        private bool IsGeneratableListEmpty() => levelData.generatable.generatable.Count <= 0;
+        
         private bool IsLevelFieldConfigNotAssigned() => levelFieldConfig == null;
         private bool IsNotClearAllLevelType() => levelData.levelType != LevelType.CLEAR_FIELD;
         private bool IsClearAllLevelType() => levelData.levelType == LevelType.CLEAR_FIELD;

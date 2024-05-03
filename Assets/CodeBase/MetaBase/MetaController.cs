@@ -35,7 +35,7 @@ namespace CodeBase.MetaBase
         private void Start()
         {
             var levelDifficultyType =
-                _levelsConfig.GetLevel(_globalGameStateModel.CurrentLevel).levelData.levelDifficultyType;
+                _levelsConfig.GetLevel().levelData.levelDifficultyType;
             currentButton = levelDifficultyType == LevelDifficultyType.Easy ? playButtonEasy :
                 levelDifficultyType == LevelDifficultyType.Normal ? playButtonNormal : playButtonHard;
             
