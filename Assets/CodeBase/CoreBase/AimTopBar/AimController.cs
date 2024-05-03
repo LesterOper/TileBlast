@@ -114,11 +114,11 @@ namespace CodeBase.CoreBase.AimTopBar
                 if(firstRow[i].Cell.ItemDataProperty == null) continue;
                 if (firstRow[i].Cell.ItemDataProperty.IsDropBottomItem)
                 {
-                    ICellBase cellBase = firstRow[i].Cell;
-                    SpriteRenderer animate = cellBase.CellViewProperty.R;
+                    IFieldCell cellBase = firstRow[i];
+                    SpriteRenderer animate = cellBase.Cell.CellViewProperty.R;
                     AnimationSource.Parabolla(aimSetter.counterTr, animate, 1f, ()=>{aimSetter.Value = -1;});
-                    _spawnController.Despawn(cellBase.CellViewProperty);
-                    cellBase.ClearCell();
+                    _spawnController.Despawn(cellBase.Cell.CellViewProperty);
+                    cellBase.Cell = new EmptyCell();
                     collect = true;
                 }
             }

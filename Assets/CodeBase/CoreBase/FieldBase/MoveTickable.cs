@@ -78,7 +78,7 @@ namespace CodeBase.CoreBase.FieldBase
             _movableItems.Clear();
         }
 
-        private WaitForSeconds _waitForSeconds = new(0.13f * 0.08f);
+        private WaitForSeconds _waitForSeconds = new(0.10f * 0.03f);
         public IEnumerator MoveItems(Action callback)
         {
             for (int i = 0; i < _movableItems.Count; i++)

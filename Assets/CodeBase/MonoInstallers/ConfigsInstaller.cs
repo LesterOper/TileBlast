@@ -22,8 +22,7 @@ namespace CodeBase.MonoInstallers
             Container.Bind<VfxConfig>().FromScriptableObject(_vfxConfig).AsSingle();
             Container.Bind<ItemsConfig>().FromScriptableObject(_itemsConfig).AsCached();
             Container.Bind<FieldSettings>().FromScriptableObject(_fieldSettings).AsSingle().WhenInjectedInto<FieldBoard>();
-            Container.Bind<LevelsConfig>().FromScriptableObject(_levelsConfig).AsSingle()
-                .WhenInjectedInto<InitializeLevelState>();
+            Container.Bind<LevelsConfig>().FromScriptableObject(_levelsConfig).AsSingle();
             Container.Bind<GlobalGameSettingsConfig>().FromScriptableObject(_gameSettingsConfig).AsCached();
         }
     }

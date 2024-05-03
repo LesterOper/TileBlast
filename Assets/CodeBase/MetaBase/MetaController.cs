@@ -2,6 +2,8 @@
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.DialogsSystem;
+using CodeBase.MetaBase.Views;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,32 +13,37 @@ namespace CodeBase.MetaBase
 {
     public class MetaController : MonoBehaviour
     {
-        [SerializeField] private Button play;
+        [SerializeField] private PlayButton playButtonEasy;
+        [SerializeField] private PlayButton playButtonNormal;
+        [SerializeField] private PlayButton playButtonHard;
+        
         [SerializeField] private Button settings;
 
+        private PlayButton currentButton;
+        
         private GlobalGameStateModel _globalGameStateModel;
         private MetaDialogController _metaDialogController;
+        private LevelsConfig _levelsConfig;
 
         [Inject]
-        private void Construct(GlobalGameStateModel gameStateModel, MetaDialogController metaDialogController)
+        private void Construct(GlobalGameStateModel gameStateModel, MetaDialogController metaDialogController, LevelsConfig levelsConfig)
         {
             _globalGameStateModel = gameStateModel;
             _metaDialogController = metaDialogController;
+            _levelsConfig = levelsConfig;
         }
         private void Start()
         {
-            play.onClick.AddListener(OnPlayClick);
+            var levelDifficultyType =
+                _levelsConfig.GetLevel(_globalGameStateModel.CurrentLevel).levelData.levelDifficultyType;
+            currentButton = levelDifficultyType == LevelDifficultyType.Easy ? playButtonEasy :
+                levelDifficultyType == LevelDifficultyType.Normal ? playButtonNormal : playButtonHard;
+            
+            currentButton.Initialize(_globalGameStateModel.CurrentLevel);
             settings.onClick.AddListener(OnSettingsClick);
         }
 
-        private void OnPlayClick()
-        {
-            if (_globalGameStateModel.HealthSetter.HasHealth)
-            {
-                SceneManager.LoadScene(2);
-            }
-            else _metaDialogController.ShowBuyMoreLivesDialog();
-        }
+        
 
         private void OnSettingsClick()
         {

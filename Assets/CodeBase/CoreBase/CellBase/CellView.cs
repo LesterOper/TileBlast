@@ -53,7 +53,7 @@ namespace CodeBase.CoreBase.CellBase
         public void MoveToTargetCell(Vector2 position, Action callback)
         {
             _moveTween?.Kill();
-            _moveTween = transform.MoveLocalToZeroOfParent(position, 0.13f)
+            _moveTween = transform.MoveLocalToZeroOfParent(position, 0.10f)
                 .SetEase(Ease.OutQuart)
                 .OnComplete(callback.Invoke);
         }
