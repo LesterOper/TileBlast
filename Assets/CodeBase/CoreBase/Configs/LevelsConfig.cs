@@ -75,7 +75,7 @@ namespace CodeBase.CoreBase.Configs
             LevelAim levelAim = new LevelAim
             {
                 ItemType = ItemType.NONE,
-                amount = levelFieldConfig.types.Count(local => local.item != ItemType.NONE)
+                amount = levelFieldConfig.types.Count(local => local.item != ItemType.NONE && local.item != ItemType.EMPTY)
             };
             levelData.LevelAims.Add(levelAim);
         } 

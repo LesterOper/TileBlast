@@ -191,7 +191,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                     }
                     else
                     {
-                        await DespawnCellWithEffect(cellView, position, cell);
+                        await DespawnCellWithEffect(cellView, position, cell, 0);
                     }
                 }
                 columnEnd--;
@@ -215,7 +215,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                         }
                         else
                         {
-                            await DespawnCellWithEffect(cellView, position, cell);
+                            await DespawnCellWithEffect(cellView, position, cell, 0);
                         }
                     }
                     rowEnd--;
@@ -241,7 +241,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                         }
                         else
                         {
-                            await DespawnCellWithEffect(cellView, position, cell);
+                            await DespawnCellWithEffect(cellView, position, cell, 0);
                         }
                     }
                     columnStart++;
@@ -562,36 +562,33 @@ namespace CodeBase.CoreBase.BoostersOnField
         private async Task ThreeHorizontalRocket(FieldPosition fieldPosition)
         {
             var position = new FieldPosition(fieldPosition._row + 1, fieldPosition._column);
-            Task firstRow = null;
-            Task secondRow = null;
-            Task thirdRow = null;
+            List<Task> tasks = new List<Task>(3);
             if (!_gameModel.FieldModel.IsFieldPositionOutOfSize(position))
-                firstRow = ActivateRocketHorizontal(position);
+                tasks.Add(ActivateRocketHorizontal(position));
             position = new FieldPosition(fieldPosition.Row - 1, fieldPosition.Column);
             if(!_gameModel.FieldModel.IsFieldPositionOutOfSize(position))
-                thirdRow = ActivateRocketHorizontal(position);
+                tasks.Add(ActivateRocketHorizontal(position));
 
-            secondRow = ActivateRocketHorizontal(fieldPosition);
+            tasks.Add(ActivateRocketHorizontal(fieldPosition));
 
-            await Task.WhenAll(firstRow, secondRow, thirdRow);
+            await Task.WhenAll(tasks);
 
         }
 
         private async Task ThreeVerticalRocket(FieldPosition fieldPosition)
         {
             var position = new FieldPosition(fieldPosition._row, fieldPosition._column + 1);
-            Task firstRow = null;
-            Task secondRow = null;
-            Task thirdRow = null;
+            
+            List<Task> tasks = new List<Task>(3);
             if (!_gameModel.FieldModel.IsFieldPositionOutOfSize(position))
-                firstRow = ActivateRocketVertical(position);
+                tasks.Add(ActivateRocketVertical(position));
             position = new FieldPosition(fieldPosition.Row, fieldPosition.Column - 1);
             if(!_gameModel.FieldModel.IsFieldPositionOutOfSize(position))
-                thirdRow = ActivateRocketVertical(position);
+               tasks.Add(ActivateRocketVertical(position));
 
-            secondRow = ActivateRocketVertical(fieldPosition);
-
-            await Task.WhenAll(firstRow, secondRow, thirdRow);
+            tasks.Add(ActivateRocketVertical(fieldPosition));
+            
+            await Task.WhenAll(tasks);
         }
 
         protected enum DirectionForBooster

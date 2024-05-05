@@ -13,6 +13,7 @@ namespace CodeBase.DialogsSystem.LooseDialog
     {
         [SerializeField] private TextMeshProUGUI levelField;
         [SerializeField] private HealthRecoveryTimerView timer;
+        [SerializeField] private HealthRecoveryTimerView timerInCounter;
         private GlobalGameStateModel _globalGameStateModel;
         private GameModel _gameModel;
         private TimeModel _timeModel;
@@ -30,6 +31,7 @@ namespace CodeBase.DialogsSystem.LooseDialog
             levelField.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";
             _globalGameStateModel.HealthSetter.Value = -1;
             _globalGameStateModel.UpdateRecoveryData(_timeModel.GetUnixTimeSeconds());
+            timerInCounter.Reinitialize();
             base.Initialize();
         }
 

@@ -44,8 +44,8 @@ namespace CodeBase.MetaBase.Views
                 {
                     _timer.Cancel();
                     _timer = null;
-                    timerField.text = "Full";
                 }
+                timerField.text = "Full";
             }
         }
 

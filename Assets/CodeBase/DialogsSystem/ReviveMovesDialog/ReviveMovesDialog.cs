@@ -44,6 +44,7 @@ namespace CodeBase.DialogsSystem.ReviveMovesDialog
             base.Confirm();
             _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value +=
                 _globalGameSettingsConfig.MovesReviveAmount;
+            _globalGameStateModel.CurrencySetter.Value = -_globalGameSettingsConfig.MovesReviveCost;
             CloseDialog();
         }
 

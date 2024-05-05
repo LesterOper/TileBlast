@@ -85,8 +85,8 @@ namespace CodeBase.CoreBase.FieldBase
                 {
                     _spawnController.Despawn(cellView);
                 });
-                _aimController.UpdateAims(itemType, 1, fieldPosition);
                 _gameModel.FieldModel.Cells[fieldPosition._row, fieldPosition._column].Cell = new EmptyCell();
+                _aimController.UpdateAims(itemType, 1, fieldPosition);
                 yield return new WaitForSeconds(0.02f);
             }
             _matchCallback.Invoke();
@@ -169,6 +169,7 @@ namespace CodeBase.CoreBase.FieldBase
 
         private void CheckMatchItemsToMakeBooster(FieldPosition fieldPosition)
         {
+            if(_gameModel.Level.levelData.levelType == LevelType.CLEAR_FIELD) return;
             var booster = _spawnController.SpawnBoosterCellView(fieldPosition, _matchedCells.Count);
             if (booster.boosterView != null && booster.boosterData != null)
             {

@@ -30,13 +30,13 @@ namespace CodeBase.CoreBase.AimTopBar
             set
             {
                 _levelAimAmount += value;
-                if (_levelAimAmount <= 0)
+                if (_levelAimAmount <= 0 && !_complete)
                 {
                     _levelAimAmount = 0;
                     _complete = true;
+                    OnAimChanged?.Invoke();
                 }
                 OnUpdateCounterEvent?.Invoke();
-                OnAimChanged?.Invoke();
             }
         }
     }

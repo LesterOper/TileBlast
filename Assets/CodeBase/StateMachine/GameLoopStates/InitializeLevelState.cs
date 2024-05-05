@@ -30,7 +30,7 @@ namespace CodeBase.StateMachine.GameLoopStates
         {
             base.Execute();
             
-            var level = _levelsConfig.GetLevel();
+            var level = _levelsConfig.GetLevel(_globalGameStateModel.CurrentLevel);
             _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.SetLevelAims(level.levelData.LevelAims);
             _gameEndingChecker.SubscribeAimSetters();
             _gameModel.GameplayCountersModelProperty.MovesModelProperty.Value = (int) level.levelData.moves;

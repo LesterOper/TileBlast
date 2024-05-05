@@ -20,7 +20,8 @@ public abstract class CounterBase : MonoBehaviour
 
     public virtual void UpdateCounter()
     {
-        _counterField.text = _counterSetter.Value.ToString();
+        var count = _counterSetter.Value;
+        _counterField.text = count <= 0 ? "0" : _counterSetter.Value.ToString();
     }
 
     public virtual void SetCounterSetter(ICounter counter)
