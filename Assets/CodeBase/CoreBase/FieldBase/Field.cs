@@ -112,6 +112,13 @@ namespace CodeBase.CoreBase.FieldBase
                         continue;
                     }
 
+                    if (item.isDropBottomItem)
+                    {
+                        cells[i, j].Cell = new DropDownItem();
+                        cells[i,j].Cell.Initialize(cellView, item);
+                        continue;
+                    }
+
                     cells[i, j].Cell = new Cell();
                     cells[i,j].Cell.Initialize(cellView, item);
                 }

@@ -107,14 +107,15 @@ namespace CodeBase.CoreBase.AimTopBar
         private void DropObjectsToBottom()
         {
             bool collect = false;
-            IFieldCell[] firstRow = _gameModel.FieldModel.GetFirstRow();
             IAimSetter aimSetter = _gameModel.GameplayCountersModelProperty.AimModelSetterProperty.Aims[0];
-            for (int i = 0; i < firstRow.Length; i++)
+
+            var fieldCells = _gameModel.FieldModel.GetFirstActiveCellsInColumnWithDropDownItems();
+
+            for (int i = 0; i < fieldCells.Count; i++)
             {
-                if(firstRow[i].Cell.ItemDataProperty == null) continue;
-                if (firstRow[i].Cell.ItemDataProperty.IsDropBottomItem)
+                IFieldCell cellBase = fieldCells[i];
+                if (fieldCells[i].IsDropDown)
                 {
-                    IFieldCell cellBase = firstRow[i];
                     SpriteRenderer animate = cellBase.Cell.CellViewProperty.R;
                     AnimationSource.Parabolla(aimSetter.counterTr, animate, 1f, ()=>{aimSetter.Value = -1;});
                     _spawnController.Despawn(cellBase.Cell.CellViewProperty);

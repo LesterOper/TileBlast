@@ -1,4 +1,6 @@
-﻿namespace CodeBase.CoreBase.CellBase
+﻿using CodeBase.CoreBase.Configs;
+
+namespace CodeBase.CoreBase.CellBase
 {
     public interface IFieldCell
     {
@@ -84,6 +86,7 @@
         }
 
         public FieldPosition FieldPositionProperty => _fieldPosition;
+
         public bool IsBooster => _isBooster;
         public bool IsEmpty => _isEmpty;
         public bool IsNonActive => _isNonActive;

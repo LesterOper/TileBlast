@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CodeBase.CoreBase.FieldBase
@@ -99,16 +100,27 @@ namespace CodeBase.CoreBase.FieldBase
         public ItemType GetItemTypeByFieldPosition(FieldPosition fieldPosition) =>
             Cells[fieldPosition.Row, fieldPosition.Column].Cell.ItemDataProperty.itemType;
 
-        public IFieldCell[] GetFirstRow()
+        public List<IFieldCell> GetFirstActiveCellsInColumnWithDropDownItems()
         {
-            IFieldCell[] firstRow = new IFieldCell[FieldSize._column];
+            //IFieldCell[] firstRow = new IFieldCell[FieldSize._column];
+            List<IFieldCell> firstActiveCells = new List<IFieldCell>();
 
-            for (int column = 0; column < FieldSize._column; column++)
+            for (int j = 0; j < FieldSize._column; j++)
             {
-                firstRow[column] = Cells[0, column];
+                List<IFieldCell> cellsColumn = GetColumn(j);
+                if(!cellsColumn.Exists(local => local.IsDropDown)) continue;
+                
+                for (int i = 0; i < FieldSize._row; i++)
+                {
+                    if(cellsColumn[i].IsNonActive) continue;
+                    
+                    firstActiveCells.Add(cellsColumn[i]);
+                    break;
+                }
             }
+            
 
-            return firstRow;
+            return firstActiveCells;
         }
         
         public List<IFieldCell> GetColumn(int column)
