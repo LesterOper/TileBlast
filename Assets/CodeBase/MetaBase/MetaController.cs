@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.ApplicationBase.AudioManager;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.DialogsSystem;
@@ -34,6 +35,7 @@ namespace CodeBase.MetaBase
         }
         private void Start()
         {
+            AudioManager.Inst.PlayMainMetaTheme();
             var levelDifficultyType =
                 _levelsConfig.GetLevel().levelData.levelDifficultyType;
             currentButton = levelDifficultyType == LevelDifficultyType.Easy ? playButtonEasy :
@@ -47,6 +49,7 @@ namespace CodeBase.MetaBase
 
         private void OnSettingsClick()
         {
+            AudioManager.Inst.PlayButton();
             _metaDialogController.ShowSettingsDialog();
         }
     }

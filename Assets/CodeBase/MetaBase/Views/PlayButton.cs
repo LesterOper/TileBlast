@@ -1,4 +1,5 @@
-﻿using CodeBase.CoreBase;
+﻿using CodeBase.ApplicationBase.AudioManager;
+using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.DialogsSystem;
 using TMPro;
@@ -33,6 +34,7 @@ namespace CodeBase.MetaBase.Views
         
         private void OnPlayClick()
         {
+            AudioManager.Inst.PlayButton();
             if (_globalGameStateModel.HealthSetter.HasHealth)
             {
                 SceneManager.LoadScene(2);

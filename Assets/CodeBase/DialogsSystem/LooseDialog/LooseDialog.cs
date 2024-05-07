@@ -1,4 +1,5 @@
 ﻿using CodeBase.ApplicationBase;
+using CodeBase.ApplicationBase.AudioManager;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.MetaBase.Views;
@@ -28,6 +29,7 @@ namespace CodeBase.DialogsSystem.LooseDialog
         
         public override void Initialize()
         {
+            AudioManager.Inst.PlayLoose();
             levelField.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";
             _globalGameStateModel.HealthSetter.Value = -1;
             _globalGameStateModel.UpdateRecoveryData(_timeModel.GetUnixTimeSeconds());

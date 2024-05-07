@@ -1,4 +1,5 @@
-﻿using CodeBase.CoreBase.GameStateModel;
+﻿using CodeBase.ApplicationBase.AudioManager;
+using CodeBase.CoreBase.GameStateModel;
 using Zenject;
 
 namespace CodeBase.DialogsSystem.PauseDialog
@@ -16,12 +17,14 @@ namespace CodeBase.DialogsSystem.PauseDialog
         protected override void Confirm()
         {
             base.Confirm();
+            AudioManager.Inst.PlayButton();
             _gameModel.DialogsController.ShowPauseRestartConfirmationDialog(false);
         }
 
         protected override void Decline()
         {
             base.Decline();
+            AudioManager.Inst.PlayButton();
             _gameModel.DialogsController.ShowPauseRestartConfirmationDialog(true);
         }
     }

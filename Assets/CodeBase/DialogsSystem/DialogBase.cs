@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.ApplicationBase.AudioManager;
 using CodeBase.CoreBase.GameStateModel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,17 +40,19 @@ namespace CodeBase.DialogsSystem
         
         public virtual void CloseDialog()
         {
+            AudioManager.Inst.PlayButton();
             Hide();
             OnDialogClosedEvent?.Invoke();
         }
 
         protected virtual void Confirm()
         {
-            
+            AudioManager.Inst.PlayButton();
         }
 
         protected virtual void Decline()
         {
+            AudioManager.Inst.PlayButton();
             
         }
 

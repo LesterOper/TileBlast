@@ -1,8 +1,8 @@
-﻿using System;
-using CodeBase.CoreBase.GameStateModel;
+﻿using CodeBase.CoreBase.GameStateModel;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using CodeBase.ApplicationBase.AudioManager;
 
 namespace CodeBase.ApplicationBase
 {
@@ -21,10 +21,12 @@ namespace CodeBase.ApplicationBase
         private void Start()
         {
             pause.onClick.AddListener(OnPauseClick);
+            AudioManager.AudioManager.Inst.PlayMainCoreTheme();
         }
 
         private void OnPauseClick()
         {
+            AudioManager.AudioManager.Inst.PlayButton();
             _gameModel.DialogsController.ShowPauseDialog();
         }
     }

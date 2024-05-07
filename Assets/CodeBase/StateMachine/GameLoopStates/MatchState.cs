@@ -1,4 +1,5 @@
-﻿using CodeBase.CoreBase.BoostersOnField;
+﻿using CodeBase.ApplicationBase.AudioManager;
+using CodeBase.CoreBase.BoostersOnField;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.CoreBase.GameStateModel;
 using DG.Tweening;
@@ -25,8 +26,8 @@ namespace CodeBase.StateMachine.GameLoopStates
             base.Execute();
             if (!_gameModel.IsClickedFieldPositionOutOfIndex())
             {
+                AudioManager.Inst.PlayBlocksTaps();
                 _matcher.TryToMatch(_gameModel.ClickFieldPosition, () => _signalBus.Fire(new NextStateSignal(typeof(MoveState))));
-                //DOVirtual.DelayedCall(0.2f, ()=>_signalBus.Fire(new NextStateSignal(typeof(MoveState))));
             }
             else
             {

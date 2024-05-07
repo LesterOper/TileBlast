@@ -1,4 +1,5 @@
-﻿using CodeBase.CoreBase;
+﻿using CodeBase.ApplicationBase.AudioManager;
+using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.GameStateModel;
 using DG.Tweening;
@@ -31,6 +32,7 @@ namespace CodeBase.DialogsSystem.WinDialog
 
         public override void Initialize()
         {
+            AudioManager.Inst.PlayWin();
             softMoney.text = $"+{_globalGameSettingsConfig.softMoneyPrizeForCompleteLevel}";
             starsAmount.text = $"+{_globalGameSettingsConfig.starsPrizeForCompleteLevel}";
             level.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";

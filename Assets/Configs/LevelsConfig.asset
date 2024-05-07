@@ -73,7 +73,7 @@ MonoBehaviour:
     levelData:
       levelDifficultyType: 0
       levelType: 1
-      moves: 15
+      moves: 35
       LevelAims:
       - ItemType: 10
         amount: 3
