@@ -3,6 +3,7 @@ using CodeBase.ApplicationBase.SavingBase;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -32,7 +33,7 @@ namespace CodeBase.ApplicationBase
         {
             Application.targetFrameRate = 60;
             var success = await _timeModel.TryToRefreshServerTime();
-            
+            StandardPurchasingModule.Instance().useFakeStoreAlways = true;
             if (PlayerPrefs.GetInt(FIRST_LAUNCH) == 0)
             {
                 _globalGameStateModel.HealthSetter.MaxHealthAmount = _gameSettingsConfig.MaxHealthAmount;

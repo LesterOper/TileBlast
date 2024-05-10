@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1af8064125948a699a84798f0eab8f0, type: 3}
+  m_Name: InGameBoostersConfig
+  m_EditorClassIdentifier: 
+  inGameBoosterDatas:
+  - inGameBoosterType: 0
+    icon: {fileID: 21300000, guid: d382185dcbb59b94384635b37f7691dd, type: 3}
+  - inGameBoosterType: 1
+    icon: {fileID: 21300000, guid: 098177de3a5bde6458122ae56501deba, type: 3}
+  - inGameBoosterType: 2
+    icon: {fileID: 21300000, guid: 38d6a682f0d242948ad9175f15ba8269, type: 3}
+  - inGameBoosterType: 3
+    icon: {fileID: 21300000, guid: 534fa7f1a5538714eb55336b351e56a0, type: 3}

@@ -1,6 +1,7 @@
 ﻿using CodeBase.ApplicationBase;
 using CodeBase.ApplicationBase.SavingBase;
 using CodeBase.CoreBase;
+using CodeBase.DialogsSystem.Shop;
 using CodeBase.Extentions.Time;
 using Zenject;
 
@@ -18,6 +19,7 @@ namespace CodeBase
             Container.Bind<TimeModel>().FromNew().AsSingle();
             Container.Bind<GetTimeFromTimeAPI>().FromNew().AsSingle();
             Container.Bind<CoroutineRunner>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<InAppPurchasingManager>().FromNew().AsSingle();
         }
     }
 }

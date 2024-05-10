@@ -17,3 +17,5 @@ MonoBehaviour:
   _levelsConfig: {fileID: 11400000, guid: ad6085de3f3d19e4cacf90d889c14ed5, type: 2}
   _gameSettingsConfig: {fileID: 11400000, guid: bba2d36ffdca441489c4cbdd9e72baa2, type: 2}
   _vfxConfig: {fileID: 11400000, guid: 980d1e811135b89499955a446ffc17b4, type: 2}
+  _shopConfig: {fileID: 11400000, guid: d87b6efe6f5163e409ea980fb54eef85, type: 2}
+  _inGameBoostersConfig: {fileID: 11400000, guid: 12fcc7f2885d4b448a41af4c1d205546, type: 2}

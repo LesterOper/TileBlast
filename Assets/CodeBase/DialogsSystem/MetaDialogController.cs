@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.DialogsSystem.BuyLivesDialog;
 using CodeBase.DialogsSystem.Settings;
+using CodeBase.DialogsSystem.Shop;
 
 namespace CodeBase.DialogsSystem
 {
@@ -8,15 +9,17 @@ namespace CodeBase.DialogsSystem
     {
         private BuyMoreLivesDialog _buyMoreLivesDialog;
         private SettingsDialog _settingsDialog;
+        private ShopDialog _shopDialog;
         
         private Stack<DialogBase> _activeDialogs;
 
         private DialogBase _activeDialog;
 
-        public MetaDialogController(BuyMoreLivesDialog buyMoreLivesDialog, SettingsDialog settingsDialog)
+        public MetaDialogController(BuyMoreLivesDialog buyMoreLivesDialog, SettingsDialog settingsDialog, ShopDialog shopDialog)
         {
             _buyMoreLivesDialog = buyMoreLivesDialog;
             _settingsDialog = settingsDialog;
+            _shopDialog = shopDialog;
         }
 
         public void ShowBuyMoreLivesDialog()
@@ -28,6 +31,12 @@ namespace CodeBase.DialogsSystem
         public void ShowSettingsDialog()
         {
             _activeDialog = _settingsDialog;
+            ShowDialog();
+        }
+
+        public void ShowShopDialog()
+        {
+            _activeDialog = _shopDialog;
             ShowDialog();
         }
         

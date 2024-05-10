@@ -9,7 +9,6 @@ namespace CodeBase.DialogsSystem.Settings
 {
     public class SettingsDialog : DialogBase
     {
-
         [SerializeField] private SwitchToggle _switchToggleSound;
         [SerializeField] private SwitchToggle _switchToggleMusic;
         

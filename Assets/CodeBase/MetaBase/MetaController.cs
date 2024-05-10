@@ -17,8 +17,10 @@ namespace CodeBase.MetaBase
         [SerializeField] private PlayButton playButtonEasy;
         [SerializeField] private PlayButton playButtonNormal;
         [SerializeField] private PlayButton playButtonHard;
-        
+
         [SerializeField] private Button settings;
+
+        [SerializeField] private Button shop;
 
         private PlayButton currentButton;
         
@@ -43,6 +45,7 @@ namespace CodeBase.MetaBase
             
             currentButton.Initialize(_globalGameStateModel.CurrentLevel);
             settings.onClick.AddListener(OnSettingsClick);
+            shop.onClick.AddListener(OnShopClick);
         }
 
         
@@ -51,6 +54,12 @@ namespace CodeBase.MetaBase
         {
             AudioManager.Inst.PlayButton();
             _metaDialogController.ShowSettingsDialog();
+        }
+        
+        private void OnShopClick()
+        {
+            AudioManager.Inst.PlayButton();
+            _metaDialogController.ShowShopDialog();
         }
     }
 }
