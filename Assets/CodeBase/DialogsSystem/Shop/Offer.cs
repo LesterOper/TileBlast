@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.InGameBoosters;
 using TMPro;
 using UnityEngine;
@@ -15,8 +16,12 @@ namespace CodeBase.DialogsSystem.Shop
 
         [Inject] private InGameBoostersConfig _inGameBoostersConfig;
 
+        private OfferData _offerData;
+        public event Action<OfferType> OnOfferBuyEvent;
+        
         public void Initialize(OfferData offerData)
         {
+            _offerData = offerData;
             cost.text = offerData.cost;
 
             var offersPrize = offerData.offerPrizes;
@@ -34,6 +39,13 @@ namespace CodeBase.DialogsSystem.Shop
                     _inGameBoostersConfig.Get(offerPrizeLocal.inGameBoosterType);
                 offerPrize[i].Initialize(icon, offerPrizeLocal.amount);
             }
+            
+            buy.onClick.AddListener(BuyClicked);
+        }
+
+        private void BuyClicked()
+        {
+            OnOfferBuyEvent?.Invoke(_offerData.offerType);   
         }
     }
 }

@@ -87,6 +87,7 @@ namespace CodeBase.DialogsSystem.Shop
     
     public enum OfferType
     {
+        [ShopCoinTypeAttribute("")]
         FirstLaunchOffer
     }
 
@@ -94,4 +95,5 @@ namespace CodeBase.DialogsSystem.Shop
     {
         Coin, Booster
     }
+    
 }

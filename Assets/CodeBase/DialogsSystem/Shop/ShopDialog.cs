@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.CoreBase;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using Zenject;
 
@@ -37,6 +39,7 @@ namespace CodeBase.DialogsSystem.Shop
             }
             
             offer.Initialize(_shopConfig.Get());
+            offer.OnOfferBuyEvent += OnOfferBuy;
             base.Initialize();
         }
 
@@ -46,11 +49,30 @@ namespace CodeBase.DialogsSystem.Shop
             _inAppPurchasingManager.MakePurchase(shopCoinType.GetAttribute<ShopCoinTypeAttribute>().SKU);
         }
 
-        private void BuyComplete(int value)
+        private void OnOfferBuy(OfferType offerType)
         {
-            _globalGameStateModel.CurrencySetter.Value = value;
-
+            Debug.Log("Buy - " + offerType);
+            _inAppPurchasingManager.MakePurchase(offerType.GetAttribute<ShopCoinTypeAttribute>().SKU);
         }
+
+        private void BuyComplete(Product product)
+        {
+            var payout = product.definition.payout.type;
+
+            if (payout == PayoutType.Currency)
+            {
+                _globalGameStateModel.CurrencySetter.Value = (int)product.definition.payout.quantity;
+                return;
+            }
+
+            if (payout == PayoutType.Item)
+            {
+                OfferData offer = _shopConfig.offers.FirstOrDefault(local => local.offerType.GetAttribute<ShopCoinTypeAttribute>().SKU.Equals(product.definition.id));
+                Debug.Log($"Buy - {offer?.offerType}");
+                return;
+            }
+        }
+        
 
         public override void CloseDialog()
         {

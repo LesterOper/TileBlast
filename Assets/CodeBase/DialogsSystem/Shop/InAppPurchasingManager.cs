@@ -12,7 +12,7 @@ namespace CodeBase.DialogsSystem.Shop
         private IExtensionProvider _extensionProvider;
         [Inject] private ShopConfig _shopConfig;
 
-        public event Action<int> buyComplete;
+        public event Action<Product> buyComplete;
 
         public void OnInitializeFailed(InitializationFailureReason error)
         {
@@ -25,7 +25,7 @@ namespace CodeBase.DialogsSystem.Shop
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
-            buyComplete?.Invoke((int)purchaseEvent.purchasedProduct.definition.payout.quantity);
+            buyComplete?.Invoke(purchaseEvent.purchasedProduct);
             
             return PurchaseProcessingResult.Complete;
         }
@@ -53,6 +53,15 @@ namespace CodeBase.DialogsSystem.Shop
                 PayoutDefinition payout =
                     new PayoutDefinition(item.payoutType, item.coinType.ToString(), item.prizeAmount + item.bonusAmount);
                 builder.AddProduct(item.coinType.GetAttribute<ShopCoinTypeAttribute>().SKU, ProductType.Consumable,
+                    new IDs(), payout);
+            }
+            
+            for (int i = 0; i < _shopConfig.offers.Count; i++)
+            {
+                OfferData item = _shopConfig.offers[i];
+                PayoutDefinition payout =
+                    new PayoutDefinition(item.payoutType, item.offerType.ToString(), 1);
+                builder.AddProduct(item.offerType.GetAttribute<ShopCoinTypeAttribute>().SKU, ProductType.NonConsumable,
                     new IDs(), payout);
             }
             

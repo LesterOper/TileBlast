@@ -33,6 +33,7 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - CFXRRuntime
+    - Purchasing.Common
     - Zenject
     - Zenject-IntegrationTests
     - Zenject-IntegrationTests-Editor
