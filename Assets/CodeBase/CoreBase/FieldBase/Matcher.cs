@@ -5,6 +5,7 @@ using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.BoostersOnField;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.Factory;
 using UnityEngine;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 
 namespace CodeBase.CoreBase.AimTopBar
 {

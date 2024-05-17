@@ -1,4 +1,5 @@
 ﻿using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

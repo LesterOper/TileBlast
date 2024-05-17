@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.DialogsSystem;
 

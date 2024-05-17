@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.Factory;
 using DG.Tweening;

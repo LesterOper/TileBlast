@@ -74,6 +74,7 @@ namespace CodeBase.CoreBase.FieldBase
 
         public void CreateField()
         {
+            _gameModel.Level.GenerateRandomField();
             IFieldCell[,] cells = _gameModel.FieldModel.Cells;
             for (int i = 0; i < cells.GetUpperBound(0) + 1; i++)
             {

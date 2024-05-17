@@ -2,6 +2,7 @@
 using System.Linq;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.Factory;
 using UnityEngine;

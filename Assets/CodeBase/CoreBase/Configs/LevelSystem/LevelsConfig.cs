@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CodeBase.CoreBase.Configs
+namespace CodeBase.CoreBase.Configs.LevelSystem
 {
     [CreateAssetMenu(menuName = "Configs/" + nameof(LevelsConfig), fileName = nameof(LevelsConfig))]
     public class LevelsConfig : ScriptableObject
@@ -37,74 +36,7 @@ namespace CodeBase.CoreBase.Configs
         }
     }
 
-    
-    [Serializable]
-    
-    public class Level
-    {
-        [BoxGroup("Level number", CenterLabel = true)] [ReadOnly]
-        public int LevelNumber;
-        [BoxGroup("Main settings for level", CenterLabel = true)]
-        public LevelData levelData;
-        
-        [InfoBox("Need to assigned LevelFieldConfig", InfoMessageType.Error, nameof(IsLevelFieldConfigNotAssigned))]
-        public LevelFieldConfig levelFieldConfig;
-        
-        [HideIf(nameof(IsLevelFieldConfigNotAssigned))]
-        [HideIf(nameof(IsGeneratableListEmpty))]
-        [InfoBox("Generate random field")]
-        [Button]
-        public void GenerateRandomField()
-        {
-            levelFieldConfig.GenerateRandomField(levelData.generatable);
-        }
 
-
-        private bool IsGeneratableListEmpty() => levelData.generatable.generatable.Count <= 0;
-        
-        private bool IsLevelFieldConfigNotAssigned() => levelFieldConfig == null;
-        private bool IsNotClearAllLevelType() => levelData.levelType != LevelType.CLEAR_FIELD;
-        private bool IsClearAllLevelType() => levelData.levelType == LevelType.CLEAR_FIELD;
-        
-        [ShowIf(nameof(IsClearAllLevelType))]
-        [InfoBox("Count aim amount")]
-        [Button]
-        private void CreateAimIfClearFieldLevelType()
-        {
-            levelData.LevelAims = new List<LevelAim>(1);
-            LevelAim levelAim = new LevelAim
-            {
-                ItemType = ItemType.NONE,
-                amount = levelFieldConfig.types.Count(local => local.item != ItemType.NONE && local.item != ItemType.EMPTY)
-            };
-            levelData.LevelAims.Add(levelAim);
-        } 
-    }
-
-    [Serializable]
-    public class LevelData
-    {
-        [BoxGroup("Difficulty", CenterLabel = true)]
-        public LevelDifficultyType levelDifficultyType;
-        [BoxGroup("Level type by type of aim", CenterLabel = true)]
-        [InfoBox("Assigned type of level, NONE is redundant", InfoMessageType.Error, nameof(IsLevelTypeEqualsNone))]
-        public LevelType levelType;
-        
-        [BoxGroup("Amount of moves", CenterLabel = true)]
-        [InfoBox("Assigned moves amount for this level", InfoMessageType.Error, nameof(IsMovesAmountEqualsOrLessThanZero))]
-        public float moves;
-        [BoxGroup("Aims", CenterLabel = true)]
-        [InfoBox("Assigned level's aims")]
-        public List<LevelAim> LevelAims;
-
-        [BoxGroup("Items which can be generated on this level", CenterLabel = true)]
-        public GeneratableItemsConfig generatable;
-        
-        private bool IsLevelTypeEqualsNone() => levelType == LevelType.NONE;
-
-        private bool IsMovesAmountEqualsOrLessThanZero() => moves <= 0;
-    }
-    
     [Serializable]
     public class LevelAim
     {

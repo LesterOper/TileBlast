@@ -3,6 +3,7 @@ using System.Linq;
 using CodeBase.ApplicationBase;
 using CodeBase.CoreBase.CellBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.CoreBase.GameStateModel;
 using CodeBase.CoreBase.Item;

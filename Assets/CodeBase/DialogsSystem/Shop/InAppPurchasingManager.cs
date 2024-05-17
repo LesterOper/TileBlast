@@ -44,11 +44,13 @@ namespace CodeBase.DialogsSystem.Shop
 
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
         {
+            
         }
 
         public void Init()
         {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+            builder.Configure<IGooglePlayConfiguration>().SetFetchPurchasesAtInitialize(true);
             for (int i = 0; i < _shopConfig.shopItems.Count; i++)
             {
                 ShopItemData item = _shopConfig.shopItems[i];

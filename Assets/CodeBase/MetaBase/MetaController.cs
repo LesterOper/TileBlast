@@ -2,6 +2,7 @@
 using CodeBase.ApplicationBase.AudioManager;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.DialogsSystem;
 using CodeBase.MetaBase.Views;
 using TMPro;

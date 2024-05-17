@@ -1,5 +1,6 @@
 ﻿using CodeBase.CoreBase.AimTopBar;
 using CodeBase.CoreBase.Configs;
+using CodeBase.CoreBase.Configs.LevelSystem;
 using CodeBase.CoreBase.FieldBase;
 using CodeBase.CoreBase.GameStateModel;
 using Zenject;

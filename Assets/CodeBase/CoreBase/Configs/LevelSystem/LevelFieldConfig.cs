@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using System.Collections.Generic;
 
-namespace CodeBase.CoreBase.Configs
+namespace CodeBase.CoreBase.Configs.LevelSystem
 {
     [CreateAssetMenu(menuName = "Configs/" + nameof(LevelFieldConfig), fileName = nameof(LevelFieldConfig))]
     [Serializable]
@@ -38,8 +36,13 @@ namespace CodeBase.CoreBase.Configs
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    types[index] = new LevelItem(i, j,
-                        generatableItemsConfig.Generate());
+                    if (types[index].item is ItemType.RED or ItemType.BLUE or ItemType.GREEN or ItemType.PURPLE
+                        or ItemType.YELLOW or ItemType.NONE)
+                    {
+                        types[index] = new LevelItem(i, j,
+                            generatableItemsConfig.Generate());
+                    }
+
                     index++;
                 }
             }
