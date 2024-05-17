@@ -12,152 +12,394 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66babc1a51e0474cb1db79bb41cd4f2e, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  level: 1
+  level: 19
   levels:
-  - levelData:
+  - LevelNumber: 1
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 80
-      LevelAims:
-      - ItemType: 2
-        amount: 50
-    levelFieldConfig: {fileID: 11400000, guid: 805cb9a08f7ca01468ff2b720401e369, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
+      moves: 35
       LevelAims:
       - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 6e64bb65c3f7b424799a4b2961941cf6, type: 2}
-  - levelData:
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 50
+        - item: 2
+          percent: 39
+        - item: 3
+          percent: 36
+    levelFieldConfig: {fileID: 11400000, guid: 63c1669a7124b20489cff67aae5eb358, type: 2}
+  - LevelNumber: 2
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 4
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 69202924778603a45ad2f028c58eae6b, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
+      moves: 30
       LevelAims:
       - ItemType: 1
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 267969082074ef34e8242f0b38131095, type: 2}
-  - levelData:
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 35
+        - item: 2
+          percent: 33
+        - item: 3
+          percent: 53
+    levelFieldConfig: {fileID: 11400000, guid: 8d6373f31b58c0a48bd932f48e0dbc5f, type: 2}
+  - LevelNumber: 3
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 94418c199aa250944af8ce918f113229, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 4e9c479779fc52e4b8d2dba0fd8dcf55, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
+      moves: 30
       LevelAims:
       - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: e7e241e79f5f2464ea0ec940ba2d4303, type: 2}
-  - levelData:
+        amount: 60
+      generatable:
+        generatable:
+        - item: 1
+          percent: 38
+        - item: 2
+          percent: 39
+        - item: 3
+          percent: 37
+    levelFieldConfig: {fileID: 11400000, guid: 3b590505a0c2e714abfdd3fcfbcfabb1, type: 2}
+  - LevelNumber: 4
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 40
+      LevelAims:
+      - ItemType: 1
+        amount: 50
+      - ItemType: 3
+        amount: 40
+      generatable:
+        generatable:
+        - item: 1
+          percent: 43
+        - item: 2
+          percent: 74
+        - item: 3
+          percent: 46
+    levelFieldConfig: {fileID: 11400000, guid: e078827ba9ce55644b89a52bd07aeebf, type: 2}
+  - LevelNumber: 5
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 40
+      LevelAims:
+      - ItemType: 3
+        amount: 60
+      generatable:
+        generatable:
+        - item: 1
+          percent: 25
+        - item: 2
+          percent: 38
+        - item: 3
+          percent: 37
+        - item: 4
+          percent: 54
+    levelFieldConfig: {fileID: 11400000, guid: 7b6da2433b4cde14fa9298fdc3894ce0, type: 2}
+  - LevelNumber: 6
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 30
       LevelAims:
       - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: fec27aad70f6e2e4c9a586da857bedac, type: 2}
-  - levelData:
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 39
+        - item: 2
+          percent: 20
+        - item: 3
+          percent: 39
+    levelFieldConfig: {fileID: 11400000, guid: f9a0c31448f58824598a968f477b25cf, type: 2}
+  - LevelNumber: 7
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 40
       LevelAims:
       - ItemType: 2
-        amount: 20
-    levelFieldConfig: {fileID: 11400000, guid: 8eb08fe479576014094ed19e8edae079, type: 2}
-  - levelData:
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 31
+        - item: 2
+          percent: 23
+        - item: 3
+          percent: 24
+        - item: 4
+          percent: 23
+    levelFieldConfig: {fileID: 11400000, guid: 0d07237c173c15941a0fd1dc4ebd4fc5, type: 2}
+  - LevelNumber: 8
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 30
       LevelAims:
-      - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 1dbea72f665961b418025c2b7f8ca63a, type: 2}
-  - levelData:
+      - ItemType: 2
+        amount: 60
+      - ItemType: 1
+        amount: 50
+      generatable:
+        generatable:
+        - item: 2
+          percent: 45
+        - item: 3
+          percent: 68
+        - item: 4
+          percent: 52
+        - item: 1
+          percent: 39
+    levelFieldConfig: {fileID: 11400000, guid: 6d8df03578b2d3649afb275602f2ca95, type: 2}
+  - LevelNumber: 9
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 40
       LevelAims:
-      - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 74d3b307507b6ac43b84aa2f2f4f5d35, type: 2}
-  - levelData:
+      - ItemType: 2
+        amount: 60
+      generatable:
+        generatable:
+        - item: 1
+          percent: 14
+        - item: 2
+          percent: 23
+        - item: 5
+          percent: 38
+        - item: 3
+          percent: 21
+    levelFieldConfig: {fileID: 11400000, guid: 4cb4caa6e75e27b4eb3b915556eadd74, type: 2}
+  - LevelNumber: 10
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 0c76b962108c7dc47a3e6c84a997261c, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 320e3e0a224d3df4cb5a5b256aa1d08f, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 4
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: d05ca66791e1c3c429b8dcb1227076c2, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
+      moves: 50
       LevelAims:
       - ItemType: 5
-        amount: 1
-    levelFieldConfig: {fileID: 11400000, guid: cf5a0e2088c1e1a4786755b2b5d62216, type: 2}
-  - levelData:
+        amount: 40
+      generatable:
+        generatable:
+        - item: 1
+          percent: 41
+        - item: 2
+          percent: 28
+        - item: 3
+          percent: 31
+        - item: 4
+          percent: 38
+        - item: 5
+          percent: 31
+    levelFieldConfig: {fileID: 11400000, guid: 412c15170ea589f4ab18a2a6dfed2ffb, type: 2}
+  - LevelNumber: 11
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
-      LevelAims:
-      - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: c3718b7c75c37f54c8b04a79bf0dcda5, type: 2}
-  - levelData:
-      levelType: 2
-      moves: 10
+      moves: 35
       LevelAims:
       - ItemType: 3
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 6288b8dd581d3d7419bd13145e890e0b, type: 2}
-  - levelData:
+        amount: 70
+      - ItemType: 1
+        amount: 50
+      generatable:
+        generatable:
+        - item: 1
+          percent: 25
+        - item: 2
+          percent: 55
+        - item: 3
+          percent: 31
+        - item: 4
+          percent: 0
+        - item: 5
+          percent: 71
+    levelFieldConfig: {fileID: 11400000, guid: 285cd84fa4fca154b8ec77e6d1116da9, type: 2}
+  - LevelNumber: 12
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 40
+      LevelAims:
+      - ItemType: 1
+        amount: 50
+      - ItemType: 2
+        amount: 50
+      generatable:
+        generatable:
+        - item: 1
+          percent: 27
+        - item: 2
+          percent: 23
+        - item: 3
+          percent: 48
+        - item: 4
+          percent: 46
+    levelFieldConfig: {fileID: 11400000, guid: d3fcfbb87f832bd488159acc4be76139, type: 2}
+  - LevelNumber: 13
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 40
+      LevelAims:
+      - ItemType: 3
+        amount: 50
+      - ItemType: 5
+        amount: 50
+      generatable:
+        generatable:
+        - item: 2
+          percent: 58
+        - item: 3
+          percent: 26
+        - item: 4
+          percent: 62
+        - item: 5
+          percent: 35
+    levelFieldConfig: {fileID: 11400000, guid: a1721f028be6b62499d780e28162fad5, type: 2}
+  - LevelNumber: 14
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 40
       LevelAims:
       - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 6ae2e3ed29d05b4429dae8bb1afd9c72, type: 2}
-  - levelData:
+        amount: 60
+      generatable:
+        generatable:
+        - item: 1
+          percent: 36
+        - item: 2
+          percent: 27
+        - item: 3
+          percent: 56
+        - item: 4
+          percent: 41
+    levelFieldConfig: {fileID: 11400000, guid: 54bf99b6e41f9d54daf710a34c750cbd, type: 2}
+  - LevelNumber: 15
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
-      moves: 10
+      moves: 40
+      LevelAims:
+      - ItemType: 4
+        amount: 50
+      - ItemType: 3
+        amount: 50
+      generatable:
+        generatable:
+        - item: 1
+          percent: 37
+        - item: 2
+          percent: 44
+        - item: 3
+          percent: 28
+        - item: 4
+          percent: 28
+    levelFieldConfig: {fileID: 11400000, guid: 25bc8d7245628ba4a87caa782527ed1c, type: 2}
+  - LevelNumber: 16
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 50
+      LevelAims:
+      - ItemType: 3
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 59
+        - item: 2
+          percent: 41
+        - item: 3
+          percent: 25
+        - item: 4
+          percent: 36
+    levelFieldConfig: {fileID: 11400000, guid: f01a42340f0848b4f96f21bc758f63ea, type: 2}
+  - LevelNumber: 17
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 30
+      LevelAims:
+      - ItemType: 1
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 25
+        - item: 2
+          percent: 45
+        - item: 3
+          percent: 50
+        - item: 4
+          percent: 32
+    levelFieldConfig: {fileID: 11400000, guid: 386d8eec0f65e2d45ade8828ea7078ed, type: 2}
+  - LevelNumber: 18
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 35
       LevelAims:
       - ItemType: 2
-        amount: 10
-    levelFieldConfig: {fileID: 11400000, guid: 6498d8c1b5509a54bbe11cbf2257f331, type: 2}
-  - levelData:
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 28
+        - item: 2
+          percent: 12
+        - item: 4
+          percent: 30
+        - item: 3
+          percent: 23
+    levelFieldConfig: {fileID: 11400000, guid: 5d7214963c91e5c48a681126059f2beb, type: 2}
+  - LevelNumber: 19
+    levelData:
+      levelDifficultyType: 0
+      levelType: 2
+      moves: 30
+      LevelAims:
+      - ItemType: 1
+        amount: 70
+      generatable:
+        generatable:
+        - item: 1
+          percent: 0
+        - item: 2
+          percent: 0
+        - item: 3
+          percent: 0
+        - item: 4
+          percent: 0
+    levelFieldConfig: {fileID: 11400000, guid: 761089c67c9a8d04c96de91c9b912741, type: 2}
+  - LevelNumber: 20
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
       moves: 50
       LevelAims:
       - ItemType: 2
         amount: 50
+      generatable:
+        generatable: []
     levelFieldConfig: {fileID: 11400000, guid: 76c83a5c0144c81488f82993467aadef, type: 2}
-  - levelData:
+  - LevelNumber: 21
+    levelData:
+      levelDifficultyType: 0
       levelType: 2
       moves: 50
       LevelAims:
       - ItemType: 3
         amount: 50
+      generatable:
+        generatable: []
     levelFieldConfig: {fileID: 11400000, guid: 1f5ab3c11e6adee46ab6c4679f4d3992, type: 2}
