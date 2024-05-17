@@ -13,35 +13,35 @@ MonoBehaviour:
   m_Name: ShopConfig
   m_EditorClassIdentifier: 
   shopItems:
-  - payoutType: 0
+  - payoutType: 1
     coinType: 0
     icon: {fileID: 21300000, guid: fbcca51ffbc02b64f9d18c06db857cb0, type: 3}
     cost: $1.49$
     prizeAmount: 150
     hasBonus: 0
     bonusAmount: 0
-  - payoutType: 0
+  - payoutType: 1
     coinType: 1
     icon: {fileID: 21300000, guid: 2f4458e126fc7214e99fda53788a1847, type: 3}
     cost: $2.99$
     prizeAmount: 350
     hasBonus: 1
     bonusAmount: 50
-  - payoutType: 0
+  - payoutType: 1
     coinType: 2
     icon: {fileID: 21300000, guid: 66de065d0269fb74eae7821d9b9c09b5, type: 3}
     cost: $5.99
     prizeAmount: 900
     hasBonus: 1
     bonusAmount: 200
-  - payoutType: 0
+  - payoutType: 1
     coinType: 3
     icon: {fileID: 21300000, guid: f32a9eedb6a987d4b85cc8dce214156f, type: 3}
     cost: $15.99
     prizeAmount: 2500
     hasBonus: 1
     bonusAmount: 700
-  - payoutType: 0
+  - payoutType: 1
     coinType: 4
     icon: {fileID: 21300000, guid: 47feb254e0b2f774996fd5462f536ba2, type: 3}
     cost: $29.99

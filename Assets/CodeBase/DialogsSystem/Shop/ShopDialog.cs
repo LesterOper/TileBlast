@@ -3,7 +3,6 @@ using System.Linq;
 using CodeBase.CoreBase;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.DialogsSystem.Shop
@@ -13,6 +12,9 @@ namespace CodeBase.DialogsSystem.Shop
         [SerializeField] private ShopConfig _shopConfig;
         [SerializeField] private GameObject settingsButton;
         [SerializeField] private Offer offer;
+
+        [SerializeField] private PurchaseStatusDialog complete;
+        [SerializeField] private PurchaseStatusDialog failed;
 
         [SerializeField] private List<ShopItem> _shopItems;
         private GlobalGameStateModel _globalGameStateModel;
@@ -32,6 +34,7 @@ namespace CodeBase.DialogsSystem.Shop
             closeButton.gameObject.SetActive(true);
 
             _inAppPurchasingManager.buyComplete += BuyComplete;
+            _inAppPurchasingManager.purchaseFailed += PurchaseFailed;
             for (int i = 0; i < _shopItems.Count; i++)
             {
                 _shopItems[i].Initialize(_shopConfig.Get(i));
@@ -58,7 +61,7 @@ namespace CodeBase.DialogsSystem.Shop
         private void BuyComplete(Product product)
         {
             var payout = product.definition.payout.type;
-
+            complete.Initialize();
             if (payout == PayoutType.Currency)
             {
                 _globalGameStateModel.CurrencySetter.Value = (int)product.definition.payout.quantity;
@@ -71,13 +74,21 @@ namespace CodeBase.DialogsSystem.Shop
                 Debug.Log($"Buy - {offer?.offerType}");
                 return;
             }
+            
+            
         }
-        
+
+        private void PurchaseFailed(Product product)
+        {
+            failed.Initialize();
+        }
 
         public override void CloseDialog()
         {
             settingsButton.SetActive(true);
             closeButton.gameObject.SetActive(false);
+            _inAppPurchasingManager.buyComplete -= BuyComplete;
+            _inAppPurchasingManager.purchaseFailed -= PurchaseFailed;
             base.CloseDialog();
         }
     }

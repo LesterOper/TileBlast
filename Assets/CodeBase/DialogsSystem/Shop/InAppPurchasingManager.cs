@@ -13,6 +13,7 @@ namespace CodeBase.DialogsSystem.Shop
         [Inject] private ShopConfig _shopConfig;
 
         public event Action<Product> buyComplete;
+        public event Action<Product> purchaseFailed;
 
         public void OnInitializeFailed(InitializationFailureReason error)
         {
@@ -32,6 +33,7 @@ namespace CodeBase.DialogsSystem.Shop
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
+            purchaseFailed?.Invoke(product);
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

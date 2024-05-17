@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1349fc62aaf46c6ad67815719417595, type: 3}
   m_Name: FieldSettings
   m_EditorClassIdentifier: 
-  tileOriginalSize: 110
+  tileOriginalSize: 120
   top: 0.75
   bottom: 0.2
   edge: 0.025
-  borderDelta: 0
+  borderDelta: 0.3

@@ -24,8 +24,8 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 2
-    item: {fileID: 21300000, guid: 3ac8e0a9264b3344ab0ca61b7a742f71, type: 3}
-    cellColor: {fileID: 21300000, guid: 19c16088cc4d32f43b05c5f4b7166cef, type: 3}
+    item: {fileID: 21300000, guid: 69caf4f775209e24f8e56aa81b5ad34e, type: 3}
+    cellColor: {fileID: 21300000, guid: 69caf4f775209e24f8e56aa81b5ad34e, type: 3}
     color: {r: 0.7803922, g: 0.7725491, b: 0.25490198, a: 1}
     isBlock: 0
     canMatch: 1
@@ -34,8 +34,8 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 1
-    item: {fileID: 21300000, guid: e7402ef7e812e654eaedb8b0a949107a, type: 3}
-    cellColor: {fileID: 21300000, guid: 7940be6883a337140a0de74f66c8916c, type: 3}
+    item: {fileID: 21300000, guid: e48b37a6a420c494c9c5021b49039742, type: 3}
+    cellColor: {fileID: 21300000, guid: e48b37a6a420c494c9c5021b49039742, type: 3}
     color: {r: 1, g: 0, b: 0, a: 1}
     isBlock: 0
     canMatch: 1
@@ -44,8 +44,8 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 3
-    item: {fileID: 21300000, guid: 3c3f965a12f531e4faa898037b4bb9e7, type: 3}
-    cellColor: {fileID: 21300000, guid: 1ef2211953adfff48a4eeea3e780362a, type: 3}
+    item: {fileID: 21300000, guid: 64f0891ececbee341ace72f3fba2bb66, type: 3}
+    cellColor: {fileID: 21300000, guid: 64f0891ececbee341ace72f3fba2bb66, type: 3}
     color: {r: 0, g: 0.7193136, b: 1, a: 1}
     isBlock: 0
     canMatch: 1
@@ -54,8 +54,8 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 4
-    item: {fileID: 21300000, guid: dbfc47f1c053d184db904c00f29789ab, type: 3}
-    cellColor: {fileID: 21300000, guid: 1cef789315b134f42a09b0e8bd08ecd2, type: 3}
+    item: {fileID: 21300000, guid: 82948f1d1835e2d48b86029f94d6214a, type: 3}
+    cellColor: {fileID: 21300000, guid: 82948f1d1835e2d48b86029f94d6214a, type: 3}
     color: {r: 0.04889083, g: 1, b: 0, a: 1}
     isBlock: 0
     canMatch: 1
@@ -64,8 +64,8 @@ MonoBehaviour:
     minCountNeedItems: 0
     maxCountNeedItems: 0
   - itemType: 5
-    item: {fileID: 21300000, guid: 522ce7e563fcdfb4596b2cb6831439d1, type: 3}
-    cellColor: {fileID: 21300000, guid: 340bdd4955d2f3e48b89fab088e700ad, type: 3}
+    item: {fileID: 21300000, guid: 1a313cf271bc3594895c054478224897, type: 3}
+    cellColor: {fileID: 21300000, guid: 1a313cf271bc3594895c054478224897, type: 3}
     color: {r: 1, g: 0, b: 0.9708805, a: 1}
     isBlock: 0
     canMatch: 1

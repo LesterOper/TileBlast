@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace CodeBase.DialogsSystem.Shop
             icon.SetNativeSize();
 
             amountText.text = $"+{amount}";
+            
         }
     }
 }

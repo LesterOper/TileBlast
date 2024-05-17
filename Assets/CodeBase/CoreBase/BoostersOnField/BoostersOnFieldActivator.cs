@@ -509,7 +509,7 @@ namespace CodeBase.CoreBase.BoostersOnField
                         await Task.Delay(10);
                         var boosters = _spawnController.SpawnBoosterCellView(cells[i, j].FieldPositionProperty,
                             neighbourCellBooster.Cell.ItemDataProperty.itemType);
-                        cells[i,j].Cell.Initialize(boosters.boosterView, boosters.boosterData);
+                        cells[i,j].Cell.Initialize(boosters.boosterView, boosters.boosterData, fieldCell.FieldPositionProperty._row);
                     
                         spawned.Add(cells[i,j]);
                         await Task.Delay(10);

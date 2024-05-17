@@ -19,7 +19,7 @@ namespace CodeBase.CoreBase.CellBase
 
         public Transform CellTransform => transform;
 
-        public void Initialize(Sprite coloredCellSprite, Sprite itemSprite, Color colorForParticle)
+        public void Initialize(Sprite coloredCellSprite, Sprite itemSprite, Color colorForParticle, int layer)
         {
             _renderComponent.sprite = coloredCellSprite;
             _itemView.Initialize(itemSprite);
@@ -35,6 +35,8 @@ namespace CodeBase.CoreBase.CellBase
                 main.startColor = new ParticleSystem.MinMaxGradient(new Color(colorForParticle.r, colorForParticle.g,
                     colorForParticle.b, 0.5f));
             }
+
+            _renderComponent.sortingOrder = layer;
         }
 
         public virtual void FadeCell(float endValue, float duration)

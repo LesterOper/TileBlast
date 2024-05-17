@@ -179,7 +179,7 @@ namespace CodeBase.CoreBase.FieldBase
                 _matchedCells.RemoveAt(0);
                 _spawnController.Despawn(_gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.CellViewProperty);
                 _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell = new FieldBooster();
-                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.Initialize(booster.boosterView, booster.boosterData);
+                _gameModel.FieldModel.Cells[fieldPosition.Row, fieldPosition.Column].Cell.Initialize(booster.boosterView, booster.boosterData, fieldPosition._row);
             } 
         }
     }

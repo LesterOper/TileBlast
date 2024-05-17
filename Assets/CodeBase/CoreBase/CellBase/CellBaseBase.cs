@@ -18,11 +18,11 @@ namespace CodeBase.CoreBase.CellBase
         }
         
         
-        public void Initialize(CellView cellView, ItemData item)
+        public void Initialize(CellView cellView, ItemData item, int layer)
         {
             _cellView = cellView;
             _itemData = item;
-            _cellView.Initialize(item.cellColor, item.item, item.color);
+            _cellView.Initialize(item.cellColor, item.item, item.color, layer);
         }
 
         public void BlockCell()

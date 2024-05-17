@@ -10,7 +10,7 @@ namespace CodeBase.CoreBase.CellBase
     }
     public interface ICellBase
     {
-        public void Initialize(CellView cellView, ItemData item);
+        public void Initialize(CellView cellView, ItemData item, int layer);
 
         public void BlockCell();
 

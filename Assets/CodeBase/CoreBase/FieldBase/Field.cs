@@ -101,26 +101,26 @@ namespace CodeBase.CoreBase.FieldBase
                     if (item.isBlock)
                     {
                         cells[i, j].Cell = new BlockedCell();
-                        cells[i, j].Cell.Initialize(cellView, item);
+                        cells[i, j].Cell.Initialize(cellView, item, i);
                         continue;
                     }
 
                     if (item.isBooster)
                     {
                         cells[i, j].Cell = new FieldBooster();
-                        cells[i,j].Cell.Initialize(cellView, item);
+                        cells[i,j].Cell.Initialize(cellView, item, i);
                         continue;
                     }
 
                     if (item.isDropBottomItem)
                     {
                         cells[i, j].Cell = new DropDownItem();
-                        cells[i,j].Cell.Initialize(cellView, item);
+                        cells[i,j].Cell.Initialize(cellView, item, i);
                         continue;
                     }
 
                     cells[i, j].Cell = new Cell();
-                    cells[i,j].Cell.Initialize(cellView, item);
+                    cells[i,j].Cell.Initialize(cellView, item, i);
                 }
             }
             
@@ -162,8 +162,8 @@ namespace CodeBase.CoreBase.FieldBase
                             Vector3 position = Vector3.Lerp(fieldBoard.WorldPosition(startRowPos, j), fieldBoard.WorldPosition(startRowPos+count - 1, j), 0.5f);
                             position.z = 0;
                             SpriteRenderer bgTileInst = Object.Instantiate(bgTile);
-                            bgTileInst.transform.position = position;
-                            bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, 0.2f + fieldBoard.TileSize * count);
+                            bgTileInst.transform.position = new Vector3(position.x, position.y + 0.02f);
+                            bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, 0.3f + fieldBoard.TileSize * count);
                         }
 
                         startRowPos = i + 1;
@@ -179,8 +179,8 @@ namespace CodeBase.CoreBase.FieldBase
                     Vector3 position = Vector3.Lerp(fieldBoard.WorldPosition(startRowPos, j), fieldBoard.WorldPosition(startRowPos+count - 1, j), 0.5f);
                     position.z = 0;
                     SpriteRenderer bgTileInst = Object.Instantiate(bgTile);
-                    bgTileInst.transform.position = position;
-                    bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, (fieldBoard.TileSize * count) + 0.2f);
+                    bgTileInst.transform.position = new Vector3(position.x, position.y + 0.02f);
+                    bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, (fieldBoard.TileSize * count) + 0.3f);
                 }
             }
         }

@@ -56,7 +56,7 @@ namespace CodeBase.CoreBase.FieldBase
                             ItemData itemData = current.Cell.ItemDataProperty;
                             CellView cellView = current.Cell.CellViewProperty;
                             empty[0].Cell = ConvertEmptyCellToParticularType(current.Cell, empty[0].Cell);
-                            empty[0].Cell.Initialize(cellView, itemData);
+                            empty[0].Cell.Initialize(cellView, itemData, empty[0].FieldPositionProperty._row);
                             empty[0].Cell.itemTypeToDestroyForDiscoBooster =
                                 current.Cell.itemTypeToDestroyForDiscoBooster;
                             Vector2 worldPosition = _fieldBoard.WorldPosition(empty[0].FieldPositionProperty);
@@ -81,7 +81,7 @@ namespace CodeBase.CoreBase.FieldBase
                                     new Vector2(worldPosition.x, 0),
                                     _fieldBoard.TileSize);
                                 empty[i].Cell = new Cell();
-                                empty[i].Cell.Initialize(cell.Item1, cell.Item2);
+                                empty[i].Cell.Initialize(cell.Item1, cell.Item2, fieldPosition._row);
                                 empty[i].Cell.itemTypeToDestroyForDiscoBooster = ItemType.NONE;
                                 MovableItemsContainer.MovableItem movableItem =
                                     new MovableItemsContainer.MovableItem(empty[i].Cell.CellViewProperty,

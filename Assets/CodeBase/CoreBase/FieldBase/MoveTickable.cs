@@ -42,8 +42,7 @@ namespace CodeBase.CoreBase.FieldBase
         {
             private CellView _cellView;
             private Vector2 _targetPosition;
-            private ICellBase _cellBase;
-            private ICellBase _currentCellBase;
+            private int layer;
             public  bool complete;
 
             public MovableItem(CellView cellView, Vector2 targetPosition)

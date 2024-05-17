@@ -1,4 +1,5 @@
-﻿using CodeBase.ApplicationBase.AudioManager;
+﻿using CodeBase.ApplicationBase;
+using CodeBase.ApplicationBase.AudioManager;
 using CodeBase.CoreBase;
 using CodeBase.CoreBase.Configs;
 using CodeBase.CoreBase.GameStateModel;
@@ -38,6 +39,8 @@ namespace CodeBase.DialogsSystem.WinDialog
             level.text = $"LEVEL {_globalGameStateModel.CurrentLevel}";
             _globalGameStateModel.CurrentLevel += 1;
             shineRotation = shine.DORotate(new Vector3(0f, 0f, 360f), 10f, RotateMode.FastBeyond360).SetLoops(-1);
+            if(_globalGameStateModel.CurrentLevel > 1 && PlayerPrefs.GetInt(Initializer.FIRST_LAUNCH) == 0)
+                PlayerPrefs.SetInt(Initializer.FIRST_LAUNCH, 1);
             base.Initialize();
         }
 

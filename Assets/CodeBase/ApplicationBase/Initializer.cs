@@ -11,7 +11,7 @@ namespace CodeBase.ApplicationBase
 {
     public class Initializer : IInitializable, IDisposable
     {
-        private const string FIRST_LAUNCH = nameof(FIRST_LAUNCH);
+        public static string FIRST_LAUNCH = nameof(FIRST_LAUNCH);
         private GlobalGameStateModel _globalGameStateModel;
         private GlobalGameSettingsConfig _gameSettingsConfig;
         private CommonSaving _commonSaving;
@@ -42,7 +42,8 @@ namespace CodeBase.ApplicationBase
                 _globalGameStateModel.CurrencySetter.Value = _gameSettingsConfig.DefaultSoftMoneyAmount;
                 _globalGameStateModel.HealthSetter.Value = _gameSettingsConfig.HealthAmountOnGameStartedFirstTime;
                 _globalGameStateModel.CurrentLevel = 1;
-                PlayerPrefs.SetInt(FIRST_LAUNCH, 1);
+                if(success)
+                    SceneManager.LoadScene(2);
             }
             else
             {
@@ -50,10 +51,11 @@ namespace CodeBase.ApplicationBase
                 _globalGameStateModel.HealthSetter.ResetDuration =
                     _gameSettingsConfig.ResetDurationOfOneHealthInSeconds;
                 _commonSaving.Load();
+                if (success)
+                    SceneManager.LoadScene(1);
             }
 
-            if (success)
-                SceneManager.LoadScene(1);
+            
         }
 
         public void Dispose()

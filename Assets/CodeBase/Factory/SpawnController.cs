@@ -56,7 +56,7 @@ namespace CodeBase.Factory
             cellView.transform.localPosition = position;
             cellView.transform.localScale =Vector3.one *  scale;
             ItemData itemData = GetNewItemData();
-            cellView.Initialize(itemData.cellColor, itemData.item, itemData.color);
+            cellView.Initialize(itemData.cellColor, itemData.item, itemData.color, fieldPosition._row);
             return (cellView, itemData);
         }
 
@@ -69,7 +69,7 @@ namespace CodeBase.Factory
                 cellView = _itemPool.Spawn(fieldPosition);
                 cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
                 cellView.transform.localScale *=  _fieldBoard.TileSize;
-                cellView.Initialize(itemData.cellColor, itemData.item, itemData.color);
+                cellView.Initialize(itemData.cellColor, itemData.item, itemData.color, fieldPosition._row);
             }
 
             return (cellView, itemData);

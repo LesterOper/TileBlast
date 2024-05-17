@@ -14,7 +14,7 @@ namespace CodeBase.CoreBase.FieldBase
         public Vector2 OriginalPosition { get; private set; }
 
         private readonly float _spriteOriginal;
-        private const float PixelPerfectPerUnit = 110f;
+        private const float PixelPerfectPerUnit = 120f;
         public float _borderDelta;
         private Camera _camera;
         

@@ -93,7 +93,7 @@ namespace CodeBase.ApplicationBase.AudioManager
 
         public void PlayBlocksTaps()
         {
-            int randInd = Random.Range(0, blocks.Count);
+            int randInd = Random.Range(0, blockClips.Count);
             EazySoundManager.PlaySound(blockClips[randInd], 0.7f);
         }
     }
