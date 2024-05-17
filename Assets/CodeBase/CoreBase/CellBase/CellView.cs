@@ -13,7 +13,6 @@ namespace CodeBase.CoreBase.CellBase
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private ParticleSystem smoke;
 
-        [SerializeField] private ParticleSystem bombEffect;
         
         private Tween _moveTween;
 
@@ -22,7 +21,7 @@ namespace CodeBase.CoreBase.CellBase
         public void Initialize(Sprite coloredCellSprite, Sprite itemSprite, Color colorForParticle, int layer)
         {
             _renderComponent.sprite = coloredCellSprite;
-            _itemView.Initialize(itemSprite);
+            //_itemView.Initialize(itemSprite);
             if (effect != null)
             {
                 var main = effect.main;
@@ -61,17 +60,5 @@ namespace CodeBase.CoreBase.CellBase
         }
 
         public SpriteRenderer R => _itemView.R;
-
-        public void PlayBombEffect(Action callback)
-        {
-            FadeCell(0, 0.1f);
-            bombEffect.gameObject.SetActive(true);
-            bombEffect.Play();
-            DOVirtual.DelayedCall(effect.main.duration, () =>
-            {
-                bombEffect.gameObject.SetActive(false);
-                callback.Invoke();
-            });
-        }
     }
 }

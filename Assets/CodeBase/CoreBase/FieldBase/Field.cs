@@ -163,7 +163,7 @@ namespace CodeBase.CoreBase.FieldBase
                             Vector3 position = Vector3.Lerp(fieldBoard.WorldPosition(startRowPos, j), fieldBoard.WorldPosition(startRowPos+count - 1, j), 0.5f);
                             position.z = 0;
                             SpriteRenderer bgTileInst = Object.Instantiate(bgTile);
-                            bgTileInst.transform.position = new Vector3(position.x, position.y + 0.02f);
+                            bgTileInst.transform.position = new Vector3(position.x, position.y);
                             bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, 0.3f + fieldBoard.TileSize * count);
                         }
 
@@ -180,7 +180,7 @@ namespace CodeBase.CoreBase.FieldBase
                     Vector3 position = Vector3.Lerp(fieldBoard.WorldPosition(startRowPos, j), fieldBoard.WorldPosition(startRowPos+count - 1, j), 0.5f);
                     position.z = 0;
                     SpriteRenderer bgTileInst = Object.Instantiate(bgTile);
-                    bgTileInst.transform.position = new Vector3(position.x, position.y + 0.02f);
+                    bgTileInst.transform.position = new Vector3(position.x, position.y );
                     bgTileInst.size = new Vector2(fieldBoard.TileSize + 0.2f, (fieldBoard.TileSize * count) + 0.3f);
                 }
             }

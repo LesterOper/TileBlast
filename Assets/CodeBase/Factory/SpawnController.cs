@@ -68,7 +68,7 @@ namespace CodeBase.Factory
             {
                 cellView = _itemPool.Spawn(fieldPosition);
                 cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-                cellView.transform.localScale *=  _fieldBoard.TileSize;
+                cellView.transform.localScale *=  _fieldBoard.TileSize / 2;
                 cellView.Initialize(itemData.cellColor, itemData.item, itemData.color, fieldPosition._row);
             }
 
@@ -83,7 +83,7 @@ namespace CodeBase.Factory
             {
                 cellView = _itemPool.Spawn(fieldPosition);
                 cellView.transform.position = _fieldBoard.WorldPosition(fieldPosition.Row, fieldPosition.Column);
-                cellView.transform.localScale *=  _fieldBoard.TileSize;
+                cellView.transform.localScale *=  _fieldBoard.TileSize / 2;
             }
 
             return (cellView, itemData);
@@ -93,7 +93,7 @@ namespace CodeBase.Factory
         {
             ItemView itemView = _cellFactory.CreateInstance(position);
             itemView.R.sprite = _itemsConfig.GetItem(itemType).item;
-            itemView.transform.localScale *= _fieldBoard.TileSize;
+            itemView.transform.localScale = Vector3.one * _fieldBoard.TileSize;
             return itemView;
         }
 

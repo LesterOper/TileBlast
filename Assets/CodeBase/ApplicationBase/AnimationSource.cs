@@ -21,15 +21,15 @@ namespace CodeBase.ApplicationBase
             animate.transform.DOScale(Vector3.zero, time * 0.3f).SetDelay(time * 0.8f);
 
             Sequence sequenceMove = DOTween.Sequence();
-            sequenceMove.Append(animate.transform.DOMoveY(target.position.y, time).SetEase(Ease.InQuart).OnComplete(() =>
-            {
-                callback?.Invoke();
-                Object.Destroy(animate);
-            }));
-            sequenceMove.Join(animate.transform.DOMoveX(target.position.x + (target.position.x * 0.3f), time)
+            sequenceMove.Append(animate.transform.DOMoveY(target.position.y, time).SetEase(Ease.InQuart).OnComplete(() => callback?.Invoke()));
+            sequenceMove.Join(animate.transform.DOMoveX(target.position.x + (target.position.x * 0.3f), time/10)
                 .SetEase(Ease.Linear));
-            sequenceMove.Append(animate.transform.DOMoveX(target.position.x, time).SetEase(Ease.Linear));
-            
+            sequenceMove.Append(animate.transform.DOMoveX(target.position.x, time - time/10).SetEase(Ease.Linear));
+            sequenceMove.OnComplete(() =>
+            {
+                //callback?.Invoke();
+                Object.Destroy(animate.gameObject);
+            });
         }
         
         public static void ParabollaForExist(Transform target, SpriteRenderer animatedObj, float time, Action callback)
@@ -44,15 +44,17 @@ namespace CodeBase.ApplicationBase
             animatedObj.transform.DOScale(Vector3.zero, time * 0.6f).SetDelay(time * 0.7f);
 
             Sequence sequenceMove = DOTween.Sequence();
-            sequenceMove.Append(animatedObj.transform.DOMoveY(target.position.y, time).SetEase(Ease.InQuart).OnComplete(() =>
-            {
-                callback?.Invoke();
-                Object.Destroy(animatedObj);
-            }));
+            sequenceMove.Append(animatedObj.transform.DOMoveY(target.position.y, time).SetEase(Ease.InQuart).OnComplete(() => callback?.Invoke()));
             int mod = Random.Range(-1, 2);
             sequenceMove.Join(animatedObj.transform.DOMoveX(target.position.x + (mod * (target.position.x * 0.1f)), time * 0.5f)
                 .SetEase(Ease.Linear));
             sequenceMove.Append(animatedObj.transform.DOMoveX(target.position.x, time).SetEase(Ease.Linear));
+            
+            sequenceMove.OnComplete(() =>
+            {
+                //callback?.Invoke();
+                Object.Destroy(animatedObj.gameObject);
+            });
             
         }
     }

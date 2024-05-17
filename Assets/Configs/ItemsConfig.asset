@@ -95,7 +95,7 @@ MonoBehaviour:
     maxCountNeedItems: 0
   - itemType: 7
     item: {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
-    cellColor: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: 23484b50aad3e4c48bebfe8cae6d76dd, type: 3}
     color: {r: 0, g: 0, b: 0, a: 0}
     isBlock: 0
     canMatch: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     maxCountNeedItems: 6
   - itemType: 6
     item: {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
-    cellColor: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: 5165d6795b93adc479df33d7acc35903, type: 3}
     color: {r: 0, g: 0, b: 0, a: 0}
     isBlock: 0
     canMatch: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     maxCountNeedItems: 8
   - itemType: 9
     item: {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
-    cellColor: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: 9173933db13f20c41aede91758b28e0c, type: 3}
     color: {r: 0, g: 0, b: 0, a: 0}
     isBlock: 0
     canMatch: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     maxCountNeedItems: 0
   - itemType: 8
     item: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
-    cellColor: {fileID: 0}
+    cellColor: {fileID: 21300000, guid: ce867ff940cc001489281a564ac1d1ed, type: 3}
     color: {r: 0, g: 0, b: 0, a: 0}
     isBlock: 0
     canMatch: 0
