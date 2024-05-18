@@ -19,3 +19,5 @@ MonoBehaviour:
   _vfxConfig: {fileID: 11400000, guid: 980d1e811135b89499955a446ffc17b4, type: 2}
   _shopConfig: {fileID: 11400000, guid: d87b6efe6f5163e409ea980fb54eef85, type: 2}
   _inGameBoostersConfig: {fileID: 11400000, guid: 12fcc7f2885d4b448a41af4c1d205546, type: 2}
+  _eventsInGameConfig: {fileID: 11400000, guid: 973d9be8c4689634294dd199f2da67e8, type: 2}
+  _offersInGameConfig: {fileID: 11400000, guid: 8d5f28cf8e714084ab0b9a95463be020, type: 2}
